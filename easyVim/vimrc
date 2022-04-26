@@ -1,29 +1,49 @@
-" 设置行号
-set number
+" 映射配置
+let mapleader=' '
+
+if has('clipboard')
+  " 设置行号
+  set number
+  " 设置相对行号
+  " set relativenumber
+endif
+
+" 自动换行
+set wrap
+
+" 显示输入
+set showcmd
+
+" 显示候选命令
+set wildmenu
+
+" 搜索高亮
+" set hlsearch
+" set incsearch
+" nnoremap <leader>e :nohlsearch<cr>
 
 " 设置缩进
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-" 映射配置
-let mapleader=','
-
-" 普通模式下配置
+" 窗口切换
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <cr> o<Esc>
 
 " 折叠设置
 set foldmethod=indent
 nnoremap <leader>w za 
-set foldlevel=9
+set foldlevel=99
+
+" 快速换行
+nnoremap <cr> o<Esc>
 
 " 插件配置
 
-" 设置标签页主题
+" 设置状态栏主题
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='dark'
 
@@ -53,7 +73,7 @@ let g:ctrlp_cmd='CtrlP'
 
 " 快速跳转
 nmap <leader>f <Plug>(easymotion-overwin-f)
-nmap <leader>F <Plug>(easymotion-overwin-f2)
+" nmap <leader>F <Plug>(easymotion-overwin-f2)
 nmap  / <Plug>(easymotion-sn)
 nmap  n <Plug>(easymotion-next)
 nmap  N <Plug>(easymotion-prev)
@@ -67,7 +87,7 @@ let g:EasyMotion_startofline=0
 let g:far#enable_undo=1
 
 " which-key 配置
-nnoremap <silent> <leader> :WhichKey ','<CR>
+nnoremap <silent> <leader> :WhichKey ' '<CR>
 
 " c++ 高亮配置
 let g:cpp_class_scope_highlight = 1

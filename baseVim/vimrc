@@ -1,0 +1,42 @@
+" 映射配置
+let mapleader=' '
+
+if has('clipboard')
+  " 设置行号
+  set number
+  " 设置相对行号
+  " set relativenumber
+endif
+
+" 自动换行
+set wrap
+
+" 显示输入
+set showcmd
+
+" 显示候选命令
+set wildmenu
+
+" 搜索高亮
+set hlsearch
+set incsearch
+nnoremap <leader>e :nohlsearch<cr>
+
+" 设置缩进
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+" 窗口切换
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" 折叠设置
+set foldmethod=indent
+nnoremap <leader>w za 
+set foldlevel=99
+
+" 快速换行
+nnoremap <cr> o<Esc>
