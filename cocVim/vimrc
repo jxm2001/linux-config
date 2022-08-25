@@ -109,6 +109,34 @@ let g:cpp_no_function_highlight = 1
 au FileType c,cpp,h,hpp,objc,objcpp,python call rainbow#load()
 let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'magenta', 'red', 'white']
 
+" coc
+let g:coc_global_extensions = [
+			\'coc-marketplace',
+			\'coc-vimlsp',
+			\'coc-json',
+			\'coc-clangd',
+			\'coc-cmake',
+			\'coc-git']
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> gh :call ShowDocumentation()<CR>
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+nmap <leader>rn <Plug>(coc-rename)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+" 状态列集成
+set signcolumn=yes
+
 call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
@@ -132,4 +160,5 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'frazrepo/vim-rainbow'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
