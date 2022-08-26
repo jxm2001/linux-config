@@ -132,8 +132,8 @@ function! ShowDocumentation()
   endif
 endfunction
 nmap <leader>rn <Plug>(coc-rename)
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>s  <Plug>(coc-format-selected)
+nmap <leader>s  <Plug>(coc-format-selected)
 " 状态列集成
 set signcolumn=yes
 
