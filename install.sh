@@ -1,19 +1,41 @@
 #!/bin/bash
-read -p "choose vim version to install(base/easy): " version
+read -p "Choose vim version to install(base/easy/coc): " version
 if [ $version == "base" ]; then
 	cp baseVim/vimrc ~/.vimrc
-	cp tmux.conf ~/.tmux.conf
 elif [ $version == "easy" ]; then
+	curl --connect-timeout 3 google.com &> /dev/null
+	if [ $? -ne 0 ]; then
+		echo "Network error!"
+		exit 2
+	fi
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	cp easyVim/vimrc ~/.vimrc
-	cp tmux.conf ~/.tmux.conf
 elif [ $version == "coc" ]; then
+	curl --connect-timeout 3 google.com &> /dev/null
+	if [ $? -ne 0 ]; then
+		echo "Network error!"
+		exit 2
+	fi
+	clangd --version &> /dev/null && node --version &> /dev/null
+	if [ $? -ne 0 ]; then
+		echo "Please run the following command to install the dependent environment"
+		clangd --version &> /dev/null
+		if [ $? -ne 0 ]; then
+			echo "sudo apt install clangd"
+		fi
+		node --version &> /dev/null
+		if [ $? -ne 0 ]; then
+			echo "curl -sL install-node.vercel.app/lts | sudo bash"
+		fi
+		exit 2
+	fi
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	cp ./cocVim/vimrc ~/.vimrc
 	cp ./cocVim/coc-settings.json ~/.vim/coc-settings.json
-	cp tmux.conf ~/.tmux.conf
 else
-	echo "error version"
+	echo "Error version"
+	exit 1
 fi
+cp tmux.conf ~/.tmux.conf

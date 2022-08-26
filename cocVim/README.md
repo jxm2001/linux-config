@@ -4,3 +4,10 @@
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
+
+## 关于插件依赖环境
+
+```sh
+sudo apt install clangd
+curl -sL install-node.vercel.app/lts | sudo bash
+```
