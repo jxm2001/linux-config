@@ -71,13 +71,20 @@ autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTa
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
-" 文件搜索插件配置 
-let g:ctrlp_map='<C-p>'
-let g:ctrlp_cmd='CtrlPMixed'
-" 匹配方式为文件名匹配
-let g:ctrlp_by_filename = 1
-" 默认搜索根目录
-let g:ctrlp_working_path_mode = 'ra'
+" LeaderF 配置
+let g:Lf_HideHelp = 1
+let g:Lf_UseCache = 0
+let g:Lf_UseVersionControlTool = 0
+let g:Lf_IgnoreCurrentBufferName = 1
+" popup mode
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
+" shortcut
+let g:Lf_ShortcutF = "<leader>pf"
+noremap <leader>pb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>pm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>pl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
 " 快速跳转
 nmap <leader>f <Plug>(easymotion-overwin-f)
@@ -85,10 +92,10 @@ nmap <leader>f <Plug>(easymotion-overwin-f)
 nmap  / <Plug>(easymotion-sn)
 nmap  n <Plug>(easymotion-next)
 nmap  N <Plug>(easymotion-prev)
-nmap <Leader>l <Plug>(easymotion-lineforward)
-nmap <Leader>j <Plug>(easymotion-j)
-nmap <Leader>k <Plug>(easymotion-k)
-nmap <Leader>h <Plug>(easymotion-linebackward)
+nmap <leader>l <Plug>(easymotion-lineforward)
+nmap <leader>j <Plug>(easymotion-j)
+nmap <leader>k <Plug>(easymotion-k)
+nmap <leader>h <Plug>(easymotion-linebackward)
 let g:EasyMotion_startofline=0
 
 " 文本替换设置
@@ -137,6 +144,7 @@ nmap <leader>s  <Plug>(coc-format-selected)
 " 状态列集成
 set signcolumn=yes
 
+
 call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
@@ -151,7 +159,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'yggdroot/indentline'
 Plug 'lifepillar/vim-solarized8'
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'brooth/far.vim'

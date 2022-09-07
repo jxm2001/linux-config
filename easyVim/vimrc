@@ -85,10 +85,10 @@ nmap <leader>f <Plug>(easymotion-overwin-f)
 nmap  / <Plug>(easymotion-sn)
 nmap  n <Plug>(easymotion-next)
 nmap  N <Plug>(easymotion-prev)
-nmap <Leader>l <Plug>(easymotion-lineforward)
-nmap <Leader>j <Plug>(easymotion-j)
-nmap <Leader>k <Plug>(easymotion-k)
-nmap <Leader>h <Plug>(easymotion-linebackward)
+nmap <leader>l <Plug>(easymotion-lineforward)
+nmap <leader>j <Plug>(easymotion-j)
+nmap <leader>k <Plug>(easymotion-k)
+nmap <leader>h <Plug>(easymotion-linebackward)
 let g:EasyMotion_startofline=0
 
 " 文本替换设置
