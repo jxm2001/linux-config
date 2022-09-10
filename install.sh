@@ -1,5 +1,5 @@
 #!/bin/bash
-read -p "Choose vim version to install(base/easy/coc): " version
+read -p "Choose vim version to install(null/base/easy/coc): " version
 if [ $version == "base" ]; then
 	cp baseVim/vimrc ~/.vimrc
 elif [ $version == "easy" ]; then
@@ -34,8 +34,22 @@ elif [ $version == "coc" ]; then
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	cp ./cocVim/vimrc ~/.vimrc
 	cp ./cocVim/coc-settings.json ~/.vim/coc-settings.json
-else
-	echo "Error version"
+elif [ $version != "null" ]; then
+	echo "Error vim version"
 	exit 1
 fi
-cp tmux.conf ~/.tmux.conf
+read -p "Choose tmux version to install(null/base/normal): " version
+if [ $version == "base" ]; then
+	cp tmux/baseTmux.conf ~/.tmux.conf
+elif [ $version == "normal" ]; then
+	curl --connect-timeout 3 google.com &> /dev/null
+	if [ $? -ne 0 ]; then
+		echo "Network error!"
+		exit 2
+	fi
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	cp ./tmux/normalTmux ~/.tmux.conf
+elif [ $version != "null" ]; then
+	echo "Error tmux version"
+	exit 1
+fi
