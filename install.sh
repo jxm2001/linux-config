@@ -1,7 +1,7 @@
 #!/bin/bash
 read -p "Choose vim version to install(null/base/easy/coc): " version
 if [ $version == "base" ]; then
-	cp baseVim/vimrc ~/.vimrc
+	cp ./baseVim/vimrc ~/.vimrc
 elif [ $version == "easy" ]; then
 	curl --connect-timeout 3 google.com &> /dev/null
 	if [ $? -ne 0 ]; then
@@ -10,7 +10,7 @@ elif [ $version == "easy" ]; then
 	fi
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	cp easyVim/vimrc ~/.vimrc
+	cp ./easyVim/vimrc ~/.vimrc
 elif [ $version == "coc" ]; then
 	curl --connect-timeout 3 google.com &> /dev/null
 	if [ $? -ne 0 ]; then
@@ -40,7 +40,7 @@ elif [ $version != "null" ]; then
 fi
 read -p "Choose tmux version to install(null/base/normal): " version
 if [ $version == "base" ]; then
-	cp tmux/baseTmux.conf ~/.tmux.conf
+	cp ./tmux/baseTmux.conf ~/.tmux.conf
 elif [ $version == "normal" ]; then
 	curl --connect-timeout 3 google.com &> /dev/null
 	if [ $? -ne 0 ]; then
@@ -48,7 +48,7 @@ elif [ $version == "normal" ]; then
 		exit 2
 	fi
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-	cp ./tmux/normalTmux ~/.tmux.conf
+	cp ./tmux/normalTmux.conf ~/.tmux.conf
 elif [ $version != "null" ]; then
 	echo "Error tmux version"
 	exit 1
