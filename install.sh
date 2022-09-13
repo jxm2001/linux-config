@@ -17,12 +17,16 @@ elif [ $version == "coc" ]; then
 		echo "Network error!"
 		exit 2
 	fi
-	clangd --version &> /dev/null && node --version &> /dev/null
+	clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "Please run the following command to install the dependent environment"
 		clangd --version &> /dev/null
 		if [ $? -ne 0 ]; then
 			echo "sudo apt install clangd"
+		fi
+		ctags --version &> /dev/null
+		if [ $? -ne 0 ]; then
+			echo "sudo apt install universal-ctags"
 		fi
 		node --version &> /dev/null
 		if [ $? -ne 0 ]; then

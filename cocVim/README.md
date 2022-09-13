@@ -9,5 +9,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 ```sh
 sudo apt install clangd
+sudo apt install universal-ctags
 curl -sL install-node.vercel.app/lts | sudo bash
 ```
