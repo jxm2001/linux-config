@@ -1,11 +1,9 @@
 " 映射配置
 let mapleader=' '
 
-if has('clipboard')
-  " 设置行号
+" 设置行号
+if or(has('clipboard'), has('nvim'))
   set number
-  " 设置相对行号
-  " set relativenumber
 endif
 
 " 自动换行
@@ -16,11 +14,6 @@ set showcmd
 
 " 显示候选命令
 set wildmenu
-
-" 搜索高亮
-" set hlsearch
-" set incsearch
-" nnoremap <leader>e :nohlsearch<cr>
 
 " 设置缩进
 set tabstop=4
@@ -51,7 +44,11 @@ let g:airline_theme='dark'
 let g:indentLine_char='┆'
 
 " 主题颜色
-set rtp+=~/.vim/plugged/vim-solarized8
+if has('nvim')
+	set rtp+=~/.local/share/nvim/plugged/vim-solarized8
+else
+	set rtp+=~/.vim/plugged/vim-solarized8
+endif
 syntax enable
 set background=dark
 colorscheme solarized8_high 
