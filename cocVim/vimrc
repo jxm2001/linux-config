@@ -2,9 +2,7 @@
 let mapleader=' '
 
 " 设置行号
-if or(has('clipboard'), has('nvim'))
-  set number
-endif
+set number
 
 " 自动换行
 set wrap

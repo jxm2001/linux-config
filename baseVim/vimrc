@@ -1,12 +1,8 @@
 " 映射配置
 let mapleader=' '
 
-if has('clipboard')
-  " 设置行号
-  set number
-  " 设置相对行号
-  " set relativenumber
-endif
+" 设置行号
+set number
 
 " 自动换行
 set wrap
