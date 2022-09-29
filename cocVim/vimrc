@@ -141,7 +141,7 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
 " 剪切板参数
-nnoremap <leader>c :call OSCYankOperator(getreg('a'))<CR>
+nnoremap <leader>c :call OSCYankOperator(getreg('"'))<CR>
 
 " coc
 let g:coc_global_extensions = [
