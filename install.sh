@@ -61,10 +61,11 @@ elif [ $version == "nvim" ]; then
 		fi
 		exit 2
 	fi
-	curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 	mkdir -p ~/.config/nvim
-	cp ./cocVim/vimrc ~/.config/nvim/init.vim
+	mkdir -p ~/.config/nvim/lua
+	cp ./neoVim/init.vim ~/.config/nvim/init.vim
+	cp ./neoVim/plugins.lua ~/.config/nvim/lua/plugins.lua
 	cp ./cocVim/coc-settings.json ~/.config/nvim/coc-settings.json 
 elif [ $version != "null" ]; then
 	echo "Error vim version"

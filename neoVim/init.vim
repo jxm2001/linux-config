@@ -34,6 +34,9 @@ nnoremap <cr> o<Esc>
 
 " 插件配置
 
+" 激活插件
+lua require('plugins')
+
 " 设置状态栏主题
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='dark'
@@ -42,10 +45,8 @@ let g:airline_theme='dark'
 let g:indentLine_char='┆'
 
 " 主题颜色
-set rtp+=~/.vim/plugged/vim-solarized8
-syntax enable
-set background=dark
-colorscheme solarized8_high 
+set termguicolors
+colorscheme kanagawa
 
 " 文件树配置
 nnoremap <leader>v :NERDTreeFind<cr>
@@ -169,31 +170,3 @@ nmap <leader>s  <Plug>(coc-format-selected)
 set signcolumn=yes
 " 允许跳转时有未保存的文件
 set hidden
-
-call plug#begin()
-" The default plugin directory will be as follows:
-"   - Vim (Linux/macOS): '~/.vim/plugged'
-"   - Vim (Windows): '~/vimfiles/plugged'
-"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
-" You can specify a custom plugin directory by passing it as the argument
-"   - e.g. `call plug#begin('~/.vim/plugged')`
-"   - Avoid using standard Vim directory names like 'plugin'
-Plug 'mhinz/vim-startify'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'yggdroot/indentline'
-Plug 'lifepillar/vim-solarized8'
-Plug 'scrooloose/nerdtree'
-Plug 'Yggdroot/LeaderF', {'do': ':LeaderfInstallCExtension'}
-Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-surround'
-Plug 'brooth/far.vim'
-Plug 'tpope/vim-commentary'
-Plug 'liuchengxu/vim-which-key'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'ryanoasis/vim-devicons'
-Plug 'frazrepo/vim-rainbow'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'ojroques/vim-oscyank'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-call plug#end()
