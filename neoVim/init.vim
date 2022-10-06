@@ -36,6 +36,7 @@ nnoremap <cr> o<Esc>
 
 " 激活插件
 lua require('plugins')
+lua require('plugins/nvim-treesitter')
 
 " 设置状态栏主题
 let g:airline#extensions#tabline#enabled=1
@@ -103,18 +104,6 @@ let g:far#enable_undo=1
 
 " which-key 配置
 nnoremap <silent> <leader> :WhichKey ' '<CR>
-
-" c++ 高亮配置
-let g:cpp_class_scope_highlight = 1
-" let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-" let g:cpp_experimental_template_highlight = 1
-let g:cpp_concepts_highlight = 1
-let g:cpp_no_function_highlight = 1
-
-" 符号颜色显示
-au FileType c,cpp,h,hpp,objc,objcpp,python call rainbow#load()
-let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'magenta', 'red', 'white']
 
 " gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']

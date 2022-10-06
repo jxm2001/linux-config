@@ -63,10 +63,9 @@ elif [ $version == "nvim" ]; then
 	fi
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 	mkdir -p ~/.config/nvim
-	mkdir -p ~/.config/nvim/lua
-	cp ./neoVim/init.vim ~/.config/nvim/init.vim
-	cp ./neoVim/plugins.lua ~/.config/nvim/lua/plugins.lua
-	cp ./cocVim/coc-settings.json ~/.config/nvim/coc-settings.json 
+	cp ./neoVim/init.vim ~/.config/nvim
+	cp ./cocVim/coc-settings.json ~/.config/nvim 
+	cp -r ./neoVim/lua ~/.config/nvim
 elif [ $version != "null" ]; then
 	echo "Error vim version"
 	exit 1

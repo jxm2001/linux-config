@@ -22,12 +22,12 @@ return require('packer').startup(
   use 'brooth/far.vim'
   use 'tpope/vim-commentary'
   use 'liuchengxu/vim-which-key'
-  use 'octol/vim-cpp-enhanced-highlight'
   use 'ryanoasis/vim-devicons'
-  use 'frazrepo/vim-rainbow'
   use 'ludovicchabant/vim-gutentags'
   use 'ojroques/vim-oscyank'
   use { 'neoclide/coc.nvim', branch = 'release' }
+  use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
+  use { 'p00f/nvim-ts-rainbow' }
 
 end
 )
