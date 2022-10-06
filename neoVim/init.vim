@@ -1,6 +1,9 @@
 " 映射配置
 let mapleader=' '
 
+" 禁用鼠标
+set mouse=
+
 " 设置行号
 set number
 
@@ -36,7 +39,11 @@ nnoremap <cr> o<Esc>
 
 " 激活插件
 lua require('plugins')
+lua require('plugins/nvim-tree')
+lua require('plugins/bufferline')
+lua require('plugins/lualine')
 lua require('plugins/nvim-treesitter')
+lua require('lualine').setup()
 
 " 设置状态栏主题
 let g:airline#extensions#tabline#enabled=1
@@ -50,19 +57,7 @@ set termguicolors
 colorscheme kanagawa
 
 " 文件树配置
-nnoremap <leader>v :NERDTreeFind<cr>
-nnoremap <leader>g :NERDTreeToggle<cr>
-nnoremap <leader>b :Bookmark<space>
-" 显示隐藏文件
-" let NERDTreeShowHidden=1
-" 显示书签
-let NERDTreeShowBookmarks=1
-let NERDTreeIgnore= ['\.git$','\.swp$']
-" 当 NERDTree 是最后一个缓冲区时自动退出
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-" 禁止其他窗口替换 NERDTree 窗口 
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+nnoremap <leader>g :NvimTreeToggle<CR>
 
 " LeaderF 配置
 let g:Lf_HideHelp = 1
