@@ -21,6 +21,12 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
+" 快速移动
+nnoremap <A-h> 5h
+nnoremap <A-j> 5j
+nnoremap <A-k> 5k
+nnoremap <A-l> 5l
+
 " 窗口切换
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -39,11 +45,11 @@ nnoremap <cr> o<Esc>
 
 " 激活插件
 lua require('plugins')
+lua require('plugins/impatient')
 lua require('plugins/nvim-tree')
 lua require('plugins/bufferline')
 lua require('plugins/lualine')
 lua require('plugins/nvim-treesitter')
-lua require('lualine').setup()
 
 " 设置状态栏主题
 let g:airline#extensions#tabline#enabled=1
@@ -132,7 +138,8 @@ let g:coc_global_extensions = [
 			\'coc-clangd',
 			\'coc-cmake',
 			\'coc-git',
-			\'coc-sh']
+			\'coc-sh',
+			\'coc-jedi']
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)

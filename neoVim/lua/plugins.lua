@@ -38,5 +38,6 @@ return require('packer').startup(
 		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end
 	}
 	use 'p00f/nvim-ts-rainbow'
+	use 'lewis6991/impatient.nvim'
 end
 )
