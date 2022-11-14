@@ -44,27 +44,31 @@ elif [ $version == "nvim" ]; then
 		echo "Network error!"
 		exit 2
 	fi
-	clangd --version &> /dev/null && ctags --version &> /dev/null && npm --version &> /dev/null
+	clangd --version &> /dev/null && ctags --version &> /dev/null && npm --version &> /dev/null && tree-sitter &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "Please run the following command to install the dependent environment"
 		clangd --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			echo "sudo apt install clangd"
+			echo "sudo pacman -S clang"
 		fi
 		ctags --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			echo "sudo apt install universal-ctags"
+			echo "sudo pacman -S ctags"
 		fi
 		node --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			echo "curl -sL install-node.vercel.app/lts | sudo bash"
+			echo "sudo pacman -S nodejs npm"
+		fi
+		tree-sitter --version &> /dev/null
+		if [ $? -ne 0 ]; then
+			echo "sudo pacman -S tree-sitter"
 		fi
 		exit 2
 	fi
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 	mkdir -p ~/.config/nvim
 	cp ./neoVim/init.vim ~/.config/nvim
-	cp ./cocVim/coc-settings.json ~/.config/nvim 
+	cp ./neoVim/coc-settings.json ~/.config/nvim 
 	cp -r ./neoVim/lua ~/.config/nvim
 elif [ $version != "null" ]; then
 	echo "Error vim version"
