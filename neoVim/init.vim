@@ -34,8 +34,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " 折叠设置
-set foldmethod=indent
 nnoremap <leader>w za 
+nnoremap <leader>qi :set foldmethod=indent<cr>
+nnoremap <leader>qe :set foldmethod=expr<cr>
+set foldmethod=expr
 set foldlevel=99
 
 " 快速换行
@@ -139,7 +141,8 @@ let g:coc_global_extensions = [
 			\'coc-cmake',
 			\'coc-git',
 			\'coc-sh',
-			\'coc-jedi']
+			\'coc-jedi',
+			\'coc-docker']
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
