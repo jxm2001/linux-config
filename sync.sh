@@ -1,0 +1,17 @@
+#!/bin/bash
+read -p "Choose vim version to sync(null/base/easy/coc/nvim): " version
+if [ $version == "base" ]; then
+	cp ~/.vimrc ./baseVim/vimrc
+elif [ $version == "easy" ]; then
+	cp ~/.vimrc ./easyVim/vimrc
+elif [ $version == "coc" ]; then
+	cp ~/.vimrc ./cocVim/vimrc
+	cp ~/.vim/coc-settings.json ./cocVim/coc-settings.json
+elif [ $version == "nvim" ]; then
+	cp ~/.config/nvim/init.vim ./neoVim/init.vim
+	cp ~/.config/nvim/coc-settings.json ./neoVim/coc-settings.json
+	cp -r ~/.config/nvim/lua ./neoVim
+elif [ $version != "null" ]; then
+	echo "Error vim version"
+	exit 1
+fi

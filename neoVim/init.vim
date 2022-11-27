@@ -49,6 +49,7 @@ nnoremap <cr> o<Esc>
 lua require('plugins')
 lua require('plugins/impatient')
 lua require('plugins/nvim-tree')
+lua require('plugins/hop')
 lua require('plugins/bufferline')
 lua require('plugins/lualine')
 lua require('plugins/nvim-treesitter')
@@ -91,16 +92,8 @@ nnoremap <leader>pl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 nnoremap <leader>pp :<C-U><C-R>=printf("Leaderf filetype %s", "")<CR><CR>
 
 " 快速跳转
-nmap <leader>f <Plug>(easymotion-overwin-f)
-" nmap <leader>F <Plug>(easymotion-overwin-f2)
-nmap  / <Plug>(easymotion-sn)
-nmap  n <Plug>(easymotion-next)
-nmap  N <Plug>(easymotion-prev)
-nmap <leader>l <Plug>(easymotion-lineforward)
-nmap <leader>j <Plug>(easymotion-j)
-nmap <leader>k <Plug>(easymotion-k)
-nmap <leader>h <Plug>(easymotion-linebackward)
-let g:EasyMotion_startofline=0
+nnoremap <leader>f :HopChar1<CR>
+nnoremap <leader>ff :HopPattern<CR>
 
 " 文本替换设置
 let g:far#enable_undo=1
