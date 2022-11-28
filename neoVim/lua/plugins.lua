@@ -24,13 +24,7 @@ return require('packer').startup(
 	use 'yggdroot/indentline'
 	use 'rebelot/kanagawa.nvim'
 	use { 'Yggdroot/LeaderF', run = ':LeaderfInstallCExtension' }
-	use {
-		'phaazon/hop.nvim',
-		branch = 'v2',
-		config = function()
-		require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-		end
-	}
+	use 'ggandor/leap.nvim'
 	use 'tpope/vim-surround'
 	use 'brooth/far.vim'
 	use 'tpope/vim-commentary'

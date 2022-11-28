@@ -49,7 +49,7 @@ nnoremap <cr> o<Esc>
 lua require('plugins')
 lua require('plugins/impatient')
 lua require('plugins/nvim-tree')
-lua require('plugins/hop')
+lua require('plugins/leap')
 lua require('plugins/bufferline')
 lua require('plugins/lualine')
 lua require('plugins/nvim-treesitter')
