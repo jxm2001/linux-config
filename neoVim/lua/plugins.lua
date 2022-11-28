@@ -21,15 +21,17 @@ return require('packer').startup(
 		'akinsho/bufferline.nvim',
 		tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'
 	}
-	use 'yggdroot/indentline'
+	use "lukas-reineke/indent-blankline.nvim"
 	use 'rebelot/kanagawa.nvim'
 	use { 'Yggdroot/LeaderF', run = ':LeaderfInstallCExtension' }
 	use 'ggandor/leap.nvim'
 	use 'tpope/vim-surround'
 	use 'brooth/far.vim'
 	use 'tpope/vim-commentary'
-	use 'liuchengxu/vim-which-key'
-	use 'ryanoasis/vim-devicons'
+	use {
+		"folke/which-key.nvim",
+		config = function() require("which-key").setup {} end
+	}
 	use 'ludovicchabant/vim-gutentags'
 	use 'ojroques/vim-oscyank'
 	use { 'neoclide/coc.nvim', branch = 'release' }

@@ -52,6 +52,7 @@ lua require('plugins/nvim-tree')
 lua require('plugins/leap')
 lua require('plugins/bufferline')
 lua require('plugins/lualine')
+lua require('plugins/indent-blankline')
 lua require('plugins/nvim-treesitter')
 
 " 设置状态栏主题
@@ -93,9 +94,6 @@ nnoremap <leader>pp :<C-U><C-R>=printf("Leaderf filetype %s", "")<CR><CR>
 
 " 文本替换设置
 let g:far#enable_undo=1
-
-" which-key 配置
-nnoremap <silent> <leader> :WhichKey ' '<CR>
 
 " gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
