@@ -15,3 +15,12 @@ elif [ $version != "null" ]; then
 	echo "Error vim version"
 	exit 1
 fi
+read -p "Choose tmux version to sync(null/base/normal): " version
+if [ $version == "base" ]; then
+	cp ~/.tmux.conf ./tmux/baseTmux.conf
+elif [ $version == "normal" ]; then
+	cp ~/.tmux.conf ./tmux/normalTmux.conf
+elif [ $version != "null" ]; then
+	echo "Error tmux version"
+	exit 1
+fi
