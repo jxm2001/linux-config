@@ -91,10 +91,6 @@ nnoremap <leader>pm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 nnoremap <leader>pl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 nnoremap <leader>pp :<C-U><C-R>=printf("Leaderf filetype %s", "")<CR><CR>
 
-" 快速跳转
-nnoremap <leader>f :HopChar1<CR>
-nnoremap <leader>ff :HopPattern<CR>
-
 " 文本替换设置
 let g:far#enable_undo=1
 
