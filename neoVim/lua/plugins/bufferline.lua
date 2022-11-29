@@ -2,7 +2,6 @@ vim.opt.termguicolors = true
 require("bufferline").setup {
     options = {
 		diagnostics = "coc",
-		numbers = "buffer_id",
 		tab_size = 0,
 		offsets = {{
 			filetype = "NvimTree",

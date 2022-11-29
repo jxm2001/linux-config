@@ -55,19 +55,24 @@ lua require('plugins/lualine')
 lua require('plugins/indent-blankline')
 lua require('plugins/nvim-treesitter')
 
-" 设置状态栏主题
-let g:airline#extensions#tabline#enabled=1
-let g:airline_theme='dark'
-
-" 缩进字符
-let g:indentLine_char='┆'
-
 " 主题颜色
 set termguicolors
 colorscheme kanagawa
 
 " 文件树配置
 nnoremap <leader>g :NvimTreeToggle<CR>
+
+" bufferline 配置
+nnoremap <silent> gb :BufferLinePick<CR>
+nnoremap <silent> g1 :BufferLineGoToBuffer 1<CR>
+nnoremap <silent> g2 :BufferLineGoToBuffer 2<CR>
+nnoremap <silent> g3 :BufferLineGoToBuffer 3<CR>
+nnoremap <silent> g4 :BufferLineGoToBuffer 4<CR>
+nnoremap <silent> g5 :BufferLineGoToBuffer 5<CR>
+nnoremap <silent> g6 :BufferLineGoToBuffer 6<CR>
+nnoremap <silent> g7 :BufferLineGoToBuffer 7<CR>
+nnoremap <silent> g8 :BufferLineGoToBuffer 8<CR>
+nnoremap <silent> g9 :BufferLineGoToBuffer 9<CR>
 
 " LeaderF 配置
 let g:Lf_HideHelp = 1
