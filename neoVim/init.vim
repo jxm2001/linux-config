@@ -43,6 +43,11 @@ set foldlevel=99
 " 快速换行
 nnoremap <cr> o<Esc>
 
+" terminal mode 配置
+tnoremap <Esc> <C-\><C-N>
+tnoremap <C-[> <C-\><C-N>
+nnoremap <leader>t :terminal<CR>i
+
 " 插件配置
 
 " 激活插件
@@ -121,8 +126,9 @@ let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
-" 剪切板参数
-nnoremap <leader>c :call OSCYankOperator(getreg('"'))<CR>
+" oscyank 配置
+nnoremap <silent> <leader>y :OSCYankReg "<CR>
+let g:oscyank_term = 'default'
 
 " coc
 let g:coc_global_extensions = [
@@ -134,6 +140,7 @@ let g:coc_global_extensions = [
 			\'coc-git',
 			\'coc-sh',
 			\'coc-jedi',
+			\'coc-snippets',
 			\'coc-docker']
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -142,6 +149,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> gh :call ShowDocumentation()<CR>
+inoremap <silent><expr> <c-o> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')

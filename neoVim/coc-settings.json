@@ -1,6 +1,7 @@
 {
 	"suggest.noselect": true,
 	"inlayHint.enable": false,
+	"clangd.disableSnippetCompletion": true,
 	"suggest.completionItemKindLabels": {
 		"class": "\uf0e8",
 		"color": "\ue22b",
