@@ -46,7 +46,11 @@ nnoremap <cr> o<Esc>
 " terminal mode 配置
 tnoremap <Esc> <C-\><C-N>
 tnoremap <C-[> <C-\><C-N>
-nnoremap <leader>t :terminal<CR>i
+nnoremap <leader>t :terminal<CR>
+" 创建终端时自动进入插入模式
+autocmd TermOpen * startinsert
+" 进入已经存在的终端时自动进入插入模式
+autocmd BufEnter term://* startinsert
 
 " 插件配置
 
@@ -66,6 +70,7 @@ colorscheme kanagawa
 
 " 文件树配置
 nnoremap <leader>g :NvimTreeToggle<CR>
+nnoremap <leader>v :NvimTreeFindFile<CR>
 
 " bufferline 配置
 nnoremap <silent> gb :BufferLinePick<CR>
@@ -149,7 +154,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> gh :call ShowDocumentation()<CR>
-inoremap <silent><expr> <c-o> coc#pum#visible() ? coc#pum#confirm()
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
