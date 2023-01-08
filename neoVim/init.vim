@@ -43,14 +43,16 @@ set foldlevel=99
 " 快速换行
 nnoremap <cr> o<Esc>
 
+" 高亮取消
+nnoremap <silent> <leader>n :nohlsearch<cr>
+
 " terminal mode 配置
-tnoremap <Esc> <C-\><C-N>
 tnoremap <C-[> <C-\><C-N>
 nnoremap <leader>t :terminal<CR>
 " 创建终端时自动进入插入模式
 autocmd TermOpen * startinsert
 " 进入已经存在的终端时自动进入插入模式
-autocmd BufEnter term://* startinsert
+" autocmd BufEnter term://* startinsert
 
 " 插件配置
 
@@ -154,7 +156,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> gh :call ShowDocumentation()<CR>
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
