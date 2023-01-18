@@ -22,16 +22,14 @@ set softtabstop=4
 set shiftwidth=4
 
 " 快速移动
-nnoremap <A-h> 5h
-nnoremap <A-j> 5j
-nnoremap <A-k> 5k
-nnoremap <A-l> 5l
-
-" 窗口切换
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <C-h> 5h
+nnoremap <C-j> 5j
+nnoremap <C-k> 5k
+nnoremap <C-l> 5l
+vnoremap <C-h> 5h
+vnoremap <C-j> 5j
+vnoremap <C-k> 5k
+vnoremap <C-l> 5l
 
 " 折叠设置
 nnoremap <leader>w za 
