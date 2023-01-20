@@ -45,3 +45,11 @@ nnoremap <leader>qi :set foldmethod=indent<cr>
 nnoremap <leader>qe :set foldmethod=expr<cr>
 set foldmethod=indent
 set foldlevel=99
+
+" terminal mode 配置
+tnoremap <C-[> <C-\><C-N>
+nnoremap <leader>t :terminal<CR>
+" 创建终端时自动进入插入模式
+autocmd TermOpen * startinsert
+" 进入已经存在的终端时自动进入插入模式
+" autocmd BufEnter term://* startinsert

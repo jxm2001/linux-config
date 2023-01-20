@@ -31,18 +31,20 @@ vnoremap <C-j> 5j
 vnoremap <C-k> 5k
 vnoremap <C-l> 5l
 
+" 快速换行
+nnoremap <cr> o<Esc>
+
+" 高亮搜索
+set hlsearch
+set incsearch
+nnoremap <silent> <leader>n :nohlsearch<cr>
+
 " 折叠设置
 nnoremap <leader>w za 
 nnoremap <leader>qi :set foldmethod=indent<cr>
 nnoremap <leader>qe :set foldmethod=expr<cr>
 set foldmethod=expr
 set foldlevel=99
-
-" 快速换行
-nnoremap <cr> o<Esc>
-
-" 高亮取消
-nnoremap <silent> <leader>n :nohlsearch<cr>
 
 " terminal mode 配置
 tnoremap <C-[> <C-\><C-N>

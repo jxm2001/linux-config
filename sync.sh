@@ -1,5 +1,5 @@
 #!/bin/bash
-read -p "Choose vim version to sync(null/base/easy/coc/nvim): " version
+read -p "Choose vim version to sync(null/base/easy/coc/baseNvim/nvim): " version
 if [ $version == "base" ]; then
 	cp ~/.vimrc ./baseVim/vimrc
 elif [ $version == "easy" ]; then
@@ -7,6 +7,8 @@ elif [ $version == "easy" ]; then
 elif [ $version == "coc" ]; then
 	cp ~/.vimrc ./cocVim/vimrc
 	cp ~/.vim/coc-settings.json ./cocVim/coc-settings.json
+elif [ $version == "baseNvim" ]; then
+	cp ~/.config/nvim/init.vim ./baseNeoVim/init.vim
 elif [ $version == "nvim" ]; then
 	cp ~/.config/nvim/init.vim ./neoVim/init.vim
 	cp ~/.config/nvim/coc-settings.json ./neoVim/coc-settings.json

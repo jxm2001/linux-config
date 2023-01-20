@@ -1,5 +1,5 @@
 #!/bin/bash
-read -p "Choose vim version to install(null/base/easy/coc/nvim): " version
+read -p "Choose vim version to install(null/base/easy/coc/baseNvim/nvim): " version
 if [ $version == "base" ]; then
 	cp ./baseVim/vimrc ~/.vimrc
 elif [ $version == "easy" ]; then
@@ -42,6 +42,9 @@ elif [ $version == "coc" ]; then
 	fi
 	cp ./cocVim/vimrc ~/.vimrc
 	cp ./cocVim/coc-settings.json ~/.vim/coc-settings.json
+elif [ $version == "baseNvim" ]; then
+	mkdir -p ~/.config/nvim
+	cp ./baseNeoVim/init.vim ~/.config/nvim/init.vim
 elif [ $version == "nvim" ]; then
 	curl --connect-timeout 3 google.com &> /dev/null
 	if [ $? -ne 0 ]; then
