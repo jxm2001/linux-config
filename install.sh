@@ -1,4 +1,40 @@
 #!/bin/bash
+function install_clangd(){
+	pacman --version &> /dev/null
+	if [ $? -eq 0 ]; then
+		echo "sudo pacman -S clang"
+	else
+		echo "sudo apt install clangd"
+	fi
+}
+function install_ctags(){
+	pacman --version &> /dev/null
+	if [ $? -eq 0 ]; then
+		echo "sudo pacman -S ctags"
+	else
+		echo "sudo apt install universal-ctags"
+	fi
+}
+function install_nodejs(){
+	pacman --version &> /dev/null
+	if [ $? -eq 0 ]; then
+		echo "sudo pacman -S nodejs npm"
+	else
+		echo "# If you want to install nodejs for all users, log in as root"
+		echo "# Do not use 'sudo' because this command does not use the proxy in the current env"
+		echo "curl -sL install-node.vercel.app/lts | bash"
+	fi
+}
+function install_tree_sitter(){
+	pacman --version &> /dev/null
+	if [ $? -eq 0 ]; then
+		echo "sudo pacman -S tree-sitter"
+	else
+		echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.20.7/tree-sitter-linux-x64.gz"
+		echo "gzip -d tree-sitter-linux-x64.gz"
+		echo "mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
+	fi
+}
 read -p "Choose vim version to install(null/base/easy/coc/baseNvim/nvim): " version
 if [ $version == "base" ]; then
 	cp ./baseVim/vimrc ~/.vimrc
@@ -19,22 +55,20 @@ elif [ $version == "coc" ]; then
 		echo "Network error!"
 		exit 2
 	fi
-	clangd --version &> /dev/null && ctags --version &> /dev/null && npm --version &> /dev/null
+	clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null && npm --version &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "Please run the following command to install the dependent environment"
 		clangd --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			echo "sudo apt install clangd"
+			install_clangd
 		fi
 		ctags --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			echo "sudo apt install universal-ctags"
+			install_ctags
 		fi
-		node --version &> /dev/null
+		node --version &> /dev/null && npm --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			echo "# If you want to install nodejs for all users, log in as root"
-			echo "# Do not use 'sudo' because this command does not use the proxy in the current env"
-			echo "curl -sL install-node.vercel.app/lts | bash"
+			install_nodejs
 		fi
 		exit 2
 	fi
@@ -53,24 +87,24 @@ elif [ $version == "nvim" ]; then
 		echo "Network error!"
 		exit 2
 	fi
-	clangd --version &> /dev/null && ctags --version &> /dev/null && npm --version &> /dev/null && tree-sitter --version &> /dev/null
+	clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null && npm --version &> /dev/null && tree-sitter --version &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "Please run the following command to install the dependent environment"
 		clangd --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			echo "sudo pacman -S clang"
+			install_clangd
 		fi
 		ctags --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			echo "sudo pacman -S ctags"
+			install_ctags
 		fi
-		node --version &> /dev/null
+		node --version &> /dev/null && npm --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			echo "sudo pacman -S nodejs npm"
+			install_nodejs
 		fi
 		tree-sitter --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			echo "sudo pacman -S tree-sitter"
+			install_tree_sitter
 		fi
 		exit 2
 	fi
