@@ -32,7 +32,9 @@ elif [ $version == "coc" ]; then
 		fi
 		node --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			echo "curl -sL install-node.vercel.app/lts | sudo bash"
+			echo "# If you want to install nodejs for all users, log in as root"
+			echo "# Do not use 'sudo' because this command does not use the proxy in the current env"
+			echo "curl -sL install-node.vercel.app/lts | bash"
 		fi
 		exit 2
 	fi
