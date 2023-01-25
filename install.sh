@@ -1,39 +1,81 @@
 #!/bin/bash
+OS=$(cat /etc/os-release | grep '^ID=' | cut -d '=' -f 2)
+case $OS in
+	"arch")
+		nvim_init_path="$HOME/.config/nvim"
+		nvim_coc_setting_path="$HOME/.config/nvim"
+		nvim_packer_path="$HOME/.local/share/nvim"
+	;;
+	"ubuntu")
+		nvim_init_path="$HOME/.config/nvim"
+		nvim_coc_setting_path="$HOME/.config/nvim"
+		nvim_packer_path="$HOME/.local/share/nvim"
+	;;
+	"msys2")
+		nvim_init_path="$LOCALAPPDATA/nvim"
+		nvim_coc_setting_path="$HOME/AppData/Local/nvim"
+		nvim_packer_path="$LOCALAPPDATA/nvim-data"
+	;;
+	*)
+		echo "Unsupported operating system!!!"
+		exit 1
+	;;
+esac
 function install_clangd(){
-	pacman --version &> /dev/null
-	if [ $? -eq 0 ]; then
-		echo "sudo pacman -S clang"
-	else
-		echo "sudo apt install clangd"
-	fi
+	case $OS in
+		"arch")
+			echo "sudo pacman -S clang"
+		;;
+		"ubuntu")
+			echo "sudo apt install clangd"
+		;;
+		"msys2")
+			echo "pacman -S mingw-w64-x86_64-clang-tools-extra"
+		;;
+	esac
 }
 function install_ctags(){
-	pacman --version &> /dev/null
-	if [ $? -eq 0 ]; then
-		echo "sudo pacman -S ctags"
-	else
-		echo "sudo apt install universal-ctags"
-	fi
+	case $OS in
+		"arch")
+			echo "sudo pacman -S ctags"
+		;;
+		"ubuntu")
+			echo "sudo apt install universal-ctags"
+		;;
+		"msys2")
+			echo "pacman -S mingw-w64-x86_64-ctags"
+		;;
+	esac
 }
 function install_nodejs(){
-	pacman --version &> /dev/null
-	if [ $? -eq 0 ]; then
-		echo "sudo pacman -S nodejs npm"
-	else
-		echo "# If you want to install nodejs for all users, log in as root"
-		echo "# Do not use 'sudo' because this command does not use the proxy in the current env"
-		echo "curl -sL install-node.vercel.app/lts | bash"
-	fi
+	case $OS in
+		"arch")
+			echo "sudo pacman -S nodejs npm"
+		;;
+		"ubuntu")
+			echo "# If you want to install nodejs for all users, log in as root"
+			echo "# Do not use 'sudo' because this command does not use the proxy in the current env"
+			echo "curl -sL install-node.vercel.app/lts | bash"
+		;;
+		"msys2")
+			echo "pacman -S mingw-w64-x86_64-nodejs"
+		;;
+	esac
 }
 function install_tree_sitter(){
-	pacman --version &> /dev/null
-	if [ $? -eq 0 ]; then
-		echo "sudo pacman -S tree-sitter"
-	else
-		echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.20.7/tree-sitter-linux-x64.gz"
-		echo "gzip -d tree-sitter-linux-x64.gz"
-		echo "mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
-	fi
+	case $OS in
+		"arch")
+			echo "sudo pacman -S tree-sitter"
+		;;
+		"ubuntu")
+			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.20.7/tree-sitter-linux-x64.gz"
+			echo "gzip -d tree-sitter-linux-x64.gz"
+			echo "mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
+		;;
+		"msys2")
+			echo "pacman -S mingw-w64-x86_64-tree-sitter"
+		;;
+	esac
 }
 read -p "Choose vim version to install(null/base/easy/coc/baseNvim/nvim): " version
 if [ $version == "base" ]; then
@@ -79,8 +121,8 @@ elif [ $version == "coc" ]; then
 	cp ./cocVim/vimrc ~/.vimrc
 	cp ./cocVim/coc-settings.json ~/.vim/coc-settings.json
 elif [ $version == "baseNvim" ]; then
-	mkdir -p ~/.config/nvim
-	cp ./baseNeoVim/init.vim ~/.config/nvim/init.vim
+	mkdir -p $nvim_init_path
+	cp ./baseNeoVim/init.vim $nvim_init_path/init.vim
 elif [ $version == "nvim" ]; then
 	curl --connect-timeout 3 google.com &> /dev/null
 	if [ $? -ne 0 ]; then
@@ -108,13 +150,14 @@ elif [ $version == "nvim" ]; then
 		fi
 		exit 2
 	fi
-	if [ ! -e ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
-		git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+	if [ ! -e $nvim_packer_path/site/pack/packer/start/packer.nvim ]; then
+		git clone --depth 1 https://github.com/wbthomason/packer.nvim $nvim_packer_path/site/pack/packer/start/packer.nvim
 	fi
-	mkdir -p ~/.config/nvim
-	cp ./neoVim/init.vim ~/.config/nvim/init.vim
-	cp ./neoVim/coc-settings.json ~/.config/nvim/coc-settings.json
-	cp -r ./neoVim/lua ~/.config/nvim
+	mkdir -p $nvim_init_path
+	cp ./neoVim/init.vim $nvim_init_path/init.vim
+	cp -r ./neoVim/lua $nvim_init_path
+	mkdir -p $nvim_coc_setting_path
+	cp ./neoVim/coc-settings.json $nvim_coc_setting_path/coc-settings.json
 elif [ $version != "null" ]; then
 	echo "Error vim version"
 	exit 1
