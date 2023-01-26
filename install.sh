@@ -180,9 +180,7 @@ elif [ $version != "null" ]; then
 	exit 1
 fi
 read -p "Choose zsh version to install(null/normal): " version
-if [ $version == "base" ]; then
-	cp ./tmux/baseTmux.conf ~/.tmux.conf
-elif [ $version == "normal" ]; then
+if [ $version == "normal" ]; then
 	curl --connect-timeout 3 google.com &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "Network error!"
