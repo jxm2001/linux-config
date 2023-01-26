@@ -53,3 +53,10 @@ nnoremap <leader>t :terminal<CR>
 autocmd TermOpen * startinsert
 " 进入已经存在的终端时自动进入插入模式
 " autocmd BufEnter term://* startinsert
+
+" 兼容 msys2 shell
+if has("win32")
+	let &shellcmdflag='-c'
+	set shellxquote=(
+	set shellslash
+endif

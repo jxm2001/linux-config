@@ -179,3 +179,38 @@ elif [ $version != "null" ]; then
 	echo "Error tmux version"
 	exit 1
 fi
+read -p "Choose zsh version to install(null/normal): " version
+if [ $version == "base" ]; then
+	cp ./tmux/baseTmux.conf ~/.tmux.conf
+elif [ $version == "normal" ]; then
+	curl --connect-timeout 3 google.com &> /dev/null
+	if [ $? -ne 0 ]; then
+		echo "Network error!"
+		exit 2
+	fi
+	cp ./zshrc ~/.zshrc
+	mkdir -p ~/.zsh/themes
+	mkdir -p ~/.zsh/plugins
+	if [ ! -e ~/.zsh/themes/powerlevel10k ]; then
+		git clone https://github.com/romkatv/powerlevel10k.git ~/.zsh/themes/powerlevel10k
+	fi
+	if [ ! -e ~/.zsh/plugins/zsh-syntax-highlighting ]; then
+		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/plugins/zsh-syntax-highlighting
+	fi
+	if [ ! -e ~/.zsh/plugins/zsh-autosuggestions ]; then
+		git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/plugins/zsh-autosuggestions
+	fi
+	if [ ! -e ~/.zsh/plugins/zsh-completions ]; then
+		git clone https://github.com/zsh-users/zsh-completions.git ~/.zsh/plugins/zsh-completions
+	fi
+	if [ ! -e ~/.zsh/plugins/z ]; then
+		git clone https://github.com/rupa/z.git ~/.zsh/plugins/z
+	fi
+	if [ ! -e ~/.zsh/plugins/fzf ]; then
+		git clone https://github.com/junegunn/fzf.git ~/.zsh/plugins/fzf
+		~/.zsh/plugins/fzf/install --xdg --key-bindings --completion --update-rc
+	fi
+elif [ $version != "null" ]; then
+	echo "Error zsh version"
+	exit 1
+fi
