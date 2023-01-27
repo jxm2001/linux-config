@@ -16,6 +16,20 @@ case $OS in
 		exit 1
 	;;
 esac
+function check_python3_neovim(){
+	case $OS in
+		"fedora")
+			rpm -q python3-neovim &> /dev/null
+		;;
+		"arch"|"msys2")
+			pacman -Ss python-pynvim | grep 'installed' &> /dev/null
+		;;
+		"ubuntu")
+			dpkg -l python3-neovim &> /dev/null
+		;;
+	esac
+	return $?
+}
 function install_clangd(){
 	case $OS in
 		"fedora")
@@ -84,6 +98,22 @@ function install_tree_sitter(){
 		;;
 	esac
 }
+function install_python3_neovim(){
+	case $OS in
+		"fedora")
+			echo "sudo dnf install python3-neovim"
+		;;
+		"arch")
+			echo "sudo pacman -S python-pynvim"
+		;;
+		"ubuntu")
+			echo "sudo apt install python3-neovim"
+		;;
+		"msys2")
+			echo "pacman -S mingw-w64-x86_64-python-pynvim"
+		;;
+	esac
+}
 read -p "Choose vim version to install(null/base/easy/coc/baseNvim/nvim): " version
 if [ $version == "base" ]; then
 	cp ./baseVim/vimrc ~/.vimrc
@@ -99,11 +129,6 @@ elif [ $version == "easy" ]; then
 	fi
 	cp ./easyVim/vimrc ~/.vimrc
 elif [ $version == "coc" ]; then
-	curl --connect-timeout 3 google.com &> /dev/null
-	if [ $? -ne 0 ]; then
-		echo "Network error!"
-		exit 2
-	fi
 	clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null && npm --version &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "Please run the following command to install the dependent environment"
@@ -121,6 +146,11 @@ elif [ $version == "coc" ]; then
 		fi
 		exit 2
 	fi
+	curl --connect-timeout 3 google.com &> /dev/null
+	if [ $? -ne 0 ]; then
+		echo "Network error!"
+		exit 2
+	fi
 	if [ ! -e ~/.vim/autoload/plug.vim ]; then
 		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 			https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -131,12 +161,8 @@ elif [ $version == "baseNvim" ]; then
 	mkdir -p $nvim_init_path
 	cp ./baseNeoVim/init.vim $nvim_init_path/init.vim
 elif [ $version == "nvim" ]; then
-	curl --connect-timeout 3 google.com &> /dev/null
-	if [ $? -ne 0 ]; then
-		echo "Network error!"
-		exit 2
-	fi
-	clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null && npm --version &> /dev/null && tree-sitter --version &> /dev/null
+	clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null \
+		&& npm --version &> /dev/null && tree-sitter --version &> /dev/null && check_python3_neovim
 	if [ $? -ne 0 ]; then
 		echo "Please run the following command to install the dependent environment"
 		clangd --version &> /dev/null
@@ -155,6 +181,15 @@ elif [ $version == "nvim" ]; then
 		if [ $? -ne 0 ]; then
 			install_tree_sitter
 		fi
+		check_python3_neovim
+		if [ $? -ne 0 ]; then
+			install_python3_neovim
+		fi
+		exit 2
+	fi
+	curl --connect-timeout 3 google.com &> /dev/null
+	if [ $? -ne 0 ]; then
+		echo "Network error!"
 		exit 2
 	fi
 	if [ ! -e $nvim_packer_path/site/pack/packer/start/packer.nvim ]; then
