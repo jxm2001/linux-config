@@ -1,12 +1,7 @@
 #!/bin/bash
 OS=$(cat /etc/os-release | grep '^ID=' | cut -d '=' -f 2)
 case $OS in
-	"arch")
-		nvim_init_path="$HOME/.config/nvim"
-		nvim_coc_setting_path="$HOME/.config/nvim"
-		nvim_packer_path="$HOME/.local/share/nvim"
-	;;
-	"ubuntu")
+	"fedora"|"arch"|"ubuntu")
 		nvim_init_path="$HOME/.config/nvim"
 		nvim_coc_setting_path="$HOME/.config/nvim"
 		nvim_packer_path="$HOME/.local/share/nvim"
@@ -23,6 +18,9 @@ case $OS in
 esac
 function install_clangd(){
 	case $OS in
+		"fedora")
+			echo "sudo dnf install clang-tools-extra"
+		;;
 		"arch")
 			echo "sudo pacman -S clang"
 		;;
@@ -36,6 +34,9 @@ function install_clangd(){
 }
 function install_ctags(){
 	case $OS in
+		"fedora")
+			echo "sudo dnf install ctags"
+		;;
 		"arch")
 			echo "sudo pacman -S ctags"
 		;;
@@ -49,6 +50,9 @@ function install_ctags(){
 }
 function install_nodejs(){
 	case $OS in
+		"fedora")
+			echo "sudo dnf install nodejs"
+		;;
 		"arch")
 			echo "sudo pacman -S nodejs npm"
 		;;
@@ -64,6 +68,9 @@ function install_nodejs(){
 }
 function install_tree_sitter(){
 	case $OS in
+		"fedora")
+			echo "sudo dnf install tree-sitter-cli"
+		;;
 		"arch")
 			echo "sudo pacman -S tree-sitter"
 		;;

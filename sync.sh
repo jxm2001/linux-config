@@ -1,13 +1,7 @@
 #!/bin/bash
 OS=$(cat /etc/os-release | grep '^ID=' | cut -d '=' -f 2)
-OS=$(cat /etc/os-release | grep '^ID=' | cut -d '=' -f 2)
 case $OS in
-	"arch")
-		nvim_init_path="$HOME/.config/nvim"
-		nvim_coc_setting_path="$HOME/.config/nvim"
-		nvim_packer_path="$HOME/.local/share/nvim"
-	;;
-	"ubuntu")
+	"fedora"|"arch"|"ubuntu")
 		nvim_init_path="$HOME/.config/nvim"
 		nvim_coc_setting_path="$HOME/.config/nvim"
 		nvim_packer_path="$HOME/.local/share/nvim"
