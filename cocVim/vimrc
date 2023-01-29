@@ -46,6 +46,12 @@ nnoremap <leader>qe :set foldmethod=expr<cr>
 set foldmethod=indent
 set foldlevel=99
 
+" 语法高亮
+syntax on
+
+" 背景颜色
+set background=dark
+
 " 插件配置
 
 " 设置状态栏主题
@@ -57,8 +63,6 @@ let g:indentLine_char='┆'
 
 " 主题颜色
 set rtp+=~/.vim/plugged/vim-solarized8
-syntax enable
-set background=dark
 colorscheme solarized8_high 
 
 " 文件树配置

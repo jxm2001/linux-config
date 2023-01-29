@@ -45,3 +45,9 @@ nnoremap <leader>qi :set foldmethod=indent<cr>
 nnoremap <leader>qe :set foldmethod=expr<cr>
 set foldmethod=indent
 set foldlevel=99
+
+" 语法高亮
+syntax on
+
+" 背景颜色
+set background=dark
