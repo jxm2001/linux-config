@@ -1,7 +1,7 @@
 #!/bin/bash
 OS=$(cat /etc/os-release | grep '^ID=' | cut -d '=' -f 2)
 case $OS in
-	"fedora"|"arch"|"ubuntu")
+	"fedora"|"centos"|"arch"|"ubuntu")
 		nvim_init_path="$HOME/.config/nvim"
 		nvim_coc_setting_path="$HOME/.config/nvim"
 		nvim_packer_path="$HOME/.local/share/nvim"
@@ -18,7 +18,7 @@ case $OS in
 esac
 function check_python3_neovim(){
 	case $OS in
-		"fedora")
+		"fedora"|"centos")
 			rpm -q python3-neovim &> /dev/null
 		;;
 		"arch"|"msys2")
@@ -32,7 +32,7 @@ function check_python3_neovim(){
 }
 function install_clangd(){
 	case $OS in
-		"fedora")
+		"fedora"|"centos")
 			echo "sudo dnf install clang-tools-extra"
 		;;
 		"arch")
@@ -48,7 +48,7 @@ function install_clangd(){
 }
 function install_ctags(){
 	case $OS in
-		"fedora")
+		"fedora"|"centos")
 			echo "sudo dnf install ctags"
 		;;
 		"arch")
@@ -64,7 +64,7 @@ function install_ctags(){
 }
 function install_nodejs(){
 	case $OS in
-		"fedora")
+		"fedora"|"centos")
 			echo "sudo dnf install nodejs"
 		;;
 		"arch")
@@ -88,7 +88,7 @@ function install_tree_sitter(){
 		"arch")
 			echo "sudo pacman -S tree-sitter"
 		;;
-		"ubuntu")
+		"ubuntu"|"centos")
 			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.20.7/tree-sitter-linux-x64.gz"
 			echo "gzip -d tree-sitter-linux-x64.gz"
 			echo "mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
@@ -100,7 +100,7 @@ function install_tree_sitter(){
 }
 function install_python3_neovim(){
 	case $OS in
-		"fedora")
+		"fedora"|"centos")
 			echo "sudo dnf install python3-neovim"
 		;;
 		"arch")
