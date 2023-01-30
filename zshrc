@@ -1,6 +1,7 @@
 export TERM="xterm-256color"
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
+export PATH=$HOME/.local/bin:$PATH
 
 # history setting
 HISTFILE=~/.zhistory

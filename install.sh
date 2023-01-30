@@ -1,5 +1,5 @@
 #!/bin/bash
-OS=$(cat /etc/os-release | grep '^ID=' | cut -d '=' -f 2)
+OS=$(cat /etc/os-release | grep '^ID=' | cut -d '=' -f 2 | sed 's/"//g')
 case $OS in
 	"fedora"|"centos"|"arch"|"ubuntu")
 		nvim_init_path="$HOME/.config/nvim"
@@ -90,8 +90,8 @@ function install_tree_sitter(){
 		;;
 		"ubuntu"|"centos")
 			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.20.7/tree-sitter-linux-x64.gz"
-			echo "gzip -d tree-sitter-linux-x64.gz"
-			echo "mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
+			echo "gzip -d tree-sitter-linux-x64.gz && chmod +x tree-sitter-linux-x64"
+			echo "mkdir -p ~/.local/bin/ && mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
 		;;
 		"msys2")
 			echo "pacman -S mingw-w64-x86_64-tree-sitter"
