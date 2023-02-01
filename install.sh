@@ -114,143 +114,152 @@ function install_python3_neovim(){
 		;;
 	esac
 }
-read -p "Choose vim version to install(null/base/easy/coc/baseNvim/nvim): " version
-if [ $version == "base" ]; then
-	cp ./baseVim/vimrc ~/.vimrc
-elif [ $version == "easy" ]; then
-	curl --connect-timeout 3 google.com &> /dev/null
-	if [ $? -ne 0 ]; then
-		echo "Network error!"
-		exit 2
-	fi
-	if [ ! -e ~/.vim/autoload/plug.vim ]; then
-		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-			https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	fi
-	cp ./easyVim/vimrc ~/.vimrc
-elif [ $version == "coc" ]; then
-	clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null && npm --version &> /dev/null
-	if [ $? -ne 0 ]; then
-		echo "Please run the following command to install the dependent environment"
-		clangd --version &> /dev/null
+function install_vim(){
+	read -p "Choose vim version to install(null/base/easy/coc/baseNvim/nvim): " version
+	if [ $version == "base" ]; then
+		cp ./baseVim/vimrc ~/.vimrc
+	elif [ $version == "easy" ]; then
+		curl --connect-timeout 3 google.com &> /dev/null
 		if [ $? -ne 0 ]; then
-			install_clangd
+			echo "Network error!"
+			exit 2
 		fi
-		ctags --version &> /dev/null
+		if [ ! -e ~/.vim/autoload/plug.vim ]; then
+			curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+				https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		fi
+		cp ./easyVim/vimrc ~/.vimrc
+	elif [ $version == "coc" ]; then
+		clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null && npm --version &> /dev/null
 		if [ $? -ne 0 ]; then
-			install_ctags
+			echo "Please run the following command to install the dependent environment"
+			clangd --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_clangd
+			fi
+			ctags --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_ctags
+			fi
+			node --version &> /dev/null && npm --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_nodejs
+			fi
+			exit 2
 		fi
-		node --version &> /dev/null && npm --version &> /dev/null
+		curl --connect-timeout 3 google.com &> /dev/null
 		if [ $? -ne 0 ]; then
-			install_nodejs
+			echo "Network error!"
+			exit 2
 		fi
-		exit 2
-	fi
-	curl --connect-timeout 3 google.com &> /dev/null
-	if [ $? -ne 0 ]; then
-		echo "Network error!"
-		exit 2
-	fi
-	if [ ! -e ~/.vim/autoload/plug.vim ]; then
-		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-			https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	fi
-	cp ./cocVim/vimrc ~/.vimrc
-	cp ./cocVim/coc-settings.json ~/.vim/coc-settings.json
-elif [ $version == "baseNvim" ]; then
-	mkdir -p $nvim_init_path
-	cp ./baseNeoVim/init.vim $nvim_init_path/init.vim
-elif [ $version == "nvim" ]; then
-	clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null \
-		&& npm --version &> /dev/null && tree-sitter --version &> /dev/null && check_python3_neovim
-	if [ $? -ne 0 ]; then
-		echo "Please run the following command to install the dependent environment"
-		clangd --version &> /dev/null
+		if [ ! -e ~/.vim/autoload/plug.vim ]; then
+			curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+				https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		fi
+		cp ./cocVim/vimrc ~/.vimrc
+		cp ./cocVim/coc-settings.json ~/.vim/coc-settings.json
+	elif [ $version == "baseNvim" ]; then
+		mkdir -p $nvim_init_path
+		cp ./baseNeoVim/init.vim $nvim_init_path/init.vim
+	elif [ $version == "nvim" ]; then
+		clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null \
+			&& npm --version &> /dev/null && tree-sitter --version &> /dev/null && check_python3_neovim
 		if [ $? -ne 0 ]; then
-			install_clangd
+			echo "Please run the following command to install the dependent environment"
+			clangd --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_clangd
+			fi
+			ctags --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_ctags
+			fi
+			node --version &> /dev/null && npm --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_nodejs
+			fi
+			tree-sitter --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_tree_sitter
+			fi
+			check_python3_neovim
+			if [ $? -ne 0 ]; then
+				install_python3_neovim
+			fi
+			exit 2
 		fi
-		ctags --version &> /dev/null
+		curl --connect-timeout 3 google.com &> /dev/null
 		if [ $? -ne 0 ]; then
-			install_ctags
+			echo "Network error!"
+			exit 2
 		fi
-		node --version &> /dev/null && npm --version &> /dev/null
+		if [ ! -e $nvim_packer_path/site/pack/packer/start/packer.nvim ]; then
+			git clone --depth 1 https://github.com/wbthomason/packer.nvim $nvim_packer_path/site/pack/packer/start/packer.nvim
+		fi
+		mkdir -p $nvim_init_path
+		cp ./neoVim/init.vim $nvim_init_path/init.vim
+		cp -r ./neoVim/lua $nvim_init_path
+		mkdir -p $nvim_coc_setting_path
+		cp ./neoVim/coc-settings.json $nvim_coc_setting_path/coc-settings.json
+	elif [ $version != "null" ]; then
+		echo "Error vim version"
+		exit 1
+	fi
+}
+function install_tmux(){
+	read -p "Choose tmux version to install(null/base/normal): " version
+	if [ $version == "base" ]; then
+		cp ./tmux/baseTmux.conf ~/.tmux.conf
+	elif [ $version == "normal" ]; then
+		curl --connect-timeout 3 google.com &> /dev/null
 		if [ $? -ne 0 ]; then
-			install_nodejs
+			echo "Network error!"
+			exit 2
 		fi
-		tree-sitter --version &> /dev/null
+		if [ ! -e ~/.tmux/plugins/tpm ]; then
+			git clone https://github.com/tmux-plugins/tpm.git ~/.tmux/plugins/tpm
+		fi
+		cp ./tmux/normalTmux.conf ~/.tmux.conf
+	elif [ $version != "null" ]; then
+		echo "Error tmux version"
+		exit 1
+	fi
+}
+function install_zsh(){
+	read -p "Choose zsh version to install(null/normal): " version
+	if [ $version == "normal" ]; then
+		curl --connect-timeout 3 google.com &> /dev/null
 		if [ $? -ne 0 ]; then
-			install_tree_sitter
+			echo "Network error!"
+			exit 2
 		fi
-		check_python3_neovim
-		if [ $? -ne 0 ]; then
-			install_python3_neovim
+		cp ./zshrc ~/.zshrc
+		mkdir -p ~/.zsh/themes
+		mkdir -p ~/.zsh/plugins
+		if [ ! -e ~/.zsh/themes/powerlevel10k ]; then
+			git clone https://github.com/romkatv/powerlevel10k.git ~/.zsh/themes/powerlevel10k
 		fi
-		exit 2
+		if [ ! -e ~/.zsh/plugins/zsh-syntax-highlighting ]; then
+			git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/plugins/zsh-syntax-highlighting
+		fi
+		if [ ! -e ~/.zsh/plugins/zsh-autosuggestions ]; then
+			git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/plugins/zsh-autosuggestions
+		fi
+		if [ ! -e ~/.zsh/plugins/zsh-completions ]; then
+			git clone https://github.com/zsh-users/zsh-completions.git ~/.zsh/plugins/zsh-completions
+		fi
+		if [ ! -e ~/.zsh/plugins/z ]; then
+			git clone https://github.com/rupa/z.git ~/.zsh/plugins/z
+		fi
+		if [ ! -e ~/.zsh/plugins/fzf ]; then
+			git clone https://github.com/junegunn/fzf.git ~/.zsh/plugins/fzf
+			~/.zsh/plugins/fzf/install --xdg --key-bindings --completion --update-rc
+		fi
+	elif [ $version != "null" ]; then
+		echo "Error zsh version"
+		exit 1
 	fi
-	curl --connect-timeout 3 google.com &> /dev/null
-	if [ $? -ne 0 ]; then
-		echo "Network error!"
-		exit 2
-	fi
-	if [ ! -e $nvim_packer_path/site/pack/packer/start/packer.nvim ]; then
-		git clone --depth 1 https://github.com/wbthomason/packer.nvim $nvim_packer_path/site/pack/packer/start/packer.nvim
-	fi
-	mkdir -p $nvim_init_path
-	cp ./neoVim/init.vim $nvim_init_path/init.vim
-	cp -r ./neoVim/lua $nvim_init_path
-	mkdir -p $nvim_coc_setting_path
-	cp ./neoVim/coc-settings.json $nvim_coc_setting_path/coc-settings.json
-elif [ $version != "null" ]; then
-	echo "Error vim version"
-	exit 1
-fi
-read -p "Choose tmux version to install(null/base/normal): " version
-if [ $version == "base" ]; then
-	cp ./tmux/baseTmux.conf ~/.tmux.conf
-elif [ $version == "normal" ]; then
-	curl --connect-timeout 3 google.com &> /dev/null
-	if [ $? -ne 0 ]; then
-		echo "Network error!"
-		exit 2
-	fi
-	if [ ! -e ~/.tmux/plugins/tpm ]; then
-		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-	fi
-	cp ./tmux/normalTmux.conf ~/.tmux.conf
-elif [ $version != "null" ]; then
-	echo "Error tmux version"
-	exit 1
-fi
-read -p "Choose zsh version to install(null/normal): " version
-if [ $version == "normal" ]; then
-	curl --connect-timeout 3 google.com &> /dev/null
-	if [ $? -ne 0 ]; then
-		echo "Network error!"
-		exit 2
-	fi
-	cp ./zshrc ~/.zshrc
-	mkdir -p ~/.zsh/themes
-	mkdir -p ~/.zsh/plugins
-	if [ ! -e ~/.zsh/themes/powerlevel10k ]; then
-		git clone https://github.com/romkatv/powerlevel10k.git ~/.zsh/themes/powerlevel10k
-	fi
-	if [ ! -e ~/.zsh/plugins/zsh-syntax-highlighting ]; then
-		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/plugins/zsh-syntax-highlighting
-	fi
-	if [ ! -e ~/.zsh/plugins/zsh-autosuggestions ]; then
-		git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/plugins/zsh-autosuggestions
-	fi
-	if [ ! -e ~/.zsh/plugins/zsh-completions ]; then
-		git clone https://github.com/zsh-users/zsh-completions.git ~/.zsh/plugins/zsh-completions
-	fi
-	if [ ! -e ~/.zsh/plugins/z ]; then
-		git clone https://github.com/rupa/z.git ~/.zsh/plugins/z
-	fi
-	if [ ! -e ~/.zsh/plugins/fzf ]; then
-		git clone https://github.com/junegunn/fzf.git ~/.zsh/plugins/fzf
-		~/.zsh/plugins/fzf/install --xdg --key-bindings --completion --update-rc
-	fi
-elif [ $version != "null" ]; then
-	echo "Error zsh version"
-	exit 1
-fi
+}
+install_zsh
+install_vim
+install_tmux
