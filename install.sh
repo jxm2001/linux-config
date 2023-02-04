@@ -16,6 +16,13 @@ case $OS in
 		exit 1
 	;;
 esac
+function check_network(){
+	curl --connect-timeout 3 google.com &> /dev/null
+	if [ $? -ne 0 ]; then
+		echo "Network error!"
+		exit 2
+	fi
+}
 function check_python3_neovim(){
 	case $OS in
 		"fedora"|"centos")
@@ -119,12 +126,8 @@ function install_vim(){
 	if [ $version == "base" ]; then
 		cp ./baseVim/vimrc ~/.vimrc
 	elif [ $version == "easy" ]; then
-		curl --connect-timeout 3 google.com &> /dev/null
-		if [ $? -ne 0 ]; then
-			echo "Network error!"
-			exit 2
-		fi
 		if [ ! -e ~/.vim/autoload/plug.vim ]; then
+			check_network
 			curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 				https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 		fi
@@ -147,12 +150,8 @@ function install_vim(){
 			fi
 			exit 2
 		fi
-		curl --connect-timeout 3 google.com &> /dev/null
-		if [ $? -ne 0 ]; then
-			echo "Network error!"
-			exit 2
-		fi
 		if [ ! -e ~/.vim/autoload/plug.vim ]; then
+			check_network
 			curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 				https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 		fi
@@ -188,12 +187,8 @@ function install_vim(){
 			fi
 			exit 2
 		fi
-		curl --connect-timeout 3 google.com &> /dev/null
-		if [ $? -ne 0 ]; then
-			echo "Network error!"
-			exit 2
-		fi
 		if [ ! -e $nvim_packer_path/site/pack/packer/start/packer.nvim ]; then
+			check_network
 			git clone --depth 1 https://github.com/wbthomason/packer.nvim $nvim_packer_path/site/pack/packer/start/packer.nvim
 		fi
 		mkdir -p $nvim_init_path
@@ -210,17 +205,19 @@ function install_tmux(){
 	read -p "Choose tmux version to install(null/base/normal): " version
 	if [ $version == "base" ]; then
 		cp ./tmux/baseTmux.conf ~/.tmux.conf
-	elif [ $version == "normal" ]; then
-		curl --connect-timeout 3 google.com &> /dev/null
-		if [ $? -ne 0 ]; then
-			echo "Network error!"
-			exit 2
+		if [ $OS == "msys2" ]; then
+			dos2unix ~/.tmux.conf
 		fi
+	elif [ $version == "normal" ]; then
 		if [ ! -e ~/.tmux/plugins/tpm ]; then
+			check_network
 			git clone https://github.com/tmux-plugins/tpm.git ~/.tmux/plugins/tpm
 		fi
 		cp ./tmux/normalTmux.conf ~/.tmux.conf
 		cp ./tmux/tmux-status-line-trigger.tmux ~/.tmux/
+		if [ $OS == "msys2" ]; then
+			dos2unix ~/.tmux.conf
+		fi
 	elif [ $version != "null" ]; then
 		echo "Error tmux version"
 		exit 1
@@ -229,11 +226,7 @@ function install_tmux(){
 function install_zsh(){
 	read -p "Choose zsh version to install(null/normal): " version
 	if [ $version == "normal" ]; then
-		curl --connect-timeout 3 google.com &> /dev/null
-		if [ $? -ne 0 ]; then
-			echo "Network error!"
-			exit 2
-		fi
+		check_network
 		cp ./zshrc ~/.zshrc
 		mkdir -p ~/.zsh/themes
 		mkdir -p ~/.zsh/plugins
