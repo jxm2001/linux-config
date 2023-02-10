@@ -118,6 +118,14 @@ let g:cpp_no_function_highlight = 1
 au FileType c,cpp,h,hpp,objc,objcpp,python call rainbow#load()
 let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'magenta', 'red', 'white']
 
+" git 配置
+set updatetime=100
+let g:gitgutter_show_msg_on_hunk_jumping = 0
+
+" oscyank 配置
+nnoremap <silent> <leader>y :OSCYankReg "<CR>
+let g:oscyank_term = 'default'
+
 call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
@@ -141,4 +149,6 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'frazrepo/vim-rainbow'
+Plug 'airblade/vim-gitgutter'
+Plug 'ojroques/vim-oscyank'
 call plug#end()

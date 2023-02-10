@@ -154,8 +154,9 @@ let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
-" 剪切板参数
-nnoremap <leader>c :call OSCYankOperator(getreg('"'))<CR>
+" oscyank 配置
+nnoremap <silent> <leader>y :OSCYankReg "<CR>
+let g:oscyank_term = 'default'
 
 " coc
 let g:coc_global_extensions = [
