@@ -46,6 +46,9 @@ nnoremap <leader>qe :set foldmethod=expr<cr>
 set foldmethod=indent
 set foldlevel=99
 
+" 背景颜色
+set background=dark
+
 " terminal mode 配置
 tnoremap <C-[> <C-\><C-N>
 nnoremap <leader>t :terminal<CR>
