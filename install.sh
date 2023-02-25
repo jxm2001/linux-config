@@ -161,8 +161,13 @@ function install_vim(){
 		mkdir -p $nvim_init_path
 		cp ./nvim_base/init.vim $nvim_init_path/init.vim
 	elif [ $version == "nvim-easy" ]; then
+		if [ ! -e $nvim_packer_path/site/pack/packer/start/packer.nvim ]; then
+			check_network
+			git clone --depth 1 https://github.com/wbthomason/packer.nvim $nvim_packer_path/site/pack/packer/start/packer.nvim
+		fi
 		mkdir -p $nvim_init_path
 		cp ./nvim_easy/init.vim $nvim_init_path/init.vim
+		cp -r ./nvim_easy/lua $nvim_init_path
 	elif [ $version == "nvim-coc" ]; then
 		clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null \
 			&& npm --version &> /dev/null && tree-sitter --version &> /dev/null && check_python3_neovim
