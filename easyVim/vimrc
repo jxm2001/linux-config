@@ -126,6 +126,9 @@ let g:gitgutter_show_msg_on_hunk_jumping = 0
 nnoremap <silent> <leader>y :OSCYankReg "<CR>
 let g:oscyank_term = 'default'
 
+" 状态列集成
+set signcolumn=yes
+
 call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'

@@ -122,7 +122,7 @@ function install_python3_neovim(){
 	esac
 }
 function install_vim(){
-	read -p "Choose vim version to install(null/base/easy/coc/baseNvim/nvim): " version
+	read -p "Choose vim version to install(null/base/easy/coc/nvim-base/nvim-easy/nvim-coc): " version
 	if [ $version == "base" ]; then
 		cp ./baseVim/vimrc ~/.vimrc
 	elif [ $version == "easy" ]; then
@@ -157,10 +157,13 @@ function install_vim(){
 		fi
 		cp ./cocVim/vimrc ~/.vimrc
 		cp ./cocVim/coc-settings.json ~/.vim/coc-settings.json
-	elif [ $version == "baseNvim" ]; then
+	elif [ $version == "nvim-base" ]; then
 		mkdir -p $nvim_init_path
-		cp ./baseNeoVim/init.vim $nvim_init_path/init.vim
-	elif [ $version == "nvim" ]; then
+		cp ./nvim_base/init.vim $nvim_init_path/init.vim
+	elif [ $version == "nvim-easy" ]; then
+		mkdir -p $nvim_init_path
+		cp ./nvim_easy/init.vim $nvim_init_path/init.vim
+	elif [ $version == "nvim-coc" ]; then
 		clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null \
 			&& npm --version &> /dev/null && tree-sitter --version &> /dev/null && check_python3_neovim
 		if [ $? -ne 0 ]; then
@@ -192,10 +195,10 @@ function install_vim(){
 			git clone --depth 1 https://github.com/wbthomason/packer.nvim $nvim_packer_path/site/pack/packer/start/packer.nvim
 		fi
 		mkdir -p $nvim_init_path
-		cp ./neoVim/init.vim $nvim_init_path/init.vim
-		cp -r ./neoVim/lua $nvim_init_path
+		cp ./nvim_coc/init.vim $nvim_init_path/init.vim
+		cp -r ./nvim_coc/lua $nvim_init_path
 		mkdir -p $nvim_coc_setting_path
-		cp ./neoVim/coc-settings.json $nvim_coc_setting_path/coc-settings.json
+		cp ./nvim_coc/coc-settings.json $nvim_coc_setting_path/coc-settings.json
 	elif [ $version != "null" ]; then
 		echo "Error vim version"
 		exit 1

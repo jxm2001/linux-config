@@ -16,7 +16,7 @@ case $OS in
 		exit 1
 	;;
 esac
-read -p "Choose vim version to sync(null/base/easy/coc/baseNvim/nvim): " version
+read -p "Choose vim version to install(null/base/easy/coc/nvim-base/nvim-easy/nvim-coc): " version
 if [ $version == "base" ]; then
 	cp ~/.vimrc ./baseVim/vimrc
 elif [ $version == "easy" ]; then
@@ -24,12 +24,14 @@ elif [ $version == "easy" ]; then
 elif [ $version == "coc" ]; then
 	cp ~/.vimrc ./cocVim/vimrc
 	cp ~/.vim/coc-settings.json ./cocVim/coc-settings.json
-elif [ $version == "baseNvim" ]; then
-	cp $nvim_init_path/init.vim ./baseNeoVim/init.vim
-elif [ $version == "nvim" ]; then
-	cp $nvim_init_path/init.vim ./neoVim/init.vim
-	cp -r $nvim_init_path/lua ./neoVim
-	cp $nvim_coc_setting_path/coc-settings.json ./neoVim/coc-settings.json
+elif [ $version == "nvim-base" ]; then
+	cp $nvim_init_path/init.vim ./nvim_base/init.vim
+elif [ $version == "nvim-easy" ]; then
+	cp $nvim_init_path/init.vim ./nvim_easy/init.vim
+elif [ $version == "nvim-coc" ]; then
+	cp $nvim_init_path/init.vim ./nvim_coc/init.vim
+	cp -r $nvim_init_path/lua ./nvim_coc
+	cp $nvim_coc_setting_path/coc-settings.json ./nvim_coc/coc-settings.json
 elif [ $version != "null" ]; then
 	echo "Error vim version"
 	exit 1
