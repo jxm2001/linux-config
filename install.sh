@@ -234,6 +234,23 @@ function install_tmux(){
 function install_zsh(){
 	read -p "Choose zsh version to install(null/normal): " version
 	if [ $version == "normal" ]; then
+		wget --version &> /dev/null && curl --version &> /dev/null && tar --version &> /dev/null
+		if [ $? -ne 0 ]; then
+			echo "Fail to install zsh"
+			wget --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				echo "Please install wget"
+			fi
+			curl --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				echo "Please install curl"
+			fi
+			tar --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				echo "Please install tar"
+			fi
+			exit 2
+		fi
 		check_network
 		cp ./zshrc ~/.zshrc
 		mkdir -p ~/.zsh/themes
