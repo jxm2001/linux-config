@@ -155,7 +155,7 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
 " oscyank 配置
-nnoremap <silent> <leader>y :OSCYankReg "<CR>
+nnoremap <silent> <leader>y :OSCYankRegister "<CR>
 let g:oscyank_term = 'default'
 
 " coc

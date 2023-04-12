@@ -119,5 +119,5 @@ nnoremap <leader>pp :<C-U><C-R>=printf("Leaderf filetype %s", "")<CR><CR>
 let g:far#enable_undo=1
 
 " oscyank 配置
-nnoremap <silent> <leader>y :OSCYankReg "<CR>
+nnoremap <silent> <leader>y :OSCYankRegister "<CR>
 let g:oscyank_term = 'default'

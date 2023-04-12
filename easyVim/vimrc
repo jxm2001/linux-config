@@ -123,7 +123,7 @@ set updatetime=100
 let g:gitgutter_show_msg_on_hunk_jumping = 0
 
 " oscyank 配置
-nnoremap <silent> <leader>y :OSCYankReg "<CR>
+nnoremap <silent> <leader>y :OSCYankRegister "<CR>
 let g:oscyank_term = 'default'
 
 " 状态列集成
