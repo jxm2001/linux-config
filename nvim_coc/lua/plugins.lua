@@ -33,6 +33,7 @@ return require('packer').startup(
 		config = function() require("which-key").setup {} end
 	}
 	use 'ludovicchabant/vim-gutentags'
+	use 'tpope/vim-fugitive'
 	use 'ojroques/vim-oscyank'
 	use { 'neoclide/coc.nvim', branch = 'release' }
 	use {
