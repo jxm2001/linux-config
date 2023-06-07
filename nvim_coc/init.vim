@@ -157,11 +157,12 @@ let g:coc_global_extensions = [
 			\'coc-snippets',
 			\'coc-docker']
 " 诊断信息跳转
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 " git 跳转
-nmap <silent> <expr> [c &diff ? '[c' : '<Plug>(coc-git-prevchunk)'
-nmap <silent> <expr> ]c &diff ? ']c' : '<Plug>(coc-git-nextchunk)'
+nmap <silent> [g <Plug>(coc-git-prevchunk)
+nmap <silent> ]g <Plug>(coc-git-nextchunk)
+nmap <silent> gs <Plug>(coc-git-chunkinfo)
 " 定义引用跳转
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
