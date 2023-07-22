@@ -288,7 +288,9 @@ function update_firewall(){
 			exit 2
 		fi
 		sudo bash ipset/ipset.sh
-		sudo iptables -A INPUT -m set --match-set ip_blacklist src -j DROP
+		if [ -z "$(sudo iptables -vL | grep 'match-set ip_blacklist src')" ]; then
+			sudo iptables -A INPUT -m set --match-set ip_blacklist src -j DROP
+		fi
 	fi
 }
 install_zsh
