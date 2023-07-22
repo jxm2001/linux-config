@@ -32,6 +32,7 @@ ipset add ip_blacklist 173.199.123.101/32
 # GoDaddy
 ipset add ip_blacklist 68.178.164.198/32
 # America
+ipset add ip_blacklist 167.94.0.0/16
 ipset add ip_blacklist 167.248.133.32/27
 ipset add ip_blacklist 170.64.0.0/16
 # Russia
