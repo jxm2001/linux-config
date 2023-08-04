@@ -32,6 +32,8 @@ return require('packer').startup(
 		"folke/which-key.nvim",
 		config = function() require("which-key").setup {} end
 	}
+	use 'airblade/vim-gitgutter'
+	use 'tpope/vim-fugitive'
 	use 'ojroques/vim-oscyank'
 	use 'lewis6991/impatient.nvim'
 end

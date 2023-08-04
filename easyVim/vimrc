@@ -153,5 +153,6 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'frazrepo/vim-rainbow'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 Plug 'ojroques/vim-oscyank'
 call plug#end()

@@ -234,6 +234,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'frazrepo/vim-rainbow'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'tpope/vim-fugitive'
 Plug 'ojroques/vim-oscyank'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
