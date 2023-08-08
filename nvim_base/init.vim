@@ -63,3 +63,9 @@ if has("win32")
 	set shellxquote=(
 	set shellslash
 endif
+
+" 状态列集成
+set signcolumn=yes
+
+" 允许跳转时有未保存的文件
+set hidden

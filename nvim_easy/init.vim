@@ -61,6 +61,12 @@ if has("win32")
 	set shellslash
 endif
 
+" 状态列集成
+set signcolumn=yes
+
+" 允许跳转时有未保存的文件
+set hidden
+
 " 插件配置
 
 " 激活插件
@@ -121,3 +127,6 @@ let g:far#enable_undo=1
 " oscyank 配置
 nnoremap <silent> <leader>y :OSCYankRegister "<CR>
 let g:oscyank_term = 'default'
+
+" 符号颜色显示
+let g:rainbow_active = 1

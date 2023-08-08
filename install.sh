@@ -17,7 +17,7 @@ case $OS in
 	;;
 esac
 function check_network(){
-	curl --connect-timeout 3 google.com &> /dev/null
+	curl --connect-timeout 3 google.com &> /dev/null || curl --connect-timeout 3 https://google.com &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "Network error!"
 		exit 2
