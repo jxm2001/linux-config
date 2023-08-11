@@ -6,6 +6,7 @@ else
 fi
 # DigitalOcean
 ipset add ip_blacklist 45.55.0.0/16
+ipset add ip_blacklist 67.205.0.0/16
 ipset add ip_blacklist 104.236.0.0/16
 ipset add ip_blacklist 107.170.224.0/19
 ipset add ip_blacklist 128.199.0.0/16
@@ -38,6 +39,9 @@ ipset add ip_blacklist 173.199.123.101/32
 # GoDaddy
 ipset add ip_blacklist 68.178.128.0/17
 ipset add ip_blacklist 132.148.76.25/32
+ipset add ip_blacklist 184.168.0.0/16
+# Media Temple
+ipset add ip_blacklist 64.207.128.0/18
 # Amazon
 ipset add ip_blacklist 3.6.0.0/16
 # Hurricane Electric
@@ -49,9 +53,11 @@ ipset add ip_blacklist 106.75.0.0/16
 # Microsoft
 ipset add ip_blacklist 20.193.148.6/31
 # 阿里云
+ipset add ip_blacklist 8.219.0.0/16
 ipset add ip_blacklist 8.222.0.0/16
 ipset add ip_blacklist 39.100.0.0/16
 ipset add ip_blacklist 47.236.0.0/16
+ipset add ip_blacklist 47.245.0.0/16
 ipset add ip_blacklist 123.56.155.0/24
 # 腾讯云
 ipset add ip_blacklist 43.132.0.0/11
@@ -61,7 +67,9 @@ ipset add ip_blacklist 124.222.68.152/32
 # 美国
 ipset add ip_blacklist 16.162.172.33/32
 ipset add ip_blacklist 38.132.109.0/24
+ipset add ip_blacklist 68.183.0.0/16
 ipset add ip_blacklist 103.203.57.12/32
+ipset add ip_blacklist 137.184.0.0/16
 ipset add ip_blacklist 143.42.59.184/32
 ipset add ip_blacklist 162.142.125.0/24
 ipset add ip_blacklist 165.232.105.52/24
@@ -118,6 +126,8 @@ ipset add ip_blacklist 103.0.0.0/8
 ipset add ip_blacklist 113.56.95.80/32
 # 辽宁
 ipset add ip_blacklist 223.100.159.87/32
+# 河南
+ipset add ip_blacklist 111.7.100.28/30
 # 河北
 ipset add ip_blacklist 121.18.180.50/32
 # 厦门

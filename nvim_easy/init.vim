@@ -128,5 +128,10 @@ let g:far#enable_undo=1
 nnoremap <silent> <leader>y :OSCYankRegister "<CR>
 let g:oscyank_term = 'default'
 
+" vim-gitgutter 配置
+nmap ]g <Plug>(GitGutterNextHunk)
+nmap [g <Plug>(GitGutterPrevHunk)
+nmap gs <Plug>(GitGutterPreviewHunk)
+
 " 符号颜色显示
 let g:rainbow_active = 1
