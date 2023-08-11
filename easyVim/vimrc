@@ -118,9 +118,12 @@ let g:cpp_no_function_highlight = 1
 au FileType c,cpp,h,hpp,objc,objcpp,python call rainbow#load()
 let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'magenta', 'red', 'white']
 
-" git 配置
+" vim-gitgutter 配置
 set updatetime=100
 let g:gitgutter_show_msg_on_hunk_jumping = 0
+nmap ]g <Plug>(GitGutterNextHunk)
+nmap [g <Plug>(GitGutterPrevHunk)
+nmap gs <Plug>(GitGutterPreviewHunk)
 
 " oscyank 配置
 nnoremap <silent> <leader>y :OSCYankRegister "<CR>

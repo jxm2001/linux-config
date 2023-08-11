@@ -129,6 +129,8 @@ nnoremap <silent> <leader>y :OSCYankRegister "<CR>
 let g:oscyank_term = 'default'
 
 " vim-gitgutter 配置
+set updatetime=100
+let g:gitgutter_show_msg_on_hunk_jumping = 0
 nmap ]g <Plug>(GitGutterNextHunk)
 nmap [g <Plug>(GitGutterPrevHunk)
 nmap gs <Plug>(GitGutterPreviewHunk)
