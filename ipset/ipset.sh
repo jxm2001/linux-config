@@ -19,11 +19,13 @@ ipset add ip_blacklist 157.245.0.0/16
 ipset add ip_blacklist 159.65.0.0/16
 ipset add ip_blacklist 159.203.0.0/16
 ipset add ip_blacklist 162.243.0.0/16
+ipset add ip_blacklist 165.227.0.0/16
 ipset add ip_blacklist 167.99.0.0/16
 ipset add ip_blacklist 178.128.0.0/16
 ipset add ip_blacklist 192.241.192.0/18
 ipset add ip_blacklist 198.199.64.0/18
 ipset add ip_blacklist 206.189.0.0/16
+ipset add ip_blacklist 207.154.0.0/16
 ipset add ip_blacklist 209.97.152.248/32
 # Linode
 ipset add ip_blacklist 45.33.0.0/17
@@ -60,7 +62,7 @@ ipset add ip_blacklist 47.236.0.0/16
 ipset add ip_blacklist 47.245.0.0/16
 ipset add ip_blacklist 123.56.155.0/24
 # 腾讯云
-ipset add ip_blacklist 43.132.0.0/11
+ipset add ip_blacklist 43.128.0.0/11
 ipset add ip_blacklist 49.234.59.18/32
 ipset add ip_blacklist 64.226.0.0/16
 ipset add ip_blacklist 124.222.68.152/32
@@ -116,6 +118,7 @@ ipset add ip_blacklist 87.236.176.0/24
 ipset add ip_blacklist 31.43.185.32/32
 # 其他国家
 ipset add ip_blacklist 78.128.114.0/24
+ipset add ip_blacklist 89.248.0.0/16
 ipset add ip_blacklist 109.205.213.34/32
 ipset add ip_blacklist 185.73.124.50/32
 ipset add ip_blacklist 186.4.250.34/32
