@@ -1,0 +1,21 @@
+zinit wait lucid for \
+	OMZL::completion.zsh \
+	OMZP::colored-man-pages/colored-man-pages.plugin.zsh \
+	OMZP::common-aliases/common-aliases.plugin.zsh
+
+zinit wait lucid light-mode for \
+	atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+	zsh-users/zsh-syntax-highlighting \
+	atload"!_zsh_autosuggest_start" \
+	zsh-users/zsh-autosuggestions \
+	zsh-users/zsh-completions
+
+zinit ice wait"1" as"command" from"gh-r" lucid \
+	atclone"./zoxide init zsh > init.zsh" \
+	atpull"%atclone" src"init.zsh" nocompile'!'
+zinit light ajeetdsouza/zoxide
+
+zinit pack"bgn-binary+keys" for fzf
+
+zinit ice depth"1"
+zinit light romkatv/powerlevel10k.git

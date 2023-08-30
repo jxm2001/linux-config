@@ -17,11 +17,13 @@ ipset add ip_blacklist 142.93.0.0/16
 ipset add ip_blacklist 157.230.0.0/16
 ipset add ip_blacklist 157.245.0.0/16
 ipset add ip_blacklist 159.65.0.0/16
+ipset add ip_blacklist 159.89.0.0/16
 ipset add ip_blacklist 159.203.0.0/16
 ipset add ip_blacklist 162.243.0.0/16
 ipset add ip_blacklist 165.227.0.0/16
 ipset add ip_blacklist 167.99.0.0/16
 ipset add ip_blacklist 178.128.0.0/16
+ipset add ip_blacklist 188.166.0.0/16
 ipset add ip_blacklist 192.241.192.0/18
 ipset add ip_blacklist 198.199.64.0/18
 ipset add ip_blacklist 206.189.0.0/16
@@ -35,12 +37,13 @@ ipset add ip_blacklist 139.162.0.0/16
 ipset add ip_blacklist 172.104.0.0/15
 ipset add ip_blacklist 192.155.80.0/20
 # Choopa
-ipset add ip_blacklist 45.32.202.167/32
-ipset add ip_blacklist 139.180.209.51/32
-ipset add ip_blacklist 173.199.123.101/32
+ipset add ip_blacklist 45.32.202.0/24
+ipset add ip_blacklist 45.76.0.0/16
+ipset add ip_blacklist 139.180.209.0/24
+ipset add ip_blacklist 173.199.123.0/24
 # GoDaddy
 ipset add ip_blacklist 68.178.128.0/17
-ipset add ip_blacklist 132.148.76.25/32
+ipset add ip_blacklist 132.148.76.0/24
 ipset add ip_blacklist 184.168.0.0/16
 # Media Temple
 ipset add ip_blacklist 64.207.128.0/18
@@ -48,16 +51,24 @@ ipset add ip_blacklist 64.207.128.0/18
 ipset add ip_blacklist 3.6.0.0/16
 # Hurricane Electric
 ipset add ip_blacklist 64.62.197.0/24
+ipset add ip_blacklist 184.105.0.0/16
 # hoststore.com
 ipset add ip_blacklist 104.248.0.0/16
 # UCloud
 ipset add ip_blacklist 106.75.0.0/16
+ipset add ip_blacklist 118.193.32.0/19
+ipset add ip_blacklist 152.32.128.0/17
 # Microsoft
+ipset add ip_blacklist 20.51.239.253/32
 ipset add ip_blacklist 20.193.148.6/31
+ipset add ip_blacklist 23.94.28.173/32
 # 阿里云
+ipset add ip_blacklist 8.210.0.0/16
 ipset add ip_blacklist 8.219.0.0/16
 ipset add ip_blacklist 8.222.0.0/16
 ipset add ip_blacklist 39.100.0.0/16
+ipset add ip_blacklist 39.105.0.0/16
+ipset add ip_blacklist 47.92.0.0/16
 ipset add ip_blacklist 47.236.0.0/16
 ipset add ip_blacklist 47.245.0.0/16
 ipset add ip_blacklist 123.56.155.0/24
@@ -81,6 +92,7 @@ ipset add ip_blacklist 167.172.120.107/32
 ipset add ip_blacklist 167.248.133.0/24
 ipset add ip_blacklist 170.64.0.0/16
 ipset add ip_blacklist 172.232.5.72/32
+ipset add ip_blacklist 192.161.48.0/20
 ipset add ip_blacklist 193.142.147.209/32
 # 英国
 ipset add ip_blacklist 62.204.41.134/32
@@ -90,8 +102,10 @@ ipset add ip_blacklist 62.122.184.3/32
 ipset add ip_blacklist 80.66.83.132/32
 ipset add ip_blacklist 94.232.41.205/32
 ipset add ip_blacklist 176.113.115.0/24
+ipset add ip_blacklist 179.60.147.0/24
 ipset add ip_blacklist 195.20.137.129/32
 # 德国
+ipset add ip_blacklist 77.90.185.110/32
 ipset add ip_blacklist 80.94.92.0/24
 ipset add ip_blacklist 176.57.184.166/32
 ipset add ip_blacklist 176.65.145.0/24
@@ -107,22 +121,25 @@ ipset add ip_blacklist 205.210.31.0/24
 # 波兰
 ipset add ip_blacklist 141.98.11.0/24
 ipset add ip_blacklist 185.233.19.0/24
-# 荷兰
-ipset add ip_blacklist 93.174.95.106/32
-ipset add ip_blacklist 185.216.140.186/32
 # 韩国
+ipset add ip_blacklist 128.134.187.73/32
 ipset add ip_blacklist 203.237.211.101/32
-# 比利时
-ipset add ip_blacklist 87.236.176.0/24
-# 乌克兰
-ipset add ip_blacklist 31.43.185.32/32
+# 欧盟
+ipset add ip_blacklist 45.0.0.0/8
 # 其他国家
+ipset add ip_blacklist 31.43.185.32/32
+ipset add ip_blacklist 36.91.222.0/24
 ipset add ip_blacklist 78.128.114.0/24
+ipset add ip_blacklist 87.236.176.0/24
 ipset add ip_blacklist 89.248.0.0/16
+ipset add ip_blacklist 93.174.95.106/32
 ipset add ip_blacklist 109.205.213.34/32
 ipset add ip_blacklist 185.73.124.50/32
+ipset add ip_blacklist 185.180.143.0/24
+ipset add ip_blacklist 185.216.140.186/32
 ipset add ip_blacklist 186.4.250.34/32
 ipset add ip_blacklist 193.29.13.22/32
+ipset add ip_blacklist 200.9.155.0/24
 # 亚洲
 ipset add ip_blacklist 103.0.0.0/8
 # 湖北
@@ -135,6 +152,8 @@ ipset add ip_blacklist 111.7.100.28/30
 ipset add ip_blacklist 121.18.180.50/32
 # 厦门
 ipset add ip_blacklist 121.204.215.24/32
+# 贵州
+ipset add ip_blacklist 117.187.173.0/24
 # 广东
 ipset add ip_blacklist 113.105.223.74/32
 ipset add ip_blacklist 116.6.233.155/32

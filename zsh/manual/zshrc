@@ -1,15 +1,32 @@
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
+
+# history setting
+HISTFILE=~/.zhistory
+HISTSIZE=50000
+SAVEHIST=10000
+
+# alias setting
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias la='ls -la'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias set_proxy='export http_proxy="http://127.0.0.1:20171"; \
+	export https_proxy="http://127.0.0.1:20171"; \
+	export all_proxy="http://127.0.0.1:20171";'
+alias unset_proxy='unset http_proxy https_proxy all_proxy'
+
+# path setting
 export PATH=$HOME/.local/bin:$PATH
 export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=$HOME/.local/lib:$LIBRARY_PATH
 export CPLUS_INCLUDE_PATH=$HOME/.local/include:$CPLUS_INCLUDE_PATH
 export C_INCLUDE_PATH=$HOME/.local/include:$C_INCLUDE_PATH
 
-# history setting
-HISTFILE=~/.zhistory
-HISTSIZE=5000
-SAVEHIST=5000
+# make zsh compatible with *
+setopt no_nomatch
 
 # plugins
 source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
@@ -31,13 +48,3 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 # enable completion 
 autoload -U compinit
 compinit
-
-# make zsh compatible with *
-setopt no_nomatch
-
-# alias setting
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias ll='ls -la'

@@ -23,6 +23,8 @@ function check_network(){
 		exit 2
 	fi
 }
+function check_zsh_dep(){
+}
 function check_python3_neovim(){
 	case $OS in
 		"fedora"|"centos")
@@ -232,8 +234,36 @@ function install_tmux(){
 	fi
 }
 function install_zsh(){
-	read -p "Choose zsh version to install(null/normal): " version
-	if [ $version == "normal" ]; then
+	read -p "Choose zsh version to install(null/manual/zinit): " version
+	if [ $version == "zinit" ]; then
+		wget --version &> /dev/null && curl --version &> /dev/null && tar --version &> /dev/null && jq -- version &> /dev/null
+		if [ $? -ne 0 ]; then
+			echo "Fail to install zsh"
+			wget --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				echo "Please install wget"
+			fi
+			curl --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				echo "Please install curl"
+			fi
+			tar --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				echo "Please install tar"
+			fi
+			jq --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				echo "Please install jq"
+			fi
+			exit 2
+		fi
+		check_network
+		cp ./zsh/zinit/zshrc.1 ~/.zshrc
+		bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+		echo "" >> ~/.zshrc
+		cat ./zsh/zinit/zshrc.2 >> ~/.zshrc
+		source ~/.zshrc
+	elif [ $version == "manual" ]; then
 		wget --version &> /dev/null && curl --version &> /dev/null && tar --version &> /dev/null
 		if [ $? -ne 0 ]; then
 			echo "Fail to install zsh"
@@ -252,7 +282,7 @@ function install_zsh(){
 			exit 2
 		fi
 		check_network
-		cp ./zshrc ~/.zshrc
+		cp ./zsh/manual/zshrc ~/.zshrc
 		mkdir -p ~/.zsh/themes
 		mkdir -p ~/.zsh/plugins
 		if [ ! -e ~/.zsh/themes/powerlevel10k ]; then
