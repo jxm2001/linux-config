@@ -234,7 +234,7 @@ function install_tmux(){
 function install_zsh(){
 	read -p "Choose zsh version to install(null/manual/zinit): " version
 	if [ $version == "zinit" ]; then
-		wget --version &> /dev/null && curl --version &> /dev/null && tar --version &> /dev/null && jq -- version &> /dev/null
+		wget --version &> /dev/null && curl --version &> /dev/null && tar --version &> /dev/null && jq --version &> /dev/null
 		if [ $? -ne 0 ]; then
 			echo "Fail to install zsh"
 			wget --version &> /dev/null
