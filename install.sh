@@ -1,7 +1,7 @@
 #!/bin/bash
 OS=$(cat /etc/os-release | grep '^ID=' | cut -d '=' -f 2 | sed 's/"//g')
 case $OS in
-	"fedora"|"centos"|"arch"|"ubuntu")
+	"arch"|"fedora"|"centos"|"debian"|"ubuntu")
 		nvim_init_path="$HOME/.config/nvim"
 		nvim_coc_setting_path="$HOME/.config/nvim"
 		nvim_packer_path="$HOME/.local/share/nvim"
@@ -23,17 +23,15 @@ function check_network(){
 		exit 2
 	fi
 }
-function check_zsh_dep(){
-}
 function check_python3_neovim(){
 	case $OS in
-		"fedora"|"centos")
-			rpm -q python3-neovim &> /dev/null
-		;;
 		"arch"|"msys2")
 			pacman -Ss python-pynvim | grep 'installed' &> /dev/null
 		;;
-		"ubuntu")
+		"fedora"|"centos")
+			rpm -q python3-neovim &> /dev/null
+		;;
+		"debian"|"ubuntu")
 			dpkg -l python3-neovim &> /dev/null
 		;;
 	esac
@@ -41,13 +39,13 @@ function check_python3_neovim(){
 }
 function install_clangd(){
 	case $OS in
-		"fedora"|"centos")
-			echo "sudo dnf install clang-tools-extra"
-		;;
 		"arch")
 			echo "sudo pacman -S clang"
 		;;
-		"ubuntu")
+		"fedora"|"centos")
+			echo "sudo dnf install clang-tools-extra"
+		;;
+		"debian"|"ubuntu")
 			echo "sudo apt install clangd"
 		;;
 		"msys2")
@@ -57,13 +55,13 @@ function install_clangd(){
 }
 function install_ctags(){
 	case $OS in
-		"fedora"|"centos")
-			echo "sudo dnf install ctags"
-		;;
 		"arch")
 			echo "sudo pacman -S ctags"
 		;;
-		"ubuntu")
+		"fedora"|"centos")
+			echo "sudo dnf install ctags"
+		;;
+		"debian"|"ubuntu")
 			echo "sudo apt install universal-ctags"
 		;;
 		"msys2")
@@ -73,13 +71,13 @@ function install_ctags(){
 }
 function install_nodejs(){
 	case $OS in
-		"fedora"|"centos")
-			echo "sudo dnf install nodejs"
-		;;
 		"arch")
 			echo "sudo pacman -S nodejs npm"
 		;;
-		"ubuntu")
+		"fedora"|"centos")
+			echo "sudo dnf install nodejs"
+		;;
+		"debian"|"ubuntu")
 			echo "# If you want to install nodejs for all users, log in as root"
 			echo "# Do not use 'sudo' because this command does not use the proxy in the current env"
 			echo "curl -sL install-node.vercel.app/lts | bash"
@@ -91,14 +89,14 @@ function install_nodejs(){
 }
 function install_tree_sitter(){
 	case $OS in
-		"fedora")
-			echo "sudo dnf install tree-sitter-cli"
-		;;
 		"arch")
 			echo "sudo pacman -S tree-sitter"
 		;;
-		"ubuntu"|"centos")
-			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.20.7/tree-sitter-linux-x64.gz"
+		"fedora")
+			echo "sudo dnf install tree-sitter-cli"
+		;;
+		"debian"|"ubuntu"|"centos")
+			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.20.8/tree-sitter-linux-x64.gz"
 			echo "gzip -d tree-sitter-linux-x64.gz && chmod +x tree-sitter-linux-x64"
 			echo "mkdir -p ~/.local/bin/ && mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
 		;;
@@ -109,13 +107,13 @@ function install_tree_sitter(){
 }
 function install_python3_neovim(){
 	case $OS in
-		"fedora"|"centos")
-			echo "sudo dnf install python3-neovim"
-		;;
 		"arch")
 			echo "sudo pacman -S python-pynvim"
 		;;
-		"ubuntu")
+		"fedora"|"centos")
+			echo "sudo dnf install python3-neovim"
+		;;
+		"debian"|"ubuntu")
 			echo "sudo apt install python3-neovim"
 		;;
 		"msys2")
