@@ -17,7 +17,7 @@ case $OS in
 	;;
 esac
 function check_network(){
-	curl --connect-timeout 3 google.com &> /dev/null || curl --connect-timeout 3 https://google.com &> /dev/null
+	curl --connect-timeout 3 https://google.com &> /dev/null
 	if [ $? -ne 0 ]; then
 		echo "Network error!"
 		exit 2
@@ -260,7 +260,6 @@ function install_zsh(){
 		bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 		echo "" >> ~/.zshrc
 		cat ./zsh/zinit/zshrc.2 >> ~/.zshrc
-		source ~/.zshrc
 	elif [ $version == "manual" ]; then
 		wget --version &> /dev/null && curl --version &> /dev/null && tar --version &> /dev/null
 		if [ $? -ne 0 ]; then

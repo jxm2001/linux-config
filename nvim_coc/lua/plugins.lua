@@ -40,7 +40,7 @@ return require('packer').startup(
 		'nvim-treesitter/nvim-treesitter',
 		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end
 	}
-	use 'p00f/nvim-ts-rainbow'
+	use 'HiPhish/rainbow-delimiters.nvim'
 	use 'lewis6991/impatient.nvim'
 end
 )
