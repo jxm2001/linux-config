@@ -78,6 +78,7 @@ lua require('plugins/bufferline')
 lua require('plugins/lualine')
 lua require('plugins/indent-blankline')
 lua require('plugins/nvim-treesitter')
+lua require('plugins/Comment')
 
 " 主题颜色
 set termguicolors

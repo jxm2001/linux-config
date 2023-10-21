@@ -27,7 +27,12 @@ return require('packer').startup(
 	use 'ggandor/leap.nvim'
 	use 'tpope/vim-surround'
 	use 'brooth/far.vim'
-	use 'tpope/vim-commentary'
+	use {
+		'numToStr/Comment.nvim',
+		config = function()
+			require('Comment').setup()
+		end
+	}
 	use {
 		"folke/which-key.nvim",
 		config = function() require("which-key").setup {} end
