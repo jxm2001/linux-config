@@ -28,6 +28,9 @@ export C_INCLUDE_PATH=$HOME/.local/include:$C_INCLUDE_PATH
 # make zsh compatible with *
 setopt no_nomatch
 
+# set keybind as emacs
+bindkey -e
+
 # plugins
 source ~/.zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

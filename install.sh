@@ -24,6 +24,9 @@ function check_network(){
 	fi
 }
 function check_python3_neovim(){
+	if [ ! -z "$(pip list | grep pynvim)" ]; then
+		return 0
+	fi
 	case $OS in
 		"arch"|"msys2")
 			pacman -Ss python-pynvim | grep 'installed' &> /dev/null
