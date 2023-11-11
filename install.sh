@@ -24,7 +24,7 @@ function check_network(){
 	fi
 }
 function check_python3_neovim(){
-	if [ ! -z "$(pip list | grep pynvim)" ]; then
+	if [ ! -z "$(pip list 2>/dev/null | grep pynvim)" ]; then
 		return 0
 	fi
 	case $OS in
@@ -96,7 +96,7 @@ function install_nodejs(){
 function install_tree_sitter(){
 	case $OS in
 		"arch")
-			echo "sudo pacman -S tree-sitter"
+			echo "sudo pacman -S tree-sitter-cli"
 		;;
 		"fedora")
 			echo "sudo dnf install tree-sitter-cli"
