@@ -120,7 +120,7 @@ function install_python3_neovim(){
 			echo "sudo dnf install python3-neovim"
 		;;
 		"debian"|"ubuntu")
-			echo "sudo apt install python3-neovim"
+			echo "sudo apt install --no-install-recommends python3-neovim"
 		;;
 		"msys2")
 			echo "pacman -S mingw-w64-x86_64-python-pynvim"
