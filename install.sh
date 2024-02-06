@@ -1,5 +1,9 @@
 #!/bin/bash
-OS=$(cat /etc/os-release | grep '^ID=' | cut -d '=' -f 2 | sed 's/"//g')
+if [ -f /etc/os-release ]; then
+	OS=$(cat /etc/os-release | grep '^ID=' | cut -d '=' -f 2 | sed 's/"//g')
+else
+    OS="unknown"
+fi
 case $OS in
 	"arch"|"fedora"|"centos"|"debian"|"ubuntu")
 		nvim_init_path="$HOME/.config/nvim"
@@ -266,6 +270,7 @@ function install_zsh(){
 		bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 		echo "" >> ~/.zshrc
 		cat ./zsh/zinit/zshrc.2 >> ~/.zshrc
+		cp ./zsh/zsh_aliases ~/.zsh_aliases
 	elif [ $version == "manual" ]; then
 		wget --version &> /dev/null && curl --version &> /dev/null && tar --version &> /dev/null
 		if [ $? -ne 0 ]; then
@@ -307,6 +312,7 @@ function install_zsh(){
 			git clone https://github.com/junegunn/fzf.git ~/.zsh/plugins/fzf
 			~/.zsh/plugins/fzf/install --xdg --key-bindings --completion --update-rc
 		fi
+		cp ./zsh/zsh_aliases ~/.zsh_aliases
 	elif [ $version != "null" ]; then
 		echo "Error zsh version"
 		exit 1
