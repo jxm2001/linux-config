@@ -4,6 +4,9 @@ if [ -f /etc/os-release ]; then
 else
     OS="unknown"
 fi
+if [ "$OS" == "archarm"  ]; then
+	OS="arch"
+fi
 case $OS in
 	"arch"|"fedora"|"centos"|"debian"|"ubuntu")
 		nvim_init_path="$HOME/.config/nvim"
