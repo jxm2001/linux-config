@@ -109,7 +109,7 @@ function install_tree_sitter(){
 			echo "sudo dnf install tree-sitter-cli"
 		;;
 		"debian"|"ubuntu"|"centos")
-			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.20.8/tree-sitter-linux-x64.gz"
+			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.22.5/tree-sitter-linux-x64.gz"
 			echo "gzip -d tree-sitter-linux-x64.gz && chmod +x tree-sitter-linux-x64"
 			echo "mkdir -p ~/.local/bin/ && mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
 		;;
