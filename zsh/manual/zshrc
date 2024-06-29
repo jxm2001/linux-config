@@ -18,9 +18,6 @@ export LIBRARY_PATH=$HOME/.local/lib:$LIBRARY_PATH
 export CPLUS_INCLUDE_PATH=$HOME/.local/include:$CPLUS_INCLUDE_PATH
 export C_INCLUDE_PATH=$HOME/.local/include:$C_INCLUDE_PATH
 
-# make zsh case sensitive (default: case insensitive)
-CASE_SENSITIVE="true"
-
 # make zsh compatible with *
 setopt no_nomatch
 
@@ -37,9 +34,12 @@ source ~/.zsh/plugins/z/z.sh
 # completions setting
 setopt AUTO_LIST
 setopt AUTO_MENU
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
-zstyle ':completion:*' rehash true                              # automatically find new executables in path
+# Case insensitive tab completion
+# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# Colored completion (different colors for dirs/files/etc)
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# automatically find new executables in path
+zstyle ':completion:*' rehash true
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
