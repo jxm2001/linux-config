@@ -47,6 +47,22 @@ function check_python3_neovim(){
 	esac
 	return $?
 }
+function check_python3_setuptools(){
+	case $OS in
+		"arch")
+			pacman -Ss python-setuptools | grep 'installed' &> /dev/null
+		;;
+	esac
+	return 0
+}
+function check_python3_distutils(){
+	case $OS in
+		"arch")
+			pacman -Ss python-distutils-extra | grep 'installed' &> /dev/null
+		;;
+	esac
+	return 0
+}
 function install_clangd(){
 	case $OS in
 		"arch")
@@ -134,6 +150,20 @@ function install_python3_neovim(){
 		;;
 	esac
 }
+function install_python3_setuptools(){
+	case $OS in
+		"arch")
+			echo "sudo pacman -S python-setuptools"
+		;;
+	esac
+}
+function install_python3_distutils(){
+	case $OS in
+		"arch")
+			echo "sudo pacman -S python-distutils-extra"
+		;;
+	esac
+}
 function install_vim(){
 	read -p "Choose vim version to install(null/base/easy/coc/nvim-base/nvim-easy/nvim-coc): " version
 	if [ $version == "base" ]; then
@@ -205,6 +235,14 @@ function install_vim(){
 			check_python3_neovim
 			if [ $? -ne 0 ]; then
 				install_python3_neovim
+			fi
+			check_python3_setuptools
+			if [ $? -ne 0 ]; then
+				install_python3_setuptools
+			fi
+			check_python3_distutils
+			if [ $? -ne 0 ]; then
+				install_python3_distutils
 			fi
 			exit 2
 		fi
