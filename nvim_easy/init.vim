@@ -77,6 +77,7 @@ lua require('plugins/leap')
 lua require('plugins/bufferline')
 lua require('plugins/lualine')
 lua require('plugins/indent-blankline')
+lua require('plugins/Comment')
 
 " 主题颜色
 set termguicolors
@@ -87,7 +88,7 @@ nnoremap <leader>g :NvimTreeToggle<CR>
 nnoremap <leader>v :NvimTreeFindFile<CR>
 
 " bufferline 配置
-nnoremap <silent> gb :BufferLinePick<CR>
+nnoremap <silent> gp :BufferLinePick<CR>
 nnoremap <silent> g1 :BufferLineGoToBuffer 1<CR>
 nnoremap <silent> g2 :BufferLineGoToBuffer 2<CR>
 nnoremap <silent> g3 :BufferLineGoToBuffer 3<CR>
