@@ -19,7 +19,7 @@ return require('packer').startup(
 	}
 	use {
 		'akinsho/bufferline.nvim',
-		tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'
+		tag = "*", requires = 'kyazdani42/nvim-web-devicons'
 	}
 	use "lukas-reineke/indent-blankline.nvim"
 	use 'rebelot/kanagawa.nvim'
