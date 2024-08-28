@@ -203,6 +203,7 @@ function install_vim(){
 	elif [ $version == "nvim-base" ]; then
 		mkdir -p $nvim_init_path
 		cp ./nvim_base/init.vim $nvim_init_path/init.vim
+		cp -r ./nvim_base/lua $nvim_init_path
 	elif [ $version == "nvim-easy" ]; then
 		if [ ! -e $nvim_packer_path/site/pack/packer/start/packer.nvim ]; then
 			check_network

@@ -67,6 +67,9 @@ set signcolumn=yes
 " 允许跳转时有未保存的文件
 set hidden
 
+" 读取 lua 配置
+lua require('init')
+
 " 插件配置
 
 " 激活插件
@@ -124,10 +127,6 @@ nnoremap <leader>pp :<C-U><C-R>=printf("Leaderf filetype %s", "")<CR><CR>
 
 " 文本替换设置
 let g:far#enable_undo=1
-
-" oscyank 配置
-nnoremap <silent> <leader>y :OSCYankRegister "<CR>
-let g:oscyank_term = 'default'
 
 " vim-gitgutter 配置
 set updatetime=100

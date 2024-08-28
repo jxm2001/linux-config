@@ -67,6 +67,9 @@ set signcolumn=yes
 " 允许跳转时有未保存的文件
 set hidden
 
+" 读取 lua 配置
+lua require('init')
+
 " 插件配置
 
 " 激活插件
@@ -146,10 +149,6 @@ let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
-
-" oscyank 配置
-nnoremap <silent> <leader>y :OSCYankRegister "<CR>
-let g:oscyank_term = 'default'
 
 " coc
 let g:coc_global_extensions = [

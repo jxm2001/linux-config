@@ -40,7 +40,6 @@ return require('packer').startup(
 	use 'luochen1990/rainbow'
 	use 'airblade/vim-gitgutter'
 	use 'tpope/vim-fugitive'
-	use 'ojroques/vim-oscyank'
 	use 'lewis6991/impatient.nvim'
 end
 )

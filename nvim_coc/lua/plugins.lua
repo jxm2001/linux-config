@@ -39,7 +39,6 @@ return require('packer').startup(
 	}
 	use 'ludovicchabant/vim-gutentags'
 	use 'tpope/vim-fugitive'
-	use 'ojroques/vim-oscyank'
 	use { 'neoclide/coc.nvim', branch = 'release' }
 	use {
 		'nvim-treesitter/nvim-treesitter',

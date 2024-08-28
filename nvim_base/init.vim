@@ -69,3 +69,6 @@ set signcolumn=yes
 
 " 允许跳转时有未保存的文件
 set hidden
+
+" 读取 lua 配置
+lua require('init')
