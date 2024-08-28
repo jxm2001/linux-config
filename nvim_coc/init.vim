@@ -93,15 +93,21 @@ nnoremap <leader>v :NvimTreeFindFile<CR>
 
 " bufferline 配置
 nnoremap <silent> gp :BufferLinePick<CR>
-nnoremap <silent> g1 :BufferLineGoToBuffer 1<CR>
-nnoremap <silent> g2 :BufferLineGoToBuffer 2<CR>
-nnoremap <silent> g3 :BufferLineGoToBuffer 3<CR>
-nnoremap <silent> g4 :BufferLineGoToBuffer 4<CR>
-nnoremap <silent> g5 :BufferLineGoToBuffer 5<CR>
-nnoremap <silent> g6 :BufferLineGoToBuffer 6<CR>
-nnoremap <silent> g7 :BufferLineGoToBuffer 7<CR>
-nnoremap <silent> g8 :BufferLineGoToBuffer 8<CR>
-nnoremap <silent> g9 :BufferLineGoToBuffer 9<CR>
+nnoremap <silent> g1 <cmd>lua require("bufferline").go_to(1, true)<CR>
+nnoremap <silent> g2 <cmd>lua require("bufferline").go_to(2, true)<CR>
+nnoremap <silent> g3 <cmd>lua require("bufferline").go_to(3, true)<CR>
+nnoremap <silent> g4 <cmd>lua require("bufferline").go_to(4, true)<CR>
+nnoremap <silent> g5 <cmd>lua require("bufferline").go_to(5, true)<CR>
+nnoremap <silent> g6 <cmd>lua require("bufferline").go_to(6, true)<CR>
+nnoremap <silent> g7 <cmd>lua require("bufferline").go_to(7, true)<CR>
+nnoremap <silent> g8 <cmd>lua require("bufferline").go_to(8, true)<CR>
+nnoremap <silent> g9 <cmd>lua require("bufferline").go_to(9, true)<CR>
+nnoremap <silent> g$ <cmd>lua require("bufferline").go_to(-1, true)<CR>
+nnoremap <silent> [b :BufferLineCyclePrev<CR>
+nnoremap <silent> ]b :BufferLineCycleNext<CR>
+nnoremap <silent> <leader>br :BufferLineCloseRight<CR>
+nnoremap <silent> <leader>bl :BufferLineCloseLeft<CR>
+nnoremap <silent> <leader>bo :BufferLineCloseOthers<CR>
 
 " LeaderF 配置
 let g:Lf_HideHelp = 1
@@ -119,9 +125,9 @@ let g:Lf_PreviewInPopup = 1
 let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 " shortcut
 let g:Lf_ShortcutF = "<c-p>"
+let g:Lf_ShortcutB = "<leader>pb"
 nnoremap <leader>pf :<C-U><C-R>=printf("Leaderf function %s", "")<CR><CR>
 nnoremap <leader>pt :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
-nnoremap <leader>pb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 nnoremap <leader>pm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 nnoremap <leader>pl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 nnoremap <leader>pp :<C-U><C-R>=printf("Leaderf filetype %s", "")<CR><CR>

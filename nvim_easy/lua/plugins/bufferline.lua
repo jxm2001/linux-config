@@ -1,7 +1,6 @@
 vim.opt.termguicolors = true
 require("bufferline").setup {
     options = {
-		diagnostics = "coc",
 		tab_size = 0,
 		offsets = {{
 			filetype = "NvimTree",
@@ -9,6 +8,7 @@ require("bufferline").setup {
 			highlight = "Directory",
 			text_align = "left"
 		}},
+		numbers = "ordinal",
 		show_buffer_close_icons = false,
 		show_close_icon = false
 	}
