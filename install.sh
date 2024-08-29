@@ -360,21 +360,6 @@ function install_zsh(){
 		exit 1
 	fi
 }
-function update_firewall(){
-	read -p "update firewall[Y/N]: " flag
-	if [ $flag == "Y" ]; then
-		ipset help &> /dev/null
-		if [ $? -ne 0 ]; then
-			echo "Fail to update firewall"
-			exit 2
-		fi
-		sudo bash ipset/ipset.sh
-		if [ -z "$(sudo iptables -vL | grep 'match-set ip_blacklist src')" ]; then
-			sudo iptables -A INPUT -m set --match-set ip_blacklist src -j DROP
-		fi
-	fi
-}
 install_zsh
 install_vim
 install_tmux
-update_firewall
