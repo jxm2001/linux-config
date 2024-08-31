@@ -37,4 +37,8 @@ require("lazy").setup({
     enabled = true,
     notify = false, -- get a notification when changes are found
   },
+  -- disable luarocks
+  rocks = {
+    enabled = false,
+  },
 })
