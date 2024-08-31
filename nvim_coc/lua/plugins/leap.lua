@@ -1,6 +1,6 @@
 return {
 	'ggandor/leap.nvim',
-	config = function () 
+	config = function ()
 		require('leap')
 		require('leap').opts.safe_labels = {}
 		require('leap').opts.highlight_unlabeled_phase_one_targets = true

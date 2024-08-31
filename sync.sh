@@ -28,7 +28,7 @@ elif [ $version == "nvim-base" ]; then
 	cp $nvim_init_path/init.vim ./nvim_base/init.vim
 elif [ $version == "nvim-easy" ]; then
 	cp $nvim_init_path/init.vim ./nvim_easy/init.vim
-	cp -r $nvim_init_path/lua ./nvim_easy
+	rm -rf ./nvim_easy/lua && cp -r $nvim_init_path/lua ./nvim_easy
 elif [ $version == "nvim-coc" ]; then
 	cp $nvim_init_path/init.vim ./nvim_coc/init.vim
 	rm -rf ./nvim_coc/lua && cp -r $nvim_init_path/lua ./nvim_coc

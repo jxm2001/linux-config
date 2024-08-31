@@ -221,10 +221,7 @@ function install_vim(){
 		cp ./nvim_base/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_base/lua $nvim_init_path
 	elif [ $version == "nvim-easy" ]; then
-		if [ ! -e $nvim_packer_path/site/pack/packer/start/packer.nvim ]; then
-			check_network
-			git clone --depth 1 https://github.com/wbthomason/packer.nvim $nvim_packer_path/site/pack/packer/start/packer.nvim
-		fi
+		check_network
 		mkdir -p $nvim_init_path
 		cp ./nvim_easy/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_easy/lua $nvim_init_path
