@@ -63,6 +63,22 @@ function check_python3_distutils(){
 	esac
 	return 0
 }
+function install_luarocks(){
+	case $OS in
+		"arch")
+			echo "sudo pacman -S luarocks"
+		;;
+		"fedora"|"centos")
+			echo "sudo dnf install luarocks"
+		;;
+		"debian"|"ubuntu")
+			echo "sudo apt install luarocks"
+		;;
+		"msys2")
+			echo "pacman -S mingw-w64-x86_64-luarocks"
+		;;
+	esac
+}
 function install_clangd(){
 	case $OS in
 		"arch")
@@ -205,18 +221,19 @@ function install_vim(){
 		cp ./nvim_base/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_base/lua $nvim_init_path
 	elif [ $version == "nvim-easy" ]; then
-		if [ ! -e $nvim_packer_path/site/pack/packer/start/packer.nvim ]; then
-			check_network
-			git clone --depth 1 https://github.com/wbthomason/packer.nvim $nvim_packer_path/site/pack/packer/start/packer.nvim
-		fi
+		check_network
 		mkdir -p $nvim_init_path
 		cp ./nvim_easy/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_easy/lua $nvim_init_path
 	elif [ $version == "nvim-coc" ]; then
-		clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null \
-			&& npm --version &> /dev/null && tree-sitter --version &> /dev/null && check_python3_neovim
+		luarocks --version &> /dev/null && clangd --version &> /dev/null && ctags --version &> /dev/null \
+			&& node --version &> /dev/null && npm --version &> /dev/null && tree-sitter --version &> /dev/null && check_python3_neovim
 		if [ $? -ne 0 ]; then
 			echo "Please run the following command to install the dependent environment"
+			luarocks --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_luarocks
+			fi
 			clangd --version &> /dev/null
 			if [ $? -ne 0 ]; then
 				install_clangd
@@ -247,10 +264,7 @@ function install_vim(){
 			fi
 			exit 2
 		fi
-		if [ ! -e $nvim_packer_path/site/pack/packer/start/packer.nvim ]; then
-			check_network
-			git clone --depth 1 https://github.com/wbthomason/packer.nvim $nvim_packer_path/site/pack/packer/start/packer.nvim
-		fi
+		check_network
 		mkdir -p $nvim_init_path
 		cp ./nvim_coc/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_coc/lua $nvim_init_path

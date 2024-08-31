@@ -1,11 +1,21 @@
-require'nvim-tree'.setup {
-	update_focused_file = {
-		enable = true,
-		update_root = {
-			enable = true
-		}
+return {
+	"nvim-tree/nvim-tree.lua",
+	version = "*",
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
 	},
-	git = {
-		enable = false
-	}
+	config = function()
+		require("nvim-tree").setup {
+			update_focused_file = {
+				enable = true,
+				update_root = {
+					enable = true
+				}
+			},
+			git = {
+				enable = false
+			}
+		}
+	end,
+	event = "VeryLazy"
 }
