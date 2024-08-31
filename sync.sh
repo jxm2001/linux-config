@@ -31,7 +31,7 @@ elif [ $version == "nvim-easy" ]; then
 	cp -r $nvim_init_path/lua ./nvim_easy
 elif [ $version == "nvim-coc" ]; then
 	cp $nvim_init_path/init.vim ./nvim_coc/init.vim
-	cp -r $nvim_init_path/lua ./nvim_coc
+	rm -rf ./nvim_coc/lua && cp -r $nvim_init_path/lua ./nvim_coc
 	cp $nvim_coc_setting_path/coc-settings.json ./nvim_coc/coc-settings.json
 elif [ $version != "null" ]; then
 	echo "Error vim version"

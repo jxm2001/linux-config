@@ -67,25 +67,13 @@ set signcolumn=yes
 " 允许跳转时有未保存的文件
 set hidden
 
-" 读取 lua 配置
-lua require('init')
+" 终端真彩色
+set termguicolors
 
 " 插件配置
 
-" 激活插件
-lua require('plugins')
-lua require('plugins/impatient')
-lua require('plugins/nvim-tree')
-lua require('plugins/leap')
-lua require('plugins/bufferline')
-lua require('plugins/lualine')
-lua require('plugins/indent-blankline')
-lua require('plugins/nvim-treesitter')
-lua require('plugins/Comment')
-
-" 主题颜色
-set termguicolors
-colorscheme kanagawa
+" 读取 lua 配置
+lua require('init')
 
 " 文件树配置
 nnoremap <leader>g :NvimTreeToggle<CR>
