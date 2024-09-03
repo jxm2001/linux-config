@@ -7,6 +7,9 @@ set mouse=
 " 设置行号
 set number
 
+" 高亮当前行
+set cursorline
+
 " 自动换行
 set wrap
 
