@@ -16,7 +16,7 @@ case $OS in
 		exit 1
 	;;
 esac
-read -p "Choose vim version to install(null/base/easy/coc/nvim-base/nvim-easy/nvim-coc): " version
+read -p "Choose vim version to sync(null/base/easy/coc/nvim-base/nvim-easy/nvim-coc): " version
 if [ $version == "base" ]; then
 	cp ~/.vimrc ./baseVim/vimrc
 elif [ $version == "easy" ]; then

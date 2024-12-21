@@ -13,5 +13,5 @@ vim.g.clipboard = {
 require("config.lazy")
 
 -- leap config
-vim.keymap.set({'x', 'o', 'n'}, 'e', '<Plug>(leap-forward-to)')
-vim.keymap.set({'x', 'o', 'n'}, 'E', '<Plug>(leap-backward-to)')
+vim.keymap.set({'n', 'x', 'o'}, 'e',  '<Plug>(leap-forward)')
+vim.keymap.set({'n', 'x', 'o'}, 'E',  '<Plug>(leap-backward)')

@@ -94,6 +94,7 @@ nnoremap <silent> g7 <cmd>lua require("bufferline").go_to(7, true)<CR>
 nnoremap <silent> g8 <cmd>lua require("bufferline").go_to(8, true)<CR>
 nnoremap <silent> g9 <cmd>lua require("bufferline").go_to(9, true)<CR>
 nnoremap <silent> g$ <cmd>lua require("bufferline").go_to(-1, true)<CR>
+nnoremap <silent> gD :BufferLinePickClose<CR>
 nnoremap <silent> [b :BufferLineCyclePrev<CR>
 nnoremap <silent> ]b :BufferLineCycleNext<CR>
 nnoremap <silent> <leader>bh :BufferLineCloseLeft<CR>
