@@ -14,7 +14,8 @@ if command -v nvim >/dev/null 2>&1; then
 	alias sudoedit='EDITOR=nvim sudoedit'
 fi
 alias grep='grep --color=auto'
-alias set_proxy='export http_proxy="http://127.0.0.1:20171"; \
-	export https_proxy="http://127.0.0.1:20171"; \
-	export all_proxy="http://127.0.0.1:20171";'
+porxy_host="sock5h://127.0.0.1:1070"
+alias set_proxy='export http_proxy="$porxy_host"; \
+	export https_proxy="$porxy_host"; \
+	export all_proxy="$porxy_host";'
 alias unset_proxy='unset http_proxy https_proxy all_proxy'
