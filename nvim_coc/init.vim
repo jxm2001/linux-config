@@ -78,10 +78,6 @@ set termguicolors
 " 读取 lua 配置
 lua require('init')
 
-" 文件树配置
-nnoremap <leader>g :NvimTreeToggle<CR>
-nnoremap <leader>v :NvimTreeFindFile<CR>
-
 " bufferline 配置
 nnoremap <silent> gp :BufferLinePick<CR>
 nnoremap <silent> g1 <cmd>lua require("bufferline").go_to(1, true)<CR>

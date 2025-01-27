@@ -150,6 +150,21 @@ function install_tree_sitter(){
 		;;
 	esac
 }
+function install_yazi(){
+	case $OS in
+		"arch")
+			echo "sudo pacman -S yazi"
+		;;
+		"debian"|"ubuntu"|"centos"|"fedora")
+			echo "wget https://github.com/sxyazi/yazi/releases/download/v0.4.2/yazi-x86_64-unknown-linux-gnu.zip"
+			echo "unzip yazi-x86_64-unknown-linux-gnu.zip"
+			echo "mkdir -p ~/.local/bin/ && mv yazi-x86_64-unknown-linux-gnu/{ya,yazi} ~/.local/bin/tree-sitter"
+		;;
+		"msys2")
+			echo "install yazi via https://yazi-rs.github.io/docs/installation"
+		;;
+	esac
+}
 function install_python3_neovim(){
 	case $OS in
 		"arch")
@@ -227,7 +242,8 @@ function install_vim(){
 		cp -r ./nvim_easy/lua $nvim_init_path
 	elif [ $version == "nvim-coc" ]; then
 		luarocks --version &> /dev/null && clangd --version &> /dev/null && ctags --version &> /dev/null \
-			&& node --version &> /dev/null && npm --version &> /dev/null && tree-sitter --version &> /dev/null && check_python3_neovim
+			&& node --version &> /dev/null && npm --version &> /dev/null && tree-sitter --version &> /dev/null \
+			&& yazi --version &> /dev/null && check_python3_neovim
 		if [ $? -ne 0 ]; then
 			echo "Please run the following command to install the dependent environment"
 			luarocks --version &> /dev/null
@@ -250,6 +266,10 @@ function install_vim(){
 			if [ $? -ne 0 ]; then
 				install_tree_sitter
 			fi
+			yazi --version &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_yazi
+			fi
 			check_python3_neovim
 			if [ $? -ne 0 ]; then
 				install_python3_neovim
@@ -268,6 +288,7 @@ function install_vim(){
 		mkdir -p $nvim_init_path
 		cp ./nvim_coc/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_coc/lua $nvim_init_path
+		cp -r ./nvim_coc/yazi $HOME/.config
 		mkdir -p $nvim_coc_setting_path
 		cp ./nvim_coc/coc-settings.json $nvim_coc_setting_path/coc-settings.json
 	elif [ $version != "null" ]; then

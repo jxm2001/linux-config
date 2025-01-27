@@ -2,42 +2,42 @@ return {
 	-- the colorscheme should be available when starting Neovim
     {
 		'rebelot/kanagawa.nvim',
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- load the colorscheme here
 			vim.cmd([[colorscheme kanagawa]])
 		end,
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 	},
-    { 'mhinz/vim-startify', lazy = false },
+	{
+		'goolord/alpha-nvim',
+		dependencies = { 'echasnovski/mini.icons' },
+		config = function ()
+			require'alpha'.setup(require'alpha.themes.startify'.config)
+		end
+	},
     {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
-        config = function()
-            require("lualine").setup {}
-        end,
-        lazy = false
+		'nvim-lualine/lualine.nvim',
+		lazy = false,
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		opts = {},
     },
     {
         'Yggdroot/LeaderF',
+		event = "VeryLazy",
         build = ':LeaderfInstallCExtension',
-		event = "VeryLazy"
     },
     { 'tpope/vim-surround', event = "VeryLazy" },
     { 'brooth/far.vim', event = "VeryLazy" },
     {
-        'numToStr/Comment.nvim',
-        config = function()
-            require('Comment').setup {}
-        end,
-         event = "VeryLazy"
+		'numToStr/Comment.nvim',
+		event = "VeryLazy",
+		opts = {},
     },
     {
         "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup {}
-        end,
-		event = "VeryLazy"
+		event = "VeryLazy",
+		opts = {},
     },
     { 'ludovicchabant/vim-gutentags', event = "VeryLazy" },
     { 'tpope/vim-fugitive', event = "VeryLazy" },
