@@ -207,18 +207,18 @@ function install_vim(){
 		fi
 		cp ./easyVim/vimrc ~/.vimrc
 	elif [ $version == "coc" ]; then
-		clangd --version &> /dev/null && ctags --version &> /dev/null && node --version &> /dev/null && npm --version &> /dev/null
+		which clangd &> /dev/null && which ctags &> /dev/null && which node &> /dev/null && which npm &> /dev/null
 		if [ $? -ne 0 ]; then
 			echo "Please run the following command to install the dependent environment"
-			clangd --version &> /dev/null
+			which clangd &> /dev/null
 			if [ $? -ne 0 ]; then
 				install_clangd
 			fi
-			ctags --version &> /dev/null
+			which ctags &> /dev/null
 			if [ $? -ne 0 ]; then
 				install_ctags
 			fi
-			node --version &> /dev/null && npm --version &> /dev/null
+			which node &> /dev/null && which npm &> /dev/null
 			if [ $? -ne 0 ]; then
 				install_nodejs
 			fi
@@ -241,32 +241,32 @@ function install_vim(){
 		cp ./nvim_easy/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_easy/lua $nvim_init_path
 	elif [ $version == "nvim-coc" ]; then
-		luarocks --version &> /dev/null && clangd --version &> /dev/null && ctags --version &> /dev/null \
-			&& node --version &> /dev/null && npm --version &> /dev/null && tree-sitter --version &> /dev/null \
-			&& yazi --version &> /dev/null && check_python3_neovim
+		which luarocks &> /dev/null && which clangd &> /dev/null && which ctags &> /dev/null \
+			&& which node &> /dev/null && which npm &> /dev/null && which tree-sitter &> /dev/null \
+			&& which yazi &> /dev/null && check_python3_neovim
 		if [ $? -ne 0 ]; then
 			echo "Please run the following command to install the dependent environment"
-			luarocks --version &> /dev/null
+			which luarocks &> /dev/null
 			if [ $? -ne 0 ]; then
 				install_luarocks
 			fi
-			clangd --version &> /dev/null
+			which clangd &> /dev/null
 			if [ $? -ne 0 ]; then
 				install_clangd
 			fi
-			ctags --version &> /dev/null
+			which ctags &> /dev/null
 			if [ $? -ne 0 ]; then
 				install_ctags
 			fi
-			node --version &> /dev/null && npm --version &> /dev/null
+			which node &> /dev/null && which npm &> /dev/null
 			if [ $? -ne 0 ]; then
 				install_nodejs
 			fi
-			tree-sitter --version &> /dev/null
+			which tree-sitter &> /dev/null
 			if [ $? -ne 0 ]; then
 				install_tree_sitter
 			fi
-			yazi --version &> /dev/null
+			which yazi &> /dev/null
 			if [ $? -ne 0 ]; then
 				install_yazi
 			fi
@@ -321,22 +321,22 @@ function install_tmux(){
 function install_zsh(){
 	read -p "Choose zsh version to install(null/manual/zinit): " version
 	if [ $version == "zinit" ]; then
-		wget --version &> /dev/null && curl --version &> /dev/null && tar --version &> /dev/null && jq --version &> /dev/null
+		which wget &> /dev/null && which curl &> /dev/null && which tar &> /dev/null && which jq &> /dev/null
 		if [ $? -ne 0 ]; then
 			echo "Fail to install zsh"
-			wget --version &> /dev/null
+			which wget &> /dev/null
 			if [ $? -ne 0 ]; then
 				echo "Please install wget"
 			fi
-			curl --version &> /dev/null
+			which curl &> /dev/null
 			if [ $? -ne 0 ]; then
 				echo "Please install curl"
 			fi
-			tar --version &> /dev/null
+			which tar &> /dev/null
 			if [ $? -ne 0 ]; then
 				echo "Please install tar"
 			fi
-			jq --version &> /dev/null
+			which jq &> /dev/null
 			if [ $? -ne 0 ]; then
 				echo "Please install jq"
 			fi
@@ -349,18 +349,18 @@ function install_zsh(){
 		cat ./zsh/zinit/zshrc.2 >> ~/.zshrc
 		cp ./zsh/zsh_aliases ~/.zsh_aliases
 	elif [ $version == "manual" ]; then
-		wget --version &> /dev/null && curl --version &> /dev/null && tar --version &> /dev/null
+		which wget &> /dev/null && which curl &> /dev/null && which tar &> /dev/null
 		if [ $? -ne 0 ]; then
 			echo "Fail to install zsh"
-			wget --version &> /dev/null
+			which wget &> /dev/null
 			if [ $? -ne 0 ]; then
 				echo "Please install wget"
 			fi
-			curl --version &> /dev/null
+			which curl &> /dev/null
 			if [ $? -ne 0 ]; then
 				echo "Please install curl"
 			fi
-			tar --version &> /dev/null
+			which tar &> /dev/null
 			if [ $? -ne 0 ]; then
 				echo "Please install tar"
 			fi
