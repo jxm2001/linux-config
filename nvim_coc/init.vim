@@ -177,9 +177,15 @@ function! ShowDocumentation()
     call feedkeys('gh', 'in')
   endif
 endfunction
-" 补全确认
-inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" 补全触发与确认
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#confirm() :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 " 重命名
 nmap <leader>rn <Plug>(coc-rename)
 " 代码格式化
