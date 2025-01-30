@@ -19,3 +19,11 @@ alias set_proxy='export http_proxy="$porxy_host"; \
 	export https_proxy="$porxy_host"; \
 	export all_proxy="$porxy_host";'
 alias unset_proxy='unset http_proxy https_proxy all_proxy'
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
