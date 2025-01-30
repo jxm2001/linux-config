@@ -191,6 +191,14 @@ nmap <leader>rn <Plug>(coc-rename)
 " 代码格式化
 xmap <leader>s  <Plug>(coc-format-selected)
 nmap <leader>s  <Plug>(coc-format-selected)
+" code actions 配置
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+" 快速修复当前行
+nmap <leader>qf  <Plug>(coc-fix-current)
+" 代码区域选取
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
 " 浮动窗口翻页
 if has('nvim-0.4.0') || has('patch-8.2.0750')
   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
