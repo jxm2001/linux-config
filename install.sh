@@ -289,6 +289,11 @@ function install_vim(){
 		cp ./nvim_coc/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_coc/lua $nvim_init_path
 		cp -r ./nvim_coc/yazi $HOME/.config
+		mkdir -p $HOME/.config/yazi
+		cp ./nvim_coc/yazi/{init.lua,keymap.toml,yazi.toml} $HOME/.config/yazi
+		echo "run follow commond after install:"
+		echo "ya pack -a yazi-rs/plugins:smart-enter"
+		echo "ya pack -a yazi-rs/plugins:git"
 		mkdir -p $nvim_coc_setting_path
 		cp ./nvim_coc/coc-settings.json $nvim_coc_setting_path/coc-settings.json
 	elif [ $version != "null" ]; then

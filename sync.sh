@@ -33,7 +33,7 @@ elif [ $version == "nvim-coc" ]; then
 	cp $nvim_init_path/init.vim ./nvim_coc/init.vim
 	rm -rf ./nvim_coc/lua && cp -r $nvim_init_path/lua ./nvim_coc
 	cp $nvim_coc_setting_path/coc-settings.json ./nvim_coc/coc-settings.json
-	cp -r $HOME/.config/yazi ./nvim_coc
+	cp $HOME/.config/yazi/{init.lua,keymap.toml,yazi.toml} ./nvim_coc/yazi
 elif [ $version != "null" ]; then
 	echo "Error vim version"
 	exit 1
