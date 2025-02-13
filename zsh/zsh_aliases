@@ -19,6 +19,13 @@ alias set_proxy='export http_proxy="$porxy_host"; \
 	export https_proxy="$porxy_host"; \
 	export all_proxy="$porxy_host";'
 alias unset_proxy='unset http_proxy https_proxy all_proxy'
+function set_opt(){
+	export PATH=$HOME/.local/opt/bin:$PATH
+	export LD_LIBRARY_PATH=$HOME/.local/opt/lib:$LD_LIBRARY_PATH
+	export LIBRARY_PATH=$HOME/.local/opt/lib:$LIBRARY_PATH
+	export CPLUS_INCLUDE_PATH=$HOME/.local/opt/include:$CPLUS_INCLUDE_PATH
+	export C_INCLUDE_PATH=$HOME/.local/opt/include:$C_INCLUDE_PATH
+}
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
