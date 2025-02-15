@@ -1,10 +1,11 @@
 [manager]
 
 prepend_keymap = [
-	{ on = "l", run = 'plugin smart-enter', desc = "Enter the child directory, or open the file" },
 	{ on = "<C-k>", run = "arrow -5", desc = "Move cursor up(repeat 5)" },
 	{ on = "<C-j>", run = "arrow 5", desc = "Move cursor down(repeat 5)" },
 	{ on = "!", run = 'shell "$SHELL" --block', desc = "Open shell here" },
+	{ on = "l", run = 'plugin smart-enter', desc = "Enter the child directory, or open the file" },
+	{ on = "T", run = 'plugin max-preview', desc = "Maximize or restore preview" },
 ]
 
 [input]
