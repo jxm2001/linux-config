@@ -141,7 +141,7 @@ function install_tree_sitter(){
 			echo "sudo dnf install tree-sitter-cli"
 		;;
 		"debian"|"ubuntu"|"centos")
-			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.22.5/tree-sitter-linux-x64.gz"
+			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.2/tree-sitter-linux-x64.gz"
 			echo "gzip -d tree-sitter-linux-x64.gz && chmod +x tree-sitter-linux-x64"
 			echo "mkdir -p ~/.local/bin/ && mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
 		;;
@@ -156,9 +156,9 @@ function install_yazi(){
 			echo "sudo pacman -S yazi"
 		;;
 		"debian"|"ubuntu"|"centos"|"fedora")
-			echo "wget https://github.com/sxyazi/yazi/releases/download/v0.4.2/yazi-x86_64-unknown-linux-gnu.zip"
-			echo "unzip yazi-x86_64-unknown-linux-gnu.zip"
-			echo "mkdir -p ~/.local/bin/ && mv yazi-x86_64-unknown-linux-gnu/{ya,yazi} ~/.local/bin/tree-sitter"
+			echo "wget https://github.com/sxyazi/yazi/releases/download/v25.2.11/yazi-x86_64-unknown-linux-musl.zip"
+			echo "unzip yazi-x86_64-unknown-linux-musl.zip"
+			echo "mkdir -p ~/.local/bin/ && mv yazi-x86_64-unknown-linux-musl/{ya,yazi} ~/.local/bin/"
 		;;
 		"msys2")
 			echo "install yazi via https://yazi-rs.github.io/docs/installation"
