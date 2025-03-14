@@ -97,29 +97,6 @@ nnoremap <silent> <leader>bh :BufferLineCloseLeft<CR>
 nnoremap <silent> <leader>bl :BufferLineCloseRight<CR>
 nnoremap <silent> <leader>bo :BufferLineCloseOthers<CR>
 
-" LeaderF 配置
-let g:Lf_HideHelp = 1
-let g:Lf_UseCache = 0
-let g:Lf_IgnoreCurrentBufferName = 1
-let g:Lf_WorkingDirectoryMode = 'AF'
-let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
-let g:Lf_WildIgnore = {
-			\ 'dir': ['.svn','.git','.hg'],
-			\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
-			\}
-" popup mode
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_PreviewInPopup = 1
-let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
-" shortcut
-let g:Lf_ShortcutF = "<c-p>"
-let g:Lf_ShortcutB = "<leader>pb"
-nnoremap <leader>pf :<C-U><C-R>=printf("Leaderf function %s", "")<CR><CR>
-nnoremap <leader>pt :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
-nnoremap <leader>pm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
-nnoremap <leader>pl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
-nnoremap <leader>pp :<C-U><C-R>=printf("Leaderf filetype %s", "")<CR><CR>
-
 " 文本替换设置
 let g:far#enable_undo=1
 

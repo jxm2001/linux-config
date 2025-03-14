@@ -23,11 +23,6 @@ return {
 		opts = {},
 	},
 	{
-		'Yggdroot/LeaderF',
-		event = "VeryLazy",
-		build = ':LeaderfInstallCExtension',
-	},
-	{
 		"kylechui/nvim-surround",
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
 		event = "VeryLazy",

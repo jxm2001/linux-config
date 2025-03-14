@@ -7,10 +7,7 @@ return{
 			configs.setup({
 				ensure_installed = { "cpp", "c", "cuda", "cmake", "bash", "vim", "python", "lua" },
 				sync_install = false,
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = false
-				},
+				highlight = { enable = true },
 				indent = { enable = true },  
 			})
 		end,

@@ -17,6 +17,16 @@ require("config.lazy")
 vim.keymap.set({'n', 'x', 'o'}, 'e',  '<Plug>(leap-forward)')
 vim.keymap.set({'n', 'x', 'o'}, 'E',  '<Plug>(leap-backward)')
 
+-- telescope config
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<c-p>', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>pg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>pb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>ph', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>pm', builtin.oldfiles, { desc = 'Telescope mru' })
+vim.keymap.set('n', '<leader>pt', builtin.tags, { desc = 'Telescope tags' })
+vim.keymap.set('n', '<leader>pf', builtin.filetypes, { desc = 'Telescope filetypes' })
+
 -- nvim_treesitter config
 vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
