@@ -1,8 +1,8 @@
 return{
 	'nvim-telescope/telescope.nvim', branch = '0.1.x',
 	dependencies = {
-		'nvim-lua/plenary.nvim',
-		{'nvim-telescope/telescope-fzf-native.nvim', build = "make" }
+		{'nvim-lua/plenary.nvim' },
+		{'nvim-telescope/telescope-fzf-native.nvim', build = "make" },
 	},
 	opts = {
 	  defaults = {
@@ -30,11 +30,6 @@ return{
 		-- builtin picker
 	  },
 	  extensions = {
-		-- Your extension configuration goes here:
-		-- extension_name = {
-		--   extension_config_key = value,
-		-- }
-		-- please take a look at the readme of the extension you want to configure
 	  }
 	},
 	config = function(_, opts)

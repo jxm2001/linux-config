@@ -295,6 +295,7 @@ function install_vim(){
 		echo "ya pack -a yazi-rs/plugins:smart-enter"
 		echo "ya pack -a yazi-rs/plugins:git"
 		echo "ya pack -a yazi-rs/plugins:max-preview"
+		echo "ya pack -a yazi-rs/plugins:vcs-files"
 		mkdir -p $nvim_coc_setting_path
 		cp ./nvim_coc/coc-settings.json $nvim_coc_setting_path/coc-settings.json
 	elif [ $version != "null" ]; then
