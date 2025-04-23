@@ -288,9 +288,8 @@ function install_vim(){
 		mkdir -p $nvim_init_path
 		cp ./nvim_coc/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_coc/lua $nvim_init_path
-		cp -r ./nvim_coc/yazi $HOME/.config
 		mkdir -p $HOME/.config/yazi
-		cp ./nvim_coc/yazi/{init.lua,keymap.toml,yazi.toml} $HOME/.config/yazi
+		cp ./yazi/{init.lua,keymap.toml,yazi.toml} $HOME/.config/yazi
 		echo "run follow commond after install:"
 		echo "ya pack -a yazi-rs/plugins:smart-enter"
 		echo "ya pack -a yazi-rs/plugins:git"
@@ -346,9 +345,8 @@ function install_vim(){
 		mkdir -p $nvim_init_path
 		cp ./nvim_lsp/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_lsp/lua $nvim_init_path
-		cp -r ./nvim_lsp/yazi $HOME/.config
 		mkdir -p $HOME/.config/yazi
-		cp ./nvim_lsp/yazi/{init.lua,keymap.toml,yazi.toml} $HOME/.config/yazi
+		cp ./yazi/{init.lua,keymap.toml,yazi.toml} $HOME/.config/yazi
 		echo "run follow commond after install:"
 		echo "ya pack -a yazi-rs/plugins:smart-enter"
 		echo "ya pack -a yazi-rs/plugins:git"
