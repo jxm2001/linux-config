@@ -196,7 +196,7 @@ function install_python3_distutils(){
 	esac
 }
 function install_vim(){
-	read -p "Choose vim version to install(null/base/easy/coc/nvim-base/nvim-easy/nvim-coc): " version
+	read -p "Choose vim version to install(null/base/easy/coc/nvim-base/nvim-easy/nvim-coc/nvim-lsp): " version
 	if [ $version == "base" ]; then
 		cp ./baseVim/vimrc ~/.vimrc
 	elif [ $version == "easy" ]; then
@@ -298,6 +298,62 @@ function install_vim(){
 		echo "ya pack -a yazi-rs/plugins:vcs-files"
 		mkdir -p $nvim_coc_setting_path
 		cp ./nvim_coc/coc-settings.json $nvim_coc_setting_path/coc-settings.json
+	elif [ $version == "nvim-lsp" ]; then
+		which luarocks &> /dev/null && which clangd &> /dev/null && which ctags &> /dev/null \
+			&& which node &> /dev/null && which npm &> /dev/null && which tree-sitter &> /dev/null \
+			&& which yazi &> /dev/null && check_python3_neovim
+		if [ $? -ne 0 ]; then
+			echo "Please run the following command to install the dependent environment"
+			which luarocks &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_luarocks
+			fi
+			which clangd &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_clangd
+			fi
+			which ctags &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_ctags
+			fi
+			which node &> /dev/null && which npm &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_nodejs
+			fi
+			which tree-sitter &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_tree_sitter
+			fi
+			which yazi &> /dev/null
+			if [ $? -ne 0 ]; then
+				install_yazi
+			fi
+			check_python3_neovim
+			if [ $? -ne 0 ]; then
+				install_python3_neovim
+			fi
+			check_python3_setuptools
+			if [ $? -ne 0 ]; then
+				install_python3_setuptools
+			fi
+			check_python3_distutils
+			if [ $? -ne 0 ]; then
+				install_python3_distutils
+			fi
+			exit 2
+		fi
+		check_network
+		mkdir -p $nvim_init_path
+		cp ./nvim_lsp/init.vim $nvim_init_path/init.vim
+		cp -r ./nvim_lsp/lua $nvim_init_path
+		cp -r ./nvim_lsp/yazi $HOME/.config
+		mkdir -p $HOME/.config/yazi
+		cp ./nvim_lsp/yazi/{init.lua,keymap.toml,yazi.toml} $HOME/.config/yazi
+		echo "run follow commond after install:"
+		echo "ya pack -a yazi-rs/plugins:smart-enter"
+		echo "ya pack -a yazi-rs/plugins:git"
+		echo "ya pack -a yazi-rs/plugins:max-preview"
+		echo "ya pack -a yazi-rs/plugins:vcs-files"
 	elif [ $version != "null" ]; then
 		echo "Error vim version"
 		exit 1

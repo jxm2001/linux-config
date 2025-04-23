@@ -16,7 +16,7 @@ case $OS in
 		exit 1
 	;;
 esac
-read -p "Choose vim version to sync(null/base/easy/coc/nvim-base/nvim-easy/nvim-coc): " version
+read -p "Choose vim version to sync(null/base/easy/coc/nvim-base/nvim-easy/nvim-coc/nvim-lsp): " version
 if [ $version == "base" ]; then
 	cp ~/.vimrc ./baseVim/vimrc
 elif [ $version == "easy" ]; then
@@ -34,6 +34,10 @@ elif [ $version == "nvim-coc" ]; then
 	rm -rf ./nvim_coc/lua && cp -r $nvim_init_path/lua ./nvim_coc
 	cp $nvim_coc_setting_path/coc-settings.json ./nvim_coc/coc-settings.json
 	cp $HOME/.config/yazi/{init.lua,keymap.toml,yazi.toml} ./nvim_coc/yazi
+elif [ $version == "nvim-lsp" ]; then
+	cp $nvim_init_path/init.vim ./nvim_lsp/init.vim
+	rm -rf ./nvim_lsp/lua && cp -r $nvim_init_path/lua ./nvim_lsp
+	cp $HOME/.config/yazi/{init.lua,keymap.toml,yazi.toml} ./nvim_lsp/yazi
 elif [ $version != "null" ]; then
 	echo "Error vim version"
 	exit 1
