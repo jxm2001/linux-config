@@ -28,7 +28,6 @@ return {
 		event = "VeryLazy",
 		opts = {},
 	},
-	{ 'brooth/far.vim', event = "VeryLazy" },
 	{
 		'numToStr/Comment.nvim',
 		event = "VeryLazy",
@@ -40,5 +39,8 @@ return {
 		opts = {},
 	},
 	{ 'ludovicchabant/vim-gutentags', event = "VeryLazy" },
-	{ 'tpope/vim-fugitive', event = "VeryLazy" },
+	{
+		'lewis6991/gitsigns.nvim',
+		opts = {},
+	}
 }

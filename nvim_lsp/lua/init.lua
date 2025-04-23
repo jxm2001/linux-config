@@ -16,7 +16,8 @@ end
 require("config.lazy")
 
 -- lsp config
-for _, server in ipairs({ "clangd" }) do
+for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vimls",
+	"dockerls", "docker_compose_language_service", "marksman", "yamlls", "fortls" }) do
   vim.lsp.enable(server)
   vim.lsp.config(server, {
     on_attach = function(client, bufnr)
@@ -26,21 +27,33 @@ for _, server in ipairs({ "clangd" }) do
 	  vim.keymap.set("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", opts)
 	  vim.keymap.set("n", "gi", "<CMD>lua vim.lsp.buf.implementation()<CR>", opts)
 	  vim.keymap.set("n", "gr", "<CMD>lua vim.lsp.buf.references()<CR>", opts)
-	  vim.keymap.set("n", "<leader>a", "<CMD>lua vim.lsp.buf.code_action()<CR>", opts)
-	  vim.keymap.set("x", "<leader>a", "<CMD>lua vim.lsp.buf.code_action()<CR>", opts)
-	  vim.keymap.set("n", "rn", "<CMD>lua vim.lsp.buf.rename()<CR>", opts)
+	  vim.keymap.set({"n", "x"}, "<leader>a", "<CMD>lua vim.lsp.buf.code_action()<CR>", opts)
+	  vim.keymap.set({"n", "x"}, "<leader>s", function()
+	    require("conform").format({ async = true }, function(err)
+	  	  if not err then
+	  	    local mode = vim.api.nvim_get_mode().mode
+	  	    if vim.startswith(string.lower(mode), "v") then
+	  	  	  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+	  	    end
+	  	  end
+	    end)
+	  end, { buffer = bufnr, desc = "format code" })
+	  vim.keymap.set("n", "<leader>rn", function()
+	    return ":IncRename " .. vim.fn.expand("<cword>")
+	  end, { buffer = bufnr, expr = true })
 	end,
   })
 end
+
 vim.diagnostic.config({
   underline = true,
   update_in_insert = false,
-  -- float = {
-  --   border = "rounded",
-  --   source = "always",
-  --   header = "",
-  --   prefix = "● ",
-  -- },
+  float = {
+    border = "rounded",
+    source = true,
+    header = "",
+    prefix = "● ",
+  },
   virtual_text = {
     spacing = 4,
     source = "if_many",
@@ -71,6 +84,11 @@ vim.keymap.set('n', '<leader>ph', builtin.help_tags, { desc = 'Telescope help ta
 vim.keymap.set('n', '<leader>pm', builtin.oldfiles, { desc = 'Telescope mru' })
 vim.keymap.set('n', '<leader>pt', builtin.tags, { desc = 'Telescope tags' })
 vim.keymap.set('n', '<leader>pf', builtin.filetypes, { desc = 'Telescope filetypes' })
+
+-- Gitsigns config
+vim.keymap.set("n", "gs", "<cmd>Gitsigns preview_hunk<cr>", { desc = "git preview hunk" })
+vim.keymap.set("n", "[g", "<cmd>Gitsigns nav_hunk prev<cr>", { desc = "git navigate hunk prev" })
+vim.keymap.set("n", "]g", "<cmd>Gitsigns nav_hunk next<cr>", { desc = "git navigate hunk next" })
 
 -- nvim_treesitter config
 vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

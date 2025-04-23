@@ -4,7 +4,7 @@ return {
 	dependencies = { 'nvim-tree/nvim-web-devicons' },
 	opts = {
 		options = {
-			diagnostics = "coc",
+			diagnostics = "nvim_lsp",
 			tab_size = 0,
 			offsets = {{
 				filetype = "NvimTree",
