@@ -1,7 +1,7 @@
 return {
 	-- the colorscheme should be available when starting Neovim
 	{
-		'rebelot/kanagawa.nvim',
+		"rebelot/kanagawa.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
@@ -10,16 +10,16 @@ return {
 		end,
 	},
 	{
-		'goolord/alpha-nvim',
-		dependencies = { 'echasnovski/mini.icons' },
-		config = function ()
-			require'alpha'.setup(require'alpha.themes.startify'.config)
-		end
+		"goolord/alpha-nvim",
+		dependencies = { "echasnovski/mini.icons" },
+		config = function()
+			require("alpha").setup(require("alpha.themes.startify").config)
+		end,
 	},
 	{
-		'nvim-lualine/lualine.nvim',
+		"nvim-lualine/lualine.nvim",
 		lazy = false,
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
 	},
 	{
@@ -29,7 +29,7 @@ return {
 		opts = {},
 	},
 	{
-		'numToStr/Comment.nvim',
+		"numToStr/Comment.nvim",
 		event = "VeryLazy",
 		opts = {},
 	},
@@ -38,9 +38,9 @@ return {
 		event = "VeryLazy",
 		opts = {},
 	},
-	{ 'ludovicchabant/vim-gutentags', event = "VeryLazy" },
+	{ "ludovicchabant/vim-gutentags", event = "VeryLazy" },
 	{
-		'lewis6991/gitsigns.nvim',
+		"lewis6991/gitsigns.nvim",
 		opts = {},
-	}
+	},
 }

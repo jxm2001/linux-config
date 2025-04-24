@@ -1,15 +1,15 @@
 -- OSC 52 clipboard config
 if pcall(require, "vim.ui.clipboard.osc52") then
 	vim.g.clipboard = {
-	  name = 'OSC 52',
-	  copy = {
-		['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-		['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-	  },
-	  paste = {
-		['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-		['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-	  },
+		name = "OSC 52",
+		copy = {
+			["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+			["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+		},
+		paste = {
+			["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+			["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+		},
 	}
 end
 
@@ -18,56 +18,57 @@ require("config.lazy")
 -- lsp config
 for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vimls",
 	"dockerls", "docker_compose_language_service", "marksman", "yamlls", "fortls" }) do
-  vim.lsp.enable(server)
-  vim.lsp.config(server, {
-    on_attach = function(client, bufnr)
-	  local opts = { buffer = bufnr }
+	local config = {
+		on_attach = function(client, bufnr)
+			local opts = { buffer = bufnr }
 
-	  vim.keymap.set("n", "gh", "<CMD>lua vim.lsp.buf.hover()<CR>", opts)
-	  vim.keymap.set("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", opts)
-	  vim.keymap.set("n", "gi", "<CMD>lua vim.lsp.buf.implementation()<CR>", opts)
-	  vim.keymap.set("n", "gr", "<CMD>lua vim.lsp.buf.references()<CR>", opts)
-	  vim.keymap.set({"n", "x"}, "<leader>a", "<CMD>lua vim.lsp.buf.code_action()<CR>", opts)
-	  vim.keymap.set({"n", "x"}, "<leader>s", function()
-	    require("conform").format({ async = true }, function(err)
-	  	  if not err then
-	  	    local mode = vim.api.nvim_get_mode().mode
-	  	    if vim.startswith(string.lower(mode), "v") then
-	  	  	  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-	  	    end
-	  	  end
-	    end)
-	  end, { buffer = bufnr, desc = "format code" })
-	  vim.keymap.set("n", "<leader>rn", function()
-	    return ":IncRename " .. vim.fn.expand("<cword>")
-	  end, { buffer = bufnr, expr = true })
-	end,
-  })
+			vim.keymap.set("n", "gh", "<CMD>lua vim.lsp.buf.hover()<CR>", opts)
+			vim.keymap.set("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", opts)
+			vim.keymap.set("n", "gi", "<CMD>lua vim.lsp.buf.implementation()<CR>", opts)
+			vim.keymap.set("n", "gr", "<CMD>lua vim.lsp.buf.references()<CR>", opts)
+			vim.keymap.set({ "n", "x" }, "<leader>a", "<CMD>lua vim.lsp.buf.code_action()<CR>", opts)
+			vim.keymap.set({ "n", "x" }, "<leader>s", function()
+				require("conform").format({ async = true }, function(err)
+					if not err then
+						local mode = vim.api.nvim_get_mode().mode
+						if vim.startswith(string.lower(mode), "v") then
+							vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+						end
+					end
+				end)
+			end, { buffer = bufnr, desc = "format code" })
+			vim.keymap.set("n", "<leader>rn", function()
+				return ":IncRename " .. vim.fn.expand("<cword>")
+			end, { buffer = bufnr, expr = true })
+		end,
+	}
+	vim.lsp.enable(server)
+	vim.lsp.config(server, config)
 end
 
 vim.diagnostic.config({
-  underline = true,
-  update_in_insert = false,
-  float = {
-    border = "rounded",
-    source = true,
-    header = "",
-    prefix = "● ",
-  },
-  virtual_text = {
-    spacing = 4,
-    source = "if_many",
-    prefix = "●",
-  },
-  severity_sort = true,
-  signs = {
-    text = {
-  	[vim.diagnostic.severity.ERROR] = "",
-  	[vim.diagnostic.severity.WARN]  = "",
-  	[vim.diagnostic.severity.HINT]  = "",
-  	[vim.diagnostic.severity.INFO]  = "",
-    },
-  },
+	underline = true,
+	update_in_insert = false,
+	float = {
+		border = "rounded",
+		source = true,
+		header = "",
+		prefix = "● ",
+	},
+	virtual_text = {
+		spacing = 4,
+		source = "if_many",
+		prefix = "●",
+	},
+	severity_sort = true,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.HINT] = "",
+			[vim.diagnostic.severity.INFO] = "",
+		},
+	},
 })
 
 
@@ -96,21 +97,21 @@ vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 local rainbow_delimiters = require 'rainbow-delimiters'
 
 vim.g.rainbow_delimiters = {
-    strategy = {
-        [''] = rainbow_delimiters.strategy['global'],
-        vim = rainbow_delimiters.strategy['local'],
-    },
-    query = {
-        [''] = 'rainbow-delimiters',
-        lua = 'rainbow-blocks',
-    },
-    highlight = {
-        'RainbowDelimiterRed',
-        'RainbowDelimiterYellow',
-        'RainbowDelimiterBlue',
-        'RainbowDelimiterOrange',
-        'RainbowDelimiterGreen',
-        'RainbowDelimiterViolet',
-        'RainbowDelimiterCyan',
-    },
+	strategy = {
+		[""] = rainbow_delimiters.strategy["global"],
+		vim = rainbow_delimiters.strategy["local"],
+	},
+	query = {
+		[""] = "rainbow-delimiters",
+		lua = "rainbow-blocks",
+	},
+	highlight = {
+		"RainbowDelimiterRed",
+		"RainbowDelimiterYellow",
+		"RainbowDelimiterBlue",
+		"RainbowDelimiterOrange",
+		"RainbowDelimiterGreen",
+		"RainbowDelimiterViolet",
+		"RainbowDelimiterCyan",
+	},
 }
