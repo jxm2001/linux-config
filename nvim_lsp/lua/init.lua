@@ -22,21 +22,11 @@ for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vim
 		on_attach = function(client, bufnr)
 			local opts = { buffer = bufnr }
 
-			vim.keymap.set("n", "gh", "<CMD>lua vim.lsp.buf.hover()<CR>", opts)
-			vim.keymap.set("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", opts)
-			vim.keymap.set("n", "gi", "<CMD>lua vim.lsp.buf.implementation()<CR>", opts)
-			vim.keymap.set("n", "gr", "<CMD>lua vim.lsp.buf.references()<CR>", opts)
-			vim.keymap.set({ "n", "x" }, "<leader>a", "<CMD>lua vim.lsp.buf.code_action()<CR>", opts)
-			vim.keymap.set({ "n", "x" }, "<leader>s", function()
-				require("conform").format({ async = true }, function(err)
-					if not err then
-						local mode = vim.api.nvim_get_mode().mode
-						if vim.startswith(string.lower(mode), "v") then
-							vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-						end
-					end
-				end)
-			end, { buffer = bufnr, desc = "format code" })
+			vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+			vim.keymap.set("n", "gD", "<CMD>lua vim.lsp.buf.declaration()<CR>", opts)
+			vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
+			vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
+			vim.keymap.set({ "n", "x" }, "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 			vim.keymap.set("n", "<leader>rn", function()
 				return ":IncRename " .. vim.fn.expand("<cword>")
 			end, { buffer = bufnr, expr = true })
@@ -71,6 +61,16 @@ vim.diagnostic.config({
 	},
 })
 
+vim.keymap.set({ "n", "x" }, "<leader>s", function()
+	require("conform").format({ async = true }, function(err)
+		if not err then
+			local mode = vim.api.nvim_get_mode().mode
+			if vim.startswith(string.lower(mode), "v") then
+				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-[>", true, false, true), "n", true)
+			end
+		end
+	end)
+end, { desc = "format code" })
 
 -- leap config
 vim.keymap.set({'n', 'x', 'o'}, 'e',  '<Plug>(leap-forward)')

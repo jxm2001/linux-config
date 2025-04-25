@@ -35,7 +35,15 @@ vnoremap <C-k> 5k
 vnoremap <C-l> 5l
 
 " 快速换行
-nnoremap <cr> o<Esc>
+function! SmartCR() abort
+  if &filetype ==# 'qf'
+    return "\<CR>"
+  else
+    return "o\<Esc>"
+  endif
+endfunction
+
+nnoremap <expr> <CR> SmartCR()
 
 " 高亮搜索
 set hlsearch
@@ -90,9 +98,9 @@ nnoremap <silent> g7 <cmd>lua require("bufferline").go_to(7, true)<CR>
 nnoremap <silent> g8 <cmd>lua require("bufferline").go_to(8, true)<CR>
 nnoremap <silent> g9 <cmd>lua require("bufferline").go_to(9, true)<CR>
 nnoremap <silent> g$ <cmd>lua require("bufferline").go_to(-1, true)<CR>
-nnoremap <silent> gD :BufferLinePickClose<CR>
 nnoremap <silent> [b :BufferLineCyclePrev<CR>
 nnoremap <silent> ]b :BufferLineCycleNext<CR>
+nnoremap <silent> <leader>bd :BufferLinePickClose<CR>
 nnoremap <silent> <leader>bh :BufferLineCloseLeft<CR>
 nnoremap <silent> <leader>bl :BufferLineCloseRight<CR>
 nnoremap <silent> <leader>bo :BufferLineCloseOthers<CR>
