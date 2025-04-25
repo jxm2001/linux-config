@@ -81,50 +81,5 @@ set hidden
 " 终端真彩色
 set termguicolors
 
-" 插件配置
-
 " 读取 lua 配置
 lua require('init')
-
-" bufferline 配置
-nnoremap <silent> gp :BufferLinePick<CR>
-nnoremap <silent> g1 <cmd>lua require("bufferline").go_to(1, true)<CR>
-nnoremap <silent> g2 <cmd>lua require("bufferline").go_to(2, true)<CR>
-nnoremap <silent> g3 <cmd>lua require("bufferline").go_to(3, true)<CR>
-nnoremap <silent> g4 <cmd>lua require("bufferline").go_to(4, true)<CR>
-nnoremap <silent> g5 <cmd>lua require("bufferline").go_to(5, true)<CR>
-nnoremap <silent> g6 <cmd>lua require("bufferline").go_to(6, true)<CR>
-nnoremap <silent> g7 <cmd>lua require("bufferline").go_to(7, true)<CR>
-nnoremap <silent> g8 <cmd>lua require("bufferline").go_to(8, true)<CR>
-nnoremap <silent> g9 <cmd>lua require("bufferline").go_to(9, true)<CR>
-nnoremap <silent> g$ <cmd>lua require("bufferline").go_to(-1, true)<CR>
-nnoremap <silent> [b :BufferLineCyclePrev<CR>
-nnoremap <silent> ]b :BufferLineCycleNext<CR>
-nnoremap <silent> <leader>bd :BufferLinePickClose<CR>
-nnoremap <silent> <leader>bh :BufferLineCloseLeft<CR>
-nnoremap <silent> <leader>bl :BufferLineCloseRight<CR>
-nnoremap <silent> <leader>bo :BufferLineCloseOthers<CR>
-
-" 文本替换设置
-let g:far#enable_undo=1
-
-" gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
-
-" 所生成的数据文件的名称
-let g:gutentags_ctags_tagfile = '.tags'
-
-" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-let s:vim_tags = expand('~/.cache/tags')
-let g:gutentags_cache_dir = s:vim_tags
-
-" 检测 ~/.cache/tags 不存在就新建
-if !isdirectory(s:vim_tags)
-   silent! call mkdir(s:vim_tags, 'p')
-endif
-
-" 配置 ctags 的参数
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']

@@ -1,5 +1,4 @@
 return {
-	-- the colorscheme should be available when starting Neovim
 	{
 		"rebelot/kanagawa.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -18,7 +17,7 @@ return {
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		lazy = false,
+		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
 	},
@@ -38,7 +37,6 @@ return {
 		event = "VeryLazy",
 		opts = {},
 	},
-	{ "ludovicchabant/vim-gutentags", event = "VeryLazy" },
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {},
