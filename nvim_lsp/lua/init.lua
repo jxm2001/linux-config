@@ -20,8 +20,8 @@ vim.keymap.del('n', 'grn')
 vim.keymap.del({'n', 'v'}, 'gra')
 vim.keymap.del('n', 'grr')
 vim.keymap.del('n', 'gri')
-for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vimls",
-	"dockerls", "docker_compose_language_service", "marksman", "yamlls", "fortls" }) do
+for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vimls", "dockerls",
+	"docker_compose_language_service", "marksman", "biome", "yamlls", "fortls" }) do
 	local config = {
 		on_attach = function(client, bufnr)
 			local opts = { buffer = bufnr }
