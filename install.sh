@@ -30,171 +30,242 @@ function check_network(){
 		exit 2
 	fi
 }
-function check_python3_neovim(){
-	if [ ! -z "$(pip list 2>/dev/null | grep pynvim)" ]; then
-		return 0
-	fi
+
+function check_git() {
+	if which git &> /dev/null; then return 0; fi
+	echo "Missing: git. Run the following command to install:"
 	case $OS in
-		"arch"|"msys2")
-			pacman -Ss python-pynvim | grep 'installed' &> /dev/null
-		;;
-		"fedora"|"centos")
-			rpm -q python3-neovim &> /dev/null
-		;;
-		"debian"|"ubuntu")
-			dpkg -l python3-neovim &> /dev/null
-		;;
+		"arch") echo "sudo pacman -S git" ;;
+		"fedora"|"centos") echo "sudo dnf install git" ;;
+		"debian"|"ubuntu") echo "sudo apt install git" ;;
+		"msys2") echo "pacman -S git" ;;
 	esac
-	return $?
+	return 1
 }
-function check_python3_setuptools(){
+
+function check_curl() {
+	if which curl &> /dev/null; then return 0; fi
+	echo "Missing: curl. Run the following command to install:"
 	case $OS in
-		"arch")
-			pacman -Ss python-setuptools | grep 'installed' &> /dev/null
-		;;
+		"arch") echo "sudo pacman -S curl" ;;
+		"fedora"|"centos") echo "sudo dnf install curl" ;;
+		"debian"|"ubuntu") echo "sudo apt install curl" ;;
+		"msys2") echo "pacman -S curl" ;;
 	esac
-	return 0
+	return 1
 }
-function check_python3_distutils(){
+
+function check_wget() {
+	if which wget &> /dev/null; then return 0; fi
+	echo "Missing: wget. Run the following command to install:"
 	case $OS in
-		"arch")
-			pacman -Ss python-distutils-extra | grep 'installed' &> /dev/null
-		;;
+		"arch") echo "sudo pacman -S wget" ;;
+		"fedora"|"centos") echo "sudo dnf install wget" ;;
+		"debian"|"ubuntu") echo "sudo apt install wget" ;;
+		"msys2") echo "pacman -S wget" ;;
 	esac
-	return 0
+	return 1
 }
-function install_luarocks(){
+
+function check_unzip() {
+	if which unzip &> /dev/null; then return 0; fi
+	echo "Missing: unzip. Run the following command to install:"
 	case $OS in
-		"arch")
-			echo "sudo pacman -S luarocks"
-		;;
-		"fedora"|"centos")
-			echo "sudo dnf install luarocks"
-		;;
-		"debian"|"ubuntu")
-			echo "sudo apt install luarocks"
-		;;
-		"msys2")
-			echo "pacman -S mingw-w64-x86_64-luarocks"
-		;;
+		"arch") echo "sudo pacman -S unzip" ;;
+		"fedora"|"centos") echo "sudo dnf install unzip" ;;
+		"debian"|"ubuntu") echo "sudo apt install unzip" ;;
+		"msys2") echo "pacman -S unzip" ;;
 	esac
+	return 1
 }
-function install_clangd(){
+
+function check_tar() {
+	if which tar &> /dev/null; then return 0; fi
+	echo "Missing: tar. Run the following command to install:"
 	case $OS in
-		"arch")
-			echo "sudo pacman -S clang"
-		;;
-		"fedora"|"centos")
-			echo "sudo dnf install clang-tools-extra"
-		;;
-		"debian"|"ubuntu")
-			echo "sudo apt install clangd"
-		;;
-		"msys2")
-			echo "pacman -S mingw-w64-x86_64-clang-tools-extra"
-		;;
+		"arch") echo "sudo pacman -S tar" ;;
+		"fedora"|"centos") echo "sudo dnf install tar" ;;
+		"debian"|"ubuntu") echo "sudo apt install tar" ;;
+		"msys2") echo "pacman -S tar" ;;
 	esac
+	return 1
 }
-function install_ctags(){
+
+function check_gzip() {
+	if which gzip &> /dev/null; then return 0; fi
+	echo "Missing: gzip. Run the following command to install:"
 	case $OS in
-		"arch")
-			echo "sudo pacman -S ctags"
-		;;
-		"fedora"|"centos")
-			echo "sudo dnf install ctags"
-		;;
-		"debian"|"ubuntu")
-			echo "sudo apt install universal-ctags"
-		;;
-		"msys2")
-			echo "pacman -S mingw-w64-x86_64-ctags"
-		;;
+		"arch") echo "sudo pacman -S gzip" ;;
+		"fedora"|"centos") echo "sudo dnf install gzip" ;;
+		"debian"|"ubuntu") echo "sudo apt install gzip" ;;
+		"msys2") echo "pacman -S gzip" ;;
 	esac
+	return 1
 }
-function install_nodejs(){
+
+function check_jq() {
+	if which jq &> /dev/null; then return 0; fi
+	echo "Missing: jq. Run the following command to install:"
 	case $OS in
-		"arch")
-			echo "sudo pacman -S nodejs npm"
-		;;
-		"fedora"|"centos")
-			echo "sudo dnf install nodejs"
-		;;
-		"debian")
-			echo "sudo apt install nodejs npm"
-		;;
+		"arch") echo "sudo pacman -S jq" ;;
+		"fedora"|"centos") echo "sudo dnf install jq" ;;
+		"debian"|"ubuntu") echo "sudo apt install jq" ;;
+		"msys2") echo "pacman -S jq" ;;
+	esac
+	return 1
+}
+
+function check_luarocks() {
+	if which luarocks &> /dev/null; then return 0; fi
+	echo "Missing: luarocks. Run the following command to install:"
+	case $OS in
+		"arch") echo "sudo pacman -S luarocks" ;;
+		"fedora"|"centos") echo "sudo dnf install luarocks" ;;
+		"debian"|"ubuntu") echo "sudo apt install luarocks" ;;
+		"msys2") echo "pacman -S mingw-w64-x86_64-luarocks" ;;
+	esac
+	return 1
+}
+
+function check_clangd() {
+	if which clangd &> /dev/null; then return 0; fi
+	echo "Missing: clangd. Run the following command to install:"
+	case $OS in
+		"arch") echo "sudo pacman -S clang" ;;
+		"fedora"|"centos") echo "sudo dnf install clang-tools-extra" ;;
+		"debian"|"ubuntu") echo "sudo apt install clangd" ;;
+		"msys2") echo "pacman -S mingw-w64-x86_64-clang-tools-extra" ;;
+	esac
+	return 1
+}
+
+function check_ctags() {
+	if which ctags &> /dev/null; then return 0; fi
+	echo "Missing: ctags. Run the following command to install:"
+	case $OS in
+		"arch") echo "sudo pacman -S ctags" ;;
+		"fedora"|"centos") echo "sudo dnf install ctags" ;;
+		"debian"|"ubuntu") echo "sudo apt install universal-ctags" ;;
+		"msys2") echo "pacman -S mingw-w64-x86_64-ctags" ;;
+	esac
+	return 1
+}
+
+function check_nodejs() {
+	if which node &> /dev/null && which npm &> /dev/null; then return 0; fi
+	echo "Missing: nodejs/npm. Run the following command to install:"
+	case $OS in
+		"arch") echo "sudo pacman -S nodejs npm" ;;
+		"fedora"|"centos") echo "sudo dnf install nodejs" ;;
+		"debian") echo "sudo apt install nodejs npm" ;;
 		"ubuntu")
-			echo "# If you want to install nodejs for all users, log in as root"
+			echo "# If installing for all users, run as root"
 			echo "# Do not use 'sudo' because this command does not use the proxy in the current env"
 			echo "curl -sL install-node.vercel.app/lts | bash"
-		;;
-		"msys2")
-			echo "pacman -S mingw-w64-x86_64-nodejs"
-		;;
+			;;
+		"msys2") echo "pacman -S mingw-w64-x86_64-nodejs" ;;
 	esac
+	return 1
 }
-function install_tree_sitter(){
+
+function check_tree_sitter() {
+	if which tree-sitter &> /dev/null; then return 0; fi
+	echo "Missing: tree-sitter. Run the following command to install:"
 	case $OS in
-		"arch")
-			echo "sudo pacman -S tree-sitter-cli"
-		;;
-		"fedora")
-			echo "sudo dnf install tree-sitter-cli"
-		;;
+		"arch") echo "sudo pacman -S tree-sitter-cli" ;;
+		"fedora") echo "sudo dnf install tree-sitter-cli" ;;
 		"debian"|"ubuntu"|"centos")
 			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.2/tree-sitter-linux-x64.gz"
 			echo "gzip -d tree-sitter-linux-x64.gz && chmod +x tree-sitter-linux-x64"
 			echo "mkdir -p ~/.local/bin/ && mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
-		;;
-		"msys2")
-			echo "pacman -S mingw-w64-x86_64-tree-sitter"
-		;;
+			;;
+		"msys2") echo "pacman -S mingw-w64-x86_64-tree-sitter" ;;
 	esac
+	return 1
 }
-function install_yazi(){
+
+function check_yazi() {
+	if which yazi &> /dev/null; then return 0; fi
+	echo "Missing: yazi. Run the following command to install:"
 	case $OS in
-		"arch")
-			echo "sudo pacman -S yazi"
-		;;
+		"arch") echo "sudo pacman -S yazi" ;;
 		"debian"|"ubuntu"|"centos"|"fedora")
 			echo "wget https://github.com/sxyazi/yazi/releases/download/v25.2.11/yazi-x86_64-unknown-linux-musl.zip"
 			echo "unzip yazi-x86_64-unknown-linux-musl.zip"
 			echo "mkdir -p ~/.local/bin/ && mv yazi-x86_64-unknown-linux-musl/{ya,yazi} ~/.local/bin/"
-		;;
-		"msys2")
-			echo "install yazi via https://yazi-rs.github.io/docs/installation"
-		;;
+			;;
+		"msys2") echo "# Install via https://yazi-rs.github.io/docs/installation" ;;
 	esac
+	return 1
 }
-function install_python3_neovim(){
+
+function check_python3_neovim() {
+	if pip list 2>/dev/null | grep -q pynvim; then return 0; fi
 	case $OS in
-		"arch")
-			echo "sudo pacman -S python-pynvim"
-		;;
+		"arch"|"msys2")
+			pacman -Qs python-pynvim | grep -q 'installed' && return 0
+			;;
 		"fedora"|"centos")
-			echo "sudo dnf install python3-neovim"
-		;;
+			rpm -q python3-neovim &> /dev/null && return 0
+			;;
 		"debian"|"ubuntu")
-			echo "sudo apt install --no-install-recommends python3-neovim"
-		;;
-		"msys2")
-			echo "pacman -S mingw-w64-x86_64-python-pynvim"
-		;;
+			dpkg -l python3-neovim &> /dev/null && return 0
+			;;
 	esac
+	echo "Missing: python3-neovim. Run the following command to install:"
+	case $OS in
+		"arch") echo "sudo pacman -S python-pynvim" ;;
+		"fedora"|"centos") echo "sudo dnf install python3-neovim" ;;
+		"debian"|"ubuntu") echo "sudo apt install --no-install-recommends python3-neovim" ;;
+		"msys2") echo "pacman -S mingw-w64-x86_64-python-pynvim" ;;
+	esac
+	return 1
 }
-function install_python3_setuptools(){
+
+function check_python3_setuptools() {
 	case $OS in
 		"arch")
+			pacman -Qs python-setuptools | grep -q 'installed' && return 0
+			echo "Missing: python3-setuptools. Run the following command to install:"
 			echo "sudo pacman -S python-setuptools"
-		;;
+			return 1
+			;;
 	esac
+	return 0
 }
-function install_python3_distutils(){
+
+function check_python3_distutils() {
 	case $OS in
 		"arch")
+			pacman -Qs python-distutils-extra | grep -q 'installed' && return 0
+			echo "Missing: python3-distutils. Run the following command to install:"
 			echo "sudo pacman -S python-distutils-extra"
-		;;
+			return 1
+			;;
 	esac
+	return 0
 }
+
+function install_yazi(){
+	local plugins=(
+		"yazi-rs/plugins:smart-enter"
+		"yazi-rs/plugins:git"
+		"yazi-rs/plugins:max-preview"
+		"yazi-rs/plugins:vcs-files"
+	)
+
+	mkdir -p $HOME/.config/yazi
+	cp ./yazi/{init.lua,keymap.toml,yazi.toml} $HOME/.config/yazi
+	for plugin in "${plugins[@]}"; do
+	  if ya pack -l | grep -q "$plugin"; then
+		echo "$plugin already installed"
+	  else
+		echo "installing $plugin"
+		ya pack -a "$plugin"
+	  fi
+	done
+}
+
 function install_vim(){
 	read -p "Choose vim version to install(null/base/easy/coc/nvim-base/nvim-easy/nvim-coc/nvim-lsp): " version
 	if [ $version == "base" ]; then
@@ -207,21 +278,12 @@ function install_vim(){
 		fi
 		cp ./easyVim/vimrc ~/.vimrc
 	elif [ $version == "coc" ]; then
-		which clangd &> /dev/null && which ctags &> /dev/null && which node &> /dev/null && which npm &> /dev/null
-		if [ $? -ne 0 ]; then
-			echo "Please run the following command to install the dependent environment"
-			which clangd &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_clangd
-			fi
-			which ctags &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_ctags
-			fi
-			which node &> /dev/null && which npm &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_nodejs
-			fi
+		local failed=0
+		check_clangd || failed=1
+		check_ctags || failed=1
+		check_nodejs || failed=1
+		if [ $failed -ne 0 ]; then
+			echo "Some dependencies are missing. Please install them using the commands above."
 			exit 2
 		fi
 		if [ ! -e ~/.vim/autoload/plug.vim ]; then
@@ -241,122 +303,56 @@ function install_vim(){
 		cp ./nvim_easy/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_easy/lua $nvim_init_path
 	elif [ $version == "nvim-coc" ]; then
-		which luarocks &> /dev/null && which clangd &> /dev/null && which ctags &> /dev/null \
-			&& which node &> /dev/null && which npm &> /dev/null && which tree-sitter &> /dev/null \
-			&& which yazi &> /dev/null && check_python3_neovim
-		if [ $? -ne 0 ]; then
-			echo "Please run the following command to install the dependent environment"
-			which luarocks &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_luarocks
-			fi
-			which clangd &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_clangd
-			fi
-			which ctags &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_ctags
-			fi
-			which node &> /dev/null && which npm &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_nodejs
-			fi
-			which tree-sitter &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_tree_sitter
-			fi
-			which yazi &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_yazi
-			fi
-			check_python3_neovim
-			if [ $? -ne 0 ]; then
-				install_python3_neovim
-			fi
-			check_python3_setuptools
-			if [ $? -ne 0 ]; then
-				install_python3_setuptools
-			fi
-			check_python3_distutils
-			if [ $? -ne 0 ]; then
-				install_python3_distutils
-			fi
+		local failed=0
+		check_luarocks || failed=1
+		check_clangd || failed=1
+		check_ctags || failed=1
+		check_nodejs || failed=1
+		check_tree_sitter || failed=1
+		check_yazi || failed=1
+		check_python3_neovim || failed=1
+		check_python3_setuptools || failed=1
+		check_python3_distutils || failed=1
+		if [ $failed -ne 0 ]; then
+			echo "Some dependencies are missing. Please install them using the commands above."
 			exit 2
 		fi
 		check_network
 		mkdir -p $nvim_init_path
 		cp ./nvim_coc/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_coc/lua $nvim_init_path
-		mkdir -p $HOME/.config/yazi
-		cp ./yazi/{init.lua,keymap.toml,yazi.toml} $HOME/.config/yazi
-		echo "run follow commond after install:"
-		echo "ya pack -a yazi-rs/plugins:smart-enter"
-		echo "ya pack -a yazi-rs/plugins:git"
-		echo "ya pack -a yazi-rs/plugins:max-preview"
-		echo "ya pack -a yazi-rs/plugins:vcs-files"
 		mkdir -p $nvim_coc_setting_path
 		cp ./nvim_coc/coc-settings.json $nvim_coc_setting_path/coc-settings.json
+		install_yazi
 	elif [ $version == "nvim-lsp" ]; then
-		which luarocks &> /dev/null && which clangd &> /dev/null && which ctags &> /dev/null \
-			&& which node &> /dev/null && which npm &> /dev/null && which tree-sitter &> /dev/null \
-			&& which yazi &> /dev/null && check_python3_neovim
-		if [ $? -ne 0 ]; then
-			echo "Please run the following command to install the dependent environment"
-			which luarocks &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_luarocks
-			fi
-			which clangd &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_clangd
-			fi
-			which ctags &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_ctags
-			fi
-			which node &> /dev/null && which npm &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_nodejs
-			fi
-			which tree-sitter &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_tree_sitter
-			fi
-			which yazi &> /dev/null
-			if [ $? -ne 0 ]; then
-				install_yazi
-			fi
-			check_python3_neovim
-			if [ $? -ne 0 ]; then
-				install_python3_neovim
-			fi
-			check_python3_setuptools
-			if [ $? -ne 0 ]; then
-				install_python3_setuptools
-			fi
-			check_python3_distutils
-			if [ $? -ne 0 ]; then
-				install_python3_distutils
-			fi
+		local failed=0
+		check_git || failed=1
+		check_curl || failed=1
+		check_wget || failed=1
+		check_unzip || failed=1
+		check_tar || failed=1
+		check_gzip || failed=1
+		check_luarocks || failed=1
+		check_tree_sitter || failed=1
+		check_yazi || failed=1
+		check_python3_neovim || failed=1
+		check_python3_setuptools || failed=1
+		check_python3_distutils || failed=1
+		if [ $failed -ne 0 ]; then
+			echo "Some dependencies are missing. Please install them using the commands above."
 			exit 2
 		fi
 		check_network
 		mkdir -p $nvim_init_path
 		cp ./nvim_lsp/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_lsp/lua $nvim_init_path
-		mkdir -p $HOME/.config/yazi
-		cp ./yazi/{init.lua,keymap.toml,yazi.toml} $HOME/.config/yazi
-		echo "run follow commond after install:"
-		echo "ya pack -a yazi-rs/plugins:smart-enter"
-		echo "ya pack -a yazi-rs/plugins:git"
-		echo "ya pack -a yazi-rs/plugins:max-preview"
-		echo "ya pack -a yazi-rs/plugins:vcs-files"
+		install_yazi
 	elif [ $version != "null" ]; then
 		echo "Error vim version"
 		exit 1
 	fi
 }
+
 function install_tmux(){
 	read -p "Choose tmux version to install(null/base/normal): " version
 	if [ $version == "base" ]; then
@@ -379,28 +375,16 @@ function install_tmux(){
 		exit 1
 	fi
 }
+
 function install_zsh(){
 	read -p "Choose zsh version to install(null/manual/zinit): " version
 	if [ $version == "zinit" ]; then
-		which wget &> /dev/null && which curl &> /dev/null && which tar &> /dev/null && which jq &> /dev/null
-		if [ $? -ne 0 ]; then
-			echo "Fail to install zsh"
-			which wget &> /dev/null
-			if [ $? -ne 0 ]; then
-				echo "Please install wget"
-			fi
-			which curl &> /dev/null
-			if [ $? -ne 0 ]; then
-				echo "Please install curl"
-			fi
-			which tar &> /dev/null
-			if [ $? -ne 0 ]; then
-				echo "Please install tar"
-			fi
-			which jq &> /dev/null
-			if [ $? -ne 0 ]; then
-				echo "Please install jq"
-			fi
+		check_wget || failed=1
+		check_curl || failed=1
+		check_tar || failed=1
+		check_jq || failed=1
+		if [ $failed -ne 0 ]; then
+			echo "Some dependencies are missing. Please install them using the commands above."
 			exit 2
 		fi
 		check_network
@@ -410,21 +394,11 @@ function install_zsh(){
 		cat ./zsh/zinit/zshrc.2 >> ~/.zshrc
 		cp ./zsh/zsh_aliases ~/.zsh_aliases
 	elif [ $version == "manual" ]; then
-		which wget &> /dev/null && which curl &> /dev/null && which tar &> /dev/null
-		if [ $? -ne 0 ]; then
-			echo "Fail to install zsh"
-			which wget &> /dev/null
-			if [ $? -ne 0 ]; then
-				echo "Please install wget"
-			fi
-			which curl &> /dev/null
-			if [ $? -ne 0 ]; then
-				echo "Please install curl"
-			fi
-			which tar &> /dev/null
-			if [ $? -ne 0 ]; then
-				echo "Please install tar"
-			fi
+		check_wget || failed=1
+		check_curl || failed=1
+		check_tar || failed=1
+		if [ $failed -ne 0 ]; then
+			echo "Some dependencies are missing. Please install them using the commands above."
 			exit 2
 		fi
 		check_network
@@ -456,6 +430,12 @@ function install_zsh(){
 		exit 1
 	fi
 }
-install_zsh
-install_vim
-install_tmux
+
+read -p "Install which? (zsh/vim/tmux/all): " choice
+case $choice in
+    zsh) install_zsh ;;
+    vim) install_vim ;;
+    tmux) install_tmux ;;
+    all) install_zsh; install_vim; install_tmux ;;
+    *) echo "Invalid option"; exit 1 ;;
+esac
