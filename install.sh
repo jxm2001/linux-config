@@ -206,7 +206,7 @@ function check_pip() {
 	fi
 	echo -e "\033[1;31mError: Missing usable pip. Run the following command to install:\033[0m"
 	case $OS in
-		"arch") echo "sudo pacman -S pipx # or sudo pacman -S miniconda3" ;;
+		"arch") echo "sudo pacman -S python-pipx # or sudo pacman -S miniconda3" ;;
 		"fedora"|"centos") echo "sudo dnf install pipx # or sudo dnf install miniconda" ;;
 		"debian"|"ubuntu") echo "sudo apt install pipx # or install miniconda manually" ;;
 		"msys2") echo "pacman -S python-pipx # or pacman -S miniconda" ;;
@@ -240,7 +240,7 @@ function check_python3_neovim() {
 function check_python3_setuptools() {
 	case $OS in
 		"arch")
-			pacman -Qs python-setuptools | grep -q 'installed' && return 0
+			pacman -Ss python-setuptools | grep -q 'installed' && return 0
 			echo -e "\033[1;31mError: Missing python3-setuptools. Run the following command to install:\033[0m"
 			echo "sudo pacman -S python-setuptools"
 			return 1
@@ -252,7 +252,7 @@ function check_python3_setuptools() {
 function check_python3_distutils() {
 	case $OS in
 		"arch")
-			pacman -Qs python-distutils-extra | grep -q 'installed' && return 0
+			pacman -Ss python-distutils-extra | grep -q 'installed' && return 0
 			echo -e "\033[1;31mError: Missing python3-distutils. Run the following command to install:\033[0m"
 			echo "sudo pacman -S python-distutils-extra"
 			return 1
