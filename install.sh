@@ -33,7 +33,7 @@ function check_network(){
 
 function check_git() {
 	if which git &> /dev/null; then return 0; fi
-	echo "Missing: git. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing git. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S git" ;;
 		"fedora"|"centos") echo "sudo dnf install git" ;;
@@ -45,7 +45,7 @@ function check_git() {
 
 function check_curl() {
 	if which curl &> /dev/null; then return 0; fi
-	echo "Missing: curl. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing curl. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S curl" ;;
 		"fedora"|"centos") echo "sudo dnf install curl" ;;
@@ -57,7 +57,7 @@ function check_curl() {
 
 function check_wget() {
 	if which wget &> /dev/null; then return 0; fi
-	echo "Missing: wget. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing wget. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S wget" ;;
 		"fedora"|"centos") echo "sudo dnf install wget" ;;
@@ -69,7 +69,7 @@ function check_wget() {
 
 function check_unzip() {
 	if which unzip &> /dev/null; then return 0; fi
-	echo "Missing: unzip. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing unzip. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S unzip" ;;
 		"fedora"|"centos") echo "sudo dnf install unzip" ;;
@@ -81,7 +81,7 @@ function check_unzip() {
 
 function check_tar() {
 	if which tar &> /dev/null; then return 0; fi
-	echo "Missing: tar. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing tar. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S tar" ;;
 		"fedora"|"centos") echo "sudo dnf install tar" ;;
@@ -93,7 +93,7 @@ function check_tar() {
 
 function check_gzip() {
 	if which gzip &> /dev/null; then return 0; fi
-	echo "Missing: gzip. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing gzip. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S gzip" ;;
 		"fedora"|"centos") echo "sudo dnf install gzip" ;;
@@ -105,7 +105,7 @@ function check_gzip() {
 
 function check_jq() {
 	if which jq &> /dev/null; then return 0; fi
-	echo "Missing: jq. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing jq. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S jq" ;;
 		"fedora"|"centos") echo "sudo dnf install jq" ;;
@@ -117,7 +117,7 @@ function check_jq() {
 
 function check_luarocks() {
 	if which luarocks &> /dev/null; then return 0; fi
-	echo "Missing: luarocks. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing luarocks. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S luarocks" ;;
 		"fedora"|"centos") echo "sudo dnf install luarocks" ;;
@@ -129,7 +129,7 @@ function check_luarocks() {
 
 function check_clangd() {
 	if which clangd &> /dev/null; then return 0; fi
-	echo "Missing: clangd. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing clangd. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S clang" ;;
 		"fedora"|"centos") echo "sudo dnf install clang-tools-extra" ;;
@@ -141,7 +141,7 @@ function check_clangd() {
 
 function check_ctags() {
 	if which ctags &> /dev/null; then return 0; fi
-	echo "Missing: ctags. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing ctags. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S ctags" ;;
 		"fedora"|"centos") echo "sudo dnf install ctags" ;;
@@ -153,14 +153,14 @@ function check_ctags() {
 
 function check_nodejs() {
 	if which node &> /dev/null && which npm &> /dev/null; then return 0; fi
-	echo "Missing: nodejs/npm. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing nodejs/npm. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S nodejs npm" ;;
 		"fedora"|"centos") echo "sudo dnf install nodejs" ;;
 		"debian") echo "sudo apt install nodejs npm" ;;
 		"ubuntu")
-			echo "# If installing for all users, run as root"
-			echo "# Do not use 'sudo' because this command does not use the proxy in the current env"
+			echo -e "\033[1;31m# If installing for all users, run as root\033[0m"
+			echo -e "\033[1;31m# Do not use 'sudo' because this command does not use the proxy in the current env\033[0m"
 			echo "curl -sL install-node.vercel.app/lts | bash"
 			;;
 		"msys2") echo "pacman -S mingw-w64-x86_64-nodejs" ;;
@@ -170,12 +170,12 @@ function check_nodejs() {
 
 function check_tree_sitter() {
 	if which tree-sitter &> /dev/null; then return 0; fi
-	echo "Missing: tree-sitter. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing tree-sitter. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S tree-sitter-cli" ;;
 		"fedora") echo "sudo dnf install tree-sitter-cli" ;;
 		"debian"|"ubuntu"|"centos")
-			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.2/tree-sitter-linux-x64.gz"
+			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.3/tree-sitter-linux-x64.gz"
 			echo "gzip -d tree-sitter-linux-x64.gz && chmod +x tree-sitter-linux-x64"
 			echo "mkdir -p ~/.local/bin/ && mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
 			;;
@@ -186,15 +186,30 @@ function check_tree_sitter() {
 
 function check_yazi() {
 	if which yazi &> /dev/null; then return 0; fi
-	echo "Missing: yazi. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing yazi. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S yazi" ;;
 		"debian"|"ubuntu"|"centos"|"fedora")
-			echo "wget https://github.com/sxyazi/yazi/releases/download/v25.2.11/yazi-x86_64-unknown-linux-musl.zip"
+			echo "wget https://github.com/sxyazi/yazi/releases/download/v25.4.8/yazi-x86_64-unknown-linux-musl.zip"
 			echo "unzip yazi-x86_64-unknown-linux-musl.zip"
 			echo "mkdir -p ~/.local/bin/ && mv yazi-x86_64-unknown-linux-musl/{ya,yazi} ~/.local/bin/"
 			;;
-		"msys2") echo "# Install via https://yazi-rs.github.io/docs/installation" ;;
+		"msys2") echo -e "\033[1;31m# Install via https://yazi-rs.github.io/docs/installation\033[0m" ;;
+	esac
+	return 1
+}
+
+function check_pip() {
+	if which pipx &> /dev/null; then return 0; fi
+	if which conda &> /dev/null; then
+		if conda list pip &> /dev/null; then return 0; fi
+	fi
+	echo -e "\033[1;31mError: Missing usable pip. Run the following command to install:\033[0m"
+	case $OS in
+		"arch") echo "sudo pacman -S pipx # or sudo pacman -S miniconda3" ;;
+		"fedora"|"centos") echo "sudo dnf install pipx # or sudo dnf install miniconda" ;;
+		"debian"|"ubuntu") echo "sudo apt install pipx # or install miniconda manually" ;;
+		"msys2") echo "pacman -S python-pipx # or pacman -S miniconda" ;;
 	esac
 	return 1
 }
@@ -212,7 +227,7 @@ function check_python3_neovim() {
 			dpkg -l python3-neovim &> /dev/null && return 0
 			;;
 	esac
-	echo "Missing: python3-neovim. Run the following command to install:"
+	echo -e "\033[1;31mError: Missing python3-neovim. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S python-pynvim" ;;
 		"fedora"|"centos") echo "sudo dnf install python3-neovim" ;;
@@ -226,7 +241,7 @@ function check_python3_setuptools() {
 	case $OS in
 		"arch")
 			pacman -Qs python-setuptools | grep -q 'installed' && return 0
-			echo "Missing: python3-setuptools. Run the following command to install:"
+			echo -e "\033[1;31mError: Missing python3-setuptools. Run the following command to install:\033[0m"
 			echo "sudo pacman -S python-setuptools"
 			return 1
 			;;
@@ -238,7 +253,7 @@ function check_python3_distutils() {
 	case $OS in
 		"arch")
 			pacman -Qs python-distutils-extra | grep -q 'installed' && return 0
-			echo "Missing: python3-distutils. Run the following command to install:"
+			echo -e "\033[1;31mError: Missing python3-distutils. Run the following command to install:\033[0m"
 			echo "sudo pacman -S python-distutils-extra"
 			return 1
 			;;
@@ -283,7 +298,7 @@ function install_vim(){
 		check_ctags || failed=1
 		check_nodejs || failed=1
 		if [ $failed -ne 0 ]; then
-			echo "Some dependencies are missing. Please install them using the commands above."
+			echo -e "\033[1;31mError: Some dependencies are missing. Please install them using the commands above.\033[0m"
 			exit 2
 		fi
 		if [ ! -e ~/.vim/autoload/plug.vim ]; then
@@ -314,7 +329,7 @@ function install_vim(){
 		check_python3_setuptools || failed=1
 		check_python3_distutils || failed=1
 		if [ $failed -ne 0 ]; then
-			echo "Some dependencies are missing. Please install them using the commands above."
+			echo -e "\033[1;31mError: Some dependencies are missing. Please install them using the commands above.\033[0m"
 			exit 2
 		fi
 		check_network
@@ -333,13 +348,15 @@ function install_vim(){
 		check_tar || failed=1
 		check_gzip || failed=1
 		check_luarocks || failed=1
+		check_nodejs || failed=1
 		check_tree_sitter || failed=1
 		check_yazi || failed=1
+		check_pip || failed=1
 		check_python3_neovim || failed=1
 		check_python3_setuptools || failed=1
 		check_python3_distutils || failed=1
 		if [ $failed -ne 0 ]; then
-			echo "Some dependencies are missing. Please install them using the commands above."
+			echo -e "\033[1;31mError: Some dependencies are missing. Please install them using the commands above.\033[0m"
 			exit 2
 		fi
 		check_network
@@ -385,7 +402,7 @@ function install_zsh(){
 		check_tar || failed=1
 		check_jq || failed=1
 		if [ $failed -ne 0 ]; then
-			echo "Some dependencies are missing. Please install them using the commands above."
+			echo -e "\033[1;31mError: Some dependencies are missing. Please install them using the commands above.\033[0m"
 			exit 2
 		fi
 		check_network
@@ -400,7 +417,7 @@ function install_zsh(){
 		check_curl || failed=1
 		check_tar || failed=1
 		if [ $failed -ne 0 ]; then
-			echo "Some dependencies are missing. Please install them using the commands above."
+			echo -e "\033[1;31mError: Some dependencies are missing. Please install them using the commands above.\033[0m"
 			exit 2
 		fi
 		check_network
