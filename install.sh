@@ -379,6 +379,7 @@ function install_tmux(){
 function install_zsh(){
 	read -p "Choose zsh version to install(null/manual/zinit): " version
 	if [ $version == "zinit" ]; then
+		local failed=0
 		check_wget || failed=1
 		check_curl || failed=1
 		check_tar || failed=1
@@ -394,6 +395,7 @@ function install_zsh(){
 		cat ./zsh/zinit/zshrc.2 >> ~/.zshrc
 		cp ./zsh/zsh_aliases ~/.zsh_aliases
 	elif [ $version == "manual" ]; then
+		local failed=0
 		check_wget || failed=1
 		check_curl || failed=1
 		check_tar || failed=1
