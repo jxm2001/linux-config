@@ -158,11 +158,7 @@ function check_nodejs() {
 		"arch") echo "sudo pacman -S nodejs npm" ;;
 		"fedora"|"centos") echo "sudo dnf install nodejs" ;;
 		"debian") echo "sudo apt install nodejs npm" ;;
-		"ubuntu")
-			echo -e "\033[1;31m# If installing for all users, run as root\033[0m"
-			echo -e "\033[1;31m# Do not use 'sudo' because this command does not use the proxy in the current env\033[0m"
-			echo "curl -sL install-node.vercel.app/lts | bash"
-			;;
+		"ubuntu") echo "curl -sfLS install-node.vercel.app/lts | bash -s -- --prefix=$HOME/.local --verbose" ;;
 		"msys2") echo "pacman -S mingw-w64-x86_64-nodejs" ;;
 	esac
 	return 1
