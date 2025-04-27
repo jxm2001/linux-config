@@ -265,7 +265,7 @@ function install_yazi(){
 	local plugins=(
 		"yazi-rs/plugins:smart-enter"
 		"yazi-rs/plugins:git"
-		"yazi-rs/plugins:max-preview"
+		"yazi-rs/plugins:toggle-pane"
 		"yazi-rs/plugins:vcs-files"
 	)
 

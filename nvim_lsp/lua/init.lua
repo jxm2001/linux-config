@@ -24,12 +24,6 @@ for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vim
 	"docker_compose_language_service", "marksman", "biome", "yamlls", "fortls" }) do
 	local config = {
 		on_attach = function(client, bufnr)
-			if client.name == "fortls" then
-				if client.config.flags then
-					client.config.flags.notify_init = nil
-				end
-			end
-
 			local opts = { buffer = bufnr }
 
 			vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
@@ -43,6 +37,15 @@ for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vim
 			end, { buffer = bufnr, expr = true })
 		end,
 	}
+	if server == "fortls" then
+		config.cmd = {
+			"fortls",
+			-- "--notify_init",
+			"--hover_signature",
+			"--hover_language=fortran",
+			"--use_signature_help",
+		}
+	end
 	vim.lsp.enable(server)
 	vim.lsp.config(server, config)
 end
