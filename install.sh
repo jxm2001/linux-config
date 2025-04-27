@@ -218,7 +218,7 @@ function check_python3_neovim() {
 	if pip list 2>/dev/null | grep -q pynvim; then return 0; fi
 	case $OS in
 		"arch"|"msys2")
-			pacman -Qs python-pynvim | grep -q 'installed' && return 0
+			pacman -Qs python-pynvim &> /dev/null && return 0
 			;;
 		"fedora"|"centos")
 			rpm -q python3-neovim &> /dev/null && return 0
@@ -240,7 +240,7 @@ function check_python3_neovim() {
 function check_python3_setuptools() {
 	case $OS in
 		"arch")
-			pacman -Ss python-setuptools | grep -q 'installed' && return 0
+			pacman -Qs python-setuptools &> /dev/null && return 0
 			echo -e "\033[1;31mError: Missing python3-setuptools. Run the following command to install:\033[0m"
 			echo "sudo pacman -S python-setuptools"
 			return 1
@@ -252,7 +252,7 @@ function check_python3_setuptools() {
 function check_python3_distutils() {
 	case $OS in
 		"arch")
-			pacman -Ss python-distutils-extra | grep -q 'installed' && return 0
+			pacman -Qs python-distutils-extra &> /dev/null && return 0
 			echo -e "\033[1;31mError: Missing python3-distutils. Run the following command to install:\033[0m"
 			echo "sudo pacman -S python-distutils-extra"
 			return 1
