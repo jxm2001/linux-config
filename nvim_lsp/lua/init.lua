@@ -14,6 +14,7 @@ if pcall(require, "vim.ui.clipboard.osc52") then
 end
 
 require("config.lazy")
+vim.keymap.set({'n'}, 'L',  '<cmd>Lazy<cr>')
 
 -- lsp config
 vim.keymap.del('n', 'grn')
@@ -26,6 +27,7 @@ for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vim
 		on_attach = function(client, bufnr)
 			local opts = { buffer = bufnr }
 
+			vim.keymap.set("n", "K", "<CMD>lua vim.lsp.buf.hover({ border = 'rounded' })<CR>", opts)
 			vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
 			vim.keymap.set("n", "gD", "<CMD>lua vim.lsp.buf.declaration()<CR>", opts)
 			vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
@@ -92,34 +94,24 @@ end, { desc = "format code" })
 vim.keymap.set({'n', 'x', 'o'}, 'e',  '<Plug>(leap-forward)')
 vim.keymap.set({'n', 'x', 'o'}, 'E',  '<Plug>(leap-backward)')
 
--- telescope config
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<c-p>', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>pg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>pb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>ph', builtin.help_tags, { desc = 'Telescope help tags' })
-vim.keymap.set('n', '<leader>pm', builtin.oldfiles, { desc = 'Telescope mru' })
-vim.keymap.set('n', '<leader>pt', builtin.tags, { desc = 'Telescope tags' })
-vim.keymap.set('n', '<leader>pf', builtin.filetypes, { desc = 'Telescope filetypes' })
-
 -- bufferline config
-vim.keymap.set('n', 'gp', '<cmd>BufferLinePick<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'g1', '<cmd>lua require("bufferline").go_to(1, true)<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'g2', '<cmd>lua require("bufferline").go_to(2, true)<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'g3', '<cmd>lua require("bufferline").go_to(3, true)<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'g4', '<cmd>lua require("bufferline").go_to(4, true)<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'g5', '<cmd>lua require("bufferline").go_to(5, true)<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'g6', '<cmd>lua require("bufferline").go_to(6, true)<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'g7', '<cmd>lua require("bufferline").go_to(7, true)<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'g8', '<cmd>lua require("bufferline").go_to(8, true)<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'g9', '<cmd>lua require("bufferline").go_to(9, true)<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'g$', '<cmd>lua require("bufferline").go_to(-1, true)<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '[b', '<cmd>BufferLineCyclePrev<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>bd', '<cmd>BufferLinePickClose<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>bh', '<cmd>BufferLineCloseLeft<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>bl', '<cmd>BufferLineCloseRight<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>bo', '<cmd>BufferLineCloseOthers<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', 'gp', '<cmd>BufferLinePick<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'g1', '<cmd>lua require("bufferline").go_to(1, true)<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'g2', '<cmd>lua require("bufferline").go_to(2, true)<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'g3', '<cmd>lua require("bufferline").go_to(3, true)<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'g4', '<cmd>lua require("bufferline").go_to(4, true)<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'g5', '<cmd>lua require("bufferline").go_to(5, true)<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'g6', '<cmd>lua require("bufferline").go_to(6, true)<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'g7', '<cmd>lua require("bufferline").go_to(7, true)<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'g8', '<cmd>lua require("bufferline").go_to(8, true)<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'g9', '<cmd>lua require("bufferline").go_to(9, true)<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', 'g$', '<cmd>lua require("bufferline").go_to(-1, true)<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '[b', '<cmd>BufferLineCyclePrev<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>bd', '<cmd>BufferLinePickClose<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>bh', '<cmd>BufferLineCloseLeft<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>bl', '<cmd>BufferLineCloseRight<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>bo', '<cmd>BufferLineCloseOthers<cr>', { noremap = true, silent = true })
 
 -- Gitsigns config
 vim.keymap.set("n", "gs", "<cmd>Gitsigns preview_hunk<cr>", { desc = "git preview hunk" })

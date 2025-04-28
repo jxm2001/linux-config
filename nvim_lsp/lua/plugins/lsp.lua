@@ -1,5 +1,8 @@
 return {
-	{ "neovim/nvim-lspconfig" },
+	{
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
+	},
 	{
 		"williamboman/mason.nvim",
 		cmd = "Mason",
@@ -7,11 +10,20 @@ return {
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = { "williamboman/mason.nvim" },
 		opts = {},
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		cmd = {
+			"MasonToolsClean",
+			"MasonToolsInstall",
+			"MasonToolsInstallSync",
+			"MasonToolsUpdate",
+			"MasonToolsUpdateSync",
+		},
+		build = ":MasonToolsInstall",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -35,8 +47,6 @@ return {
 				"beautysh",
 				"stylua",
 			},
-			run_on_start = true,
-			auto_update = false,
 		},
 	},
 	{
@@ -46,6 +56,7 @@ return {
 	},
 	{
 		"saghen/blink.cmp",
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = { "rafamadriz/friendly-snippets" },
 
 		version = "1.*",
@@ -83,7 +94,12 @@ return {
 				},
 			},
 
-			cmdline = { enabled = false },
+			cmdline = {
+				enabled = true,
+				completion = {
+					list = { selection = { preselect = false, auto_insert = true } },
+				},
+			},
 
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},

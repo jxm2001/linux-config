@@ -43,7 +43,7 @@ function! SmartCR() abort
   endif
 endfunction
 
-nnoremap <expr> <CR> SmartCR()
+nnoremap <expr> <cr> SmartCR()
 
 " 高亮搜索
 set hlsearch

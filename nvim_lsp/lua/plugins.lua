@@ -17,7 +17,6 @@ return {
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
 	},
@@ -39,10 +38,12 @@ return {
 	},
 	{
 		"lewis6991/gitsigns.nvim",
+		event = {"BufReadPost", "BufNewFile"},
 		opts = {},
 	},
 	{
 		"j-hui/fidget.nvim",
+		event = "VeryLazy",
 		opts = {},
 	},
 }
