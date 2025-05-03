@@ -9,15 +9,24 @@ return {
 		end,
 	},
 	{
+		"echasnovski/mini.icons",
+		lazy = true,
+		opts = {},
+		init = function()
+			package.preload["nvim-web-devicons"] = function()
+				require("mini.icons").mock_nvim_web_devicons()
+				return package.loaded["nvim-web-devicons"]
+			end
+		end,
+	},
+	{
 		"goolord/alpha-nvim",
-		dependencies = { 'echasnovski/mini.icons' },
 		config = function()
-			require'alpha'.setup(require'alpha.themes.startify'.config)
+			require("alpha").setup(require("alpha.themes.startify").config)
 		end,
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
 	},
 	{
@@ -38,7 +47,7 @@ return {
 	},
 	{
 		"lewis6991/gitsigns.nvim",
-		event = {"BufReadPost", "BufNewFile"},
+		event = { "BufReadPost", "BufNewFile" },
 		opts = {},
 	},
 	{
