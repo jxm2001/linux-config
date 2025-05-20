@@ -1,11 +1,10 @@
 return {
 	"lukas-reineke/indent-blankline.nvim",
+	event = "VeryLazy",
 	main = "ibl",
 	---@module "ibl"
 	---@type ibl.config
-	opts = {},
-	config = function()
-		require("ibl").setup { scope = { enabled = false } }
-	end,
-	lazy = false
+	opts = {
+		scope = { enabled = false }
+	},
 }
