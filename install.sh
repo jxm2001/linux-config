@@ -10,13 +10,9 @@ fi
 case $OS in
 	"arch"|"fedora"|"centos"|"debian"|"ubuntu")
 		nvim_init_path="$HOME/.config/nvim"
-		nvim_coc_setting_path="$HOME/.config/nvim"
-		nvim_packer_path="$HOME/.local/share/nvim"
 	;;
 	"msys2")
 		nvim_init_path="$LOCALAPPDATA/nvim"
-		nvim_coc_setting_path="$HOME/AppData/Local/nvim"
-		nvim_packer_path="$LOCALAPPDATA/nvim-data"
 	;;
 	*)
 		echo "Unsupported operating system!!!"
@@ -278,7 +274,7 @@ function install_yazi(){
 }
 
 function install_vim(){
-	read -p "Choose vim version to install(null/base/easy/coc/nvim-base/nvim-easy/nvim-coc/nvim-lsp): " version
+	read -p "Choose vim version to install(null/base/easy/coc/nvim-base/nvim-easy/nvim-lsp): " version
 	if [ $version == "base" ]; then
 		cp ./baseVim/vimrc ~/.vimrc
 	elif [ $version == "easy" ]; then
@@ -313,28 +309,6 @@ function install_vim(){
 		mkdir -p $nvim_init_path
 		cp ./nvim_easy/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_easy/lua $nvim_init_path
-	elif [ $version == "nvim-coc" ]; then
-		local failed=0
-		check_luarocks || failed=1
-		check_clangd || failed=1
-		check_ctags || failed=1
-		check_nodejs || failed=1
-		check_tree_sitter || failed=1
-		check_yazi || failed=1
-		check_python3_neovim || failed=1
-		check_python3_setuptools || failed=1
-		check_python3_distutils || failed=1
-		if [ $failed -ne 0 ]; then
-			echo -e "\033[1;31mError: Some dependencies are missing. Please install them using the commands above.\033[0m"
-			exit 2
-		fi
-		check_network
-		mkdir -p $nvim_init_path
-		cp ./nvim_coc/init.vim $nvim_init_path/init.vim
-		cp -r ./nvim_coc/lua $nvim_init_path
-		mkdir -p $nvim_coc_setting_path
-		cp ./nvim_coc/coc-settings.json $nvim_coc_setting_path/coc-settings.json
-		install_yazi
 	elif [ $version == "nvim-lsp" ]; then
 		local failed=0
 		check_git || failed=1
