@@ -2,16 +2,54 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			vim.keymap.del('n', 'grn')
+			vim.keymap.del({'n', 'v'}, 'gra')
+			vim.keymap.del('n', 'grr')
+			vim.keymap.del('n', 'gri')
+			for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vimls", "dockerls",
+				"docker_compose_language_service", "marksman", "biome", "yamlls", "fortls" }) do
+				local config = {
+					on_attach = function(client, bufnr)
+						local opts = { buffer = bufnr }
+
+						vim.keymap.set("n", "K", "<CMD>lua vim.lsp.buf.hover({ border = 'rounded' })<CR>", opts)
+						vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+						vim.keymap.set("n", "gD", "<CMD>lua vim.lsp.buf.declaration()<CR>", opts)
+						vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
+						vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
+						vim.keymap.set("n", "gy", "<cmd>Telescope lsp_type_definitions<cr>", opts)
+						vim.keymap.set("n", "<leader>o", "<cmd>Telescope lsp_document_symbols<cr>", opts)
+						vim.keymap.set("n", "<leader>s", "<cmd>Telescope lsp_workspace_symbols<cr>", opts)
+						vim.keymap.set({ "n", "x" }, "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+						vim.keymap.set("n", "<leader>rn", function()
+							return ":IncRename " .. vim.fn.expand("<cword>")
+						end, { desc = "rename", buffer = bufnr, expr = true })
+					end,
+				}
+				if server == "fortls" then
+					config.cmd = {
+						"fortls",
+						-- "--notify_init",
+						"--hover_signature",
+						"--hover_language=fortran",
+						"--use_signature_help",
+					}
+				end
+				vim.lsp.enable(server)
+				vim.lsp.config(server, config)
+			end
+		end,
 	},
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		cmd = "Mason",
 		opts = {},
 	},
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"mason-org/mason-lspconfig.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-		dependencies = { "williamboman/mason.nvim" },
+		dependencies = { "mason-org/mason.nvim" },
 		opts = {},
 	},
 	{
@@ -25,8 +63,8 @@ return {
 		},
 		build = ":MasonToolsInstall",
 		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			"mason-org/mason.nvim",
+			"mason-org/mason-lspconfig.nvim",
 		},
 		opts = {
 			ensure_installed = {

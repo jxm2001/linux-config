@@ -17,43 +17,6 @@ require("config.lazy")
 vim.keymap.set({'n'}, 'L',  '<cmd>Lazy<cr>')
 
 -- lsp config
-vim.keymap.del('n', 'grn')
-vim.keymap.del({'n', 'v'}, 'gra')
-vim.keymap.del('n', 'grr')
-vim.keymap.del('n', 'gri')
-for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vimls", "dockerls",
-	"docker_compose_language_service", "marksman", "biome", "yamlls", "fortls" }) do
-	local config = {
-		on_attach = function(client, bufnr)
-			local opts = { buffer = bufnr }
-
-			vim.keymap.set("n", "K", "<CMD>lua vim.lsp.buf.hover({ border = 'rounded' })<CR>", opts)
-			vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
-			vim.keymap.set("n", "gD", "<CMD>lua vim.lsp.buf.declaration()<CR>", opts)
-			vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
-			vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
-			vim.keymap.set("n", "gy", "<cmd>Telescope lsp_type_definitions<cr>", opts)
-			vim.keymap.set("n", "<leader>o", "<cmd>Telescope lsp_document_symbols<cr>", opts)
-			vim.keymap.set("n", "<leader>s", "<cmd>Telescope lsp_workspace_symbols<cr>", opts)
-			vim.keymap.set({ "n", "x" }, "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-			vim.keymap.set("n", "<leader>rn", function()
-				return ":IncRename " .. vim.fn.expand("<cword>")
-			end, { desc = "rename", buffer = bufnr, expr = true })
-		end,
-	}
-	if server == "fortls" then
-		config.cmd = {
-			"fortls",
-			-- "--notify_init",
-			"--hover_signature",
-			"--hover_language=fortran",
-			"--use_signature_help",
-		}
-	end
-	vim.lsp.enable(server)
-	vim.lsp.config(server, config)
-end
-
 vim.diagnostic.config({
 	underline = true,
 	update_in_insert = false,
@@ -117,9 +80,9 @@ vim.keymap.set('n', '<leader>bo', '<cmd>BufferLineCloseOthers<cr>', { noremap = 
 vim.keymap.set("n", "gs", "<cmd>Gitsigns preview_hunk<cr>", { desc = "git preview hunk" })
 vim.keymap.set("n", "[g", "<cmd>Gitsigns nav_hunk prev<cr>", { desc = "git navigate hunk prev" })
 vim.keymap.set("n", "]g", "<cmd>Gitsigns nav_hunk next<cr>", { desc = "git navigate hunk next" })
-vim.keymap.set("n", "<leader>hb", "<cmd>Gitsigns blame<cr>", { desc = "git blame" })
-vim.keymap.set("n", "<leader>hd", "<cmd>Gitsigns diffthis<cr>", { desc = "git diff HEAD" })
-vim.keymap.set("n", "<leader>hD", "<cmd>Gitsigns diffthis ~<cr>", { desc = "git diff HEAD^" })
+vim.keymap.set("n", "<leader>Gb", "<cmd>Gitsigns blame<cr>", { desc = "git blame" })
+vim.keymap.set("n", "<leader>Gd", "<cmd>Gitsigns diffthis<cr>", { desc = "git diff HEAD" })
+vim.keymap.set("n", "<leader>GD", "<cmd>Gitsigns diffthis ~<cr>", { desc = "git diff HEAD^" })
 
 -- nvim_treesitter config
 vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
