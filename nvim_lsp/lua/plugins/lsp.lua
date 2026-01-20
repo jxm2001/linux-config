@@ -3,10 +3,18 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			vim.keymap.del('n', 'grn')
+			-- vim.lsp.buf.code_action()
 			vim.keymap.del({'n', 'v'}, 'gra')
-			vim.keymap.del('n', 'grr')
+			-- vim.lsp.buf.implementation()
 			vim.keymap.del('n', 'gri')
+			-- vim.lsp.buf.rename()
+			vim.keymap.del('n', 'grn')
+			-- vim.lsp.buf.references()
+			vim.keymap.del('n', 'grr')
+			-- vim.lsp.buf.type_definition()
+			vim.keymap.del('n', 'grt')
+			-- vim.lsp.buf.document_symbol()
+			vim.keymap.del('n', 'gO')
 			for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vimls", "dockerls",
 				"docker_compose_language_service", "marksman", "biome", "yamlls", "fortls" }) do
 				local config = {
