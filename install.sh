@@ -182,7 +182,7 @@ function check_yazi() {
 	case $OS in
 		"arch") echo "sudo pacman -S yazi" ;;
 		"debian"|"ubuntu"|"centos"|"fedora")
-			echo "wget https://github.com/sxyazi/yazi/releases/download/v25.4.8/yazi-x86_64-unknown-linux-musl.zip"
+			echo "wget https://github.com/sxyazi/yazi/releases/download/v26.1.4/yazi-x86_64-unknown-linux-musl.zip"
 			echo "unzip yazi-x86_64-unknown-linux-musl.zip"
 			echo "mkdir -p ~/.local/bin/ && mv yazi-x86_64-unknown-linux-musl/{ya,yazi} ~/.local/bin/"
 			;;
@@ -264,11 +264,11 @@ function install_yazi(){
 	mkdir -p $HOME/.config/yazi
 	cp ./yazi/{init.lua,keymap.toml,yazi.toml} $HOME/.config/yazi
 	for plugin in "${plugins[@]}"; do
-	  if ya pack -l | grep -q "$plugin"; then
+	  if ya pkg list | grep -q "$plugin"; then
 		echo "$plugin already installed"
 	  else
 		echo "installing $plugin"
-		ya pack -a "$plugin"
+		ya pkg add "$plugin"
 	  fi
 	done
 }
