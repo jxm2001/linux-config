@@ -353,7 +353,6 @@ function install_tmux(){
 			git clone https://github.com/tmux-plugins/tpm.git ~/.tmux/plugins/tpm
 		fi
 		cp ./tmux/normalTmux.conf ~/.tmux.conf
-		cp ./tmux/tmux-status-line-trigger.tmux ~/.tmux/
 		if [ $OS == "msys2" ]; then
 			dos2unix ~/.tmux.conf
 		fi

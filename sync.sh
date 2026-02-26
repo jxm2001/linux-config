@@ -37,7 +37,6 @@ read -p "Choose tmux version to sync(null/base/normal): " version
 if [ $version == "base" ]; then
 	cp ~/.tmux.conf ./tmux/baseTmux.conf
 elif [ $version == "normal" ]; then
-	cp ~/.tmux/tmux-status-line-trigger.tmux ./tmux/
 	cp ~/.tmux.conf ./tmux/normalTmux.conf
 elif [ $version != "null" ]; then
 	echo "Error tmux version"
