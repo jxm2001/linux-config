@@ -363,7 +363,7 @@ function install_tmux(){
 }
 
 function install_zsh(){
-	read -p "Choose zsh version to install(null/manual/zinit): " version
+	read -p "Choose zsh version to install(null/zinit): " version
 	if [ $version == "zinit" ]; then
 		local failed=0
 		check_wget || failed=1
@@ -379,39 +379,6 @@ function install_zsh(){
 		bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 		echo "" >> ~/.zshrc
 		cat ./zsh/zinit/zshrc.2 >> ~/.zshrc
-		cp ./zsh/zsh_aliases ~/.zsh_aliases
-	elif [ $version == "manual" ]; then
-		local failed=0
-		check_wget || failed=1
-		check_curl || failed=1
-		check_tar || failed=1
-		if [ $failed -ne 0 ]; then
-			echo -e "\033[1;31mError: Some dependencies are missing. Please install them using the commands above.\033[0m"
-			exit 2
-		fi
-		check_network
-		cp ./zsh/manual/zshrc ~/.zshrc
-		mkdir -p ~/.zsh/themes
-		mkdir -p ~/.zsh/plugins
-		if [ ! -e ~/.zsh/themes/powerlevel10k ]; then
-			git clone https://github.com/romkatv/powerlevel10k.git ~/.zsh/themes/powerlevel10k
-		fi
-		if [ ! -e ~/.zsh/plugins/zsh-syntax-highlighting ]; then
-			git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/plugins/zsh-syntax-highlighting
-		fi
-		if [ ! -e ~/.zsh/plugins/zsh-autosuggestions ]; then
-			git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/plugins/zsh-autosuggestions
-		fi
-		if [ ! -e ~/.zsh/plugins/zsh-completions ]; then
-			git clone https://github.com/zsh-users/zsh-completions.git ~/.zsh/plugins/zsh-completions
-		fi
-		if [ ! -e ~/.zsh/plugins/z ]; then
-			git clone https://github.com/rupa/z.git ~/.zsh/plugins/z
-		fi
-		if [ ! -e ~/.zsh/plugins/fzf ]; then
-			git clone https://github.com/junegunn/fzf.git ~/.zsh/plugins/fzf
-			~/.zsh/plugins/fzf/install --xdg --key-bindings --completion --update-rc
-		fi
 		cp ./zsh/zsh_aliases ~/.zsh_aliases
 	elif [ $version != "null" ]; then
 		echo "Error zsh version"
