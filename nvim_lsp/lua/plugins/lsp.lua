@@ -15,7 +15,7 @@ return {
 			vim.keymap.del('n', 'grt')
 			-- vim.lsp.buf.document_symbol()
 			vim.keymap.del('n', 'gO')
-			for _, server in ipairs({ "clangd", "cmake", "pyright", "bashls", "lua_ls", "vimls", "dockerls",
+			for _, server in ipairs({ "clangd", "neocmake", "pyright", "bashls", "lua_ls", "vimls", "dockerls",
 				"docker_compose_language_service", "marksman", "biome", "yamlls", "fortls" }) do
 				local config = {
 					on_attach = function(client, bufnr)
@@ -77,7 +77,7 @@ return {
 		opts = {
 			ensure_installed = {
 				"clangd",
-				"cmake",
+				"neocmakelsp",
 				"pyright",
 				"bashls",
 				"lua_ls",
