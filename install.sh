@@ -167,7 +167,7 @@ function check_tree_sitter() {
 		"arch") echo "sudo pacman -S tree-sitter-cli" ;;
 		"fedora") echo "sudo dnf install tree-sitter-cli" ;;
 		"debian"|"ubuntu"|"centos")
-			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.3/tree-sitter-linux-x64.gz"
+			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.10/tree-sitter-linux-x64.gz"
 			echo "gzip -d tree-sitter-linux-x64.gz && chmod +x tree-sitter-linux-x64"
 			echo "mkdir -p ~/.local/bin/ && mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
 			;;
@@ -182,7 +182,7 @@ function check_yazi() {
 	case $OS in
 		"arch") echo "sudo pacman -S yazi" ;;
 		"debian"|"ubuntu"|"centos"|"fedora")
-			echo "wget https://github.com/sxyazi/yazi/releases/download/v26.1.4/yazi-x86_64-unknown-linux-musl.zip"
+			echo "wget https://github.com/sxyazi/yazi/releases/download/v26.1.22/yazi-x86_64-unknown-linux-musl.zip"
 			echo "unzip yazi-x86_64-unknown-linux-musl.zip"
 			echo "mkdir -p ~/.local/bin/ && mv yazi-x86_64-unknown-linux-musl/{ya,yazi} ~/.local/bin/"
 			;;
