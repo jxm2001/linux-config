@@ -229,6 +229,16 @@ function check_python3_neovim() {
 	return 1
 }
 
+function check_python3_pygments() {
+	if which pygmentize &> /dev/null; then return 0; fi
+	echo -e "\033[1;31mError: Missing python3-pygments. Run the following command to install:\033[0m"
+	case $OS in
+		"arch") echo "sudo pacman -S python-pygments" ;;
+		"debian"|"ubuntu") echo "sudo apt install python3-pygments" ;;
+	esac
+	return 1
+}
+
 function check_python3_setuptools() {
 	case $OS in
 		"arch")
@@ -259,6 +269,7 @@ function install_yazi(){
 		"yazi-rs/plugins:git"
 		"yazi-rs/plugins:toggle-pane"
 		"yazi-rs/plugins:vcs-files"
+		"yazi-rs/plugins:piper"
 	)
 
 	mkdir -p $HOME/.config/yazi
@@ -323,6 +334,7 @@ function install_vim(){
 		check_yazi || failed=1
 		check_pip || failed=1
 		check_python3_neovim || failed=1
+		check_python3_pygments || failed=1
 		check_python3_setuptools || failed=1
 		check_python3_distutils || failed=1
 		if [ $failed -ne 0 ]; then

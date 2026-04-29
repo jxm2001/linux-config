@@ -9,3 +9,8 @@ prepend_fetchers = [
 	{ id = "git", name = "*", run  = "git" },
 	{ id = "git", name = "*/", run  = "git" },
 ]
+
+prepend_previewers = [
+	{ url = "*.cu",  run = 'piper -- pygmentize -l cuda -O style=dracula "$1"' },
+	{ url = "*.cuh", run = 'piper -- pygmentize -l cuda -O style=dracula "$1"' },
+]
