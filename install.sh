@@ -167,7 +167,7 @@ function check_tree_sitter() {
 		"arch") echo "sudo pacman -S tree-sitter-cli" ;;
 		"fedora") echo "sudo dnf install tree-sitter-cli" ;;
 		"debian"|"ubuntu"|"centos")
-			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.10/tree-sitter-linux-x64.gz"
+			echo "wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.8/tree-sitter-linux-x64.gz"
 			echo "gzip -d tree-sitter-linux-x64.gz && chmod +x tree-sitter-linux-x64"
 			echo "mkdir -p ~/.local/bin/ && mv tree-sitter-linux-x64 ~/.local/bin/tree-sitter"
 			;;
