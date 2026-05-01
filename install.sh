@@ -19,6 +19,90 @@ case $OS in
 		exit 1
 	;;
 esac
+
+choice=""
+vim_version=""
+tmux_version=""
+non_interactive=0
+
+function print_usage() {
+	cat <<'EOF'
+Usage: bash install.sh [options]
+
+Options:
+  -t, --target <zsh|vim|tmux>
+  --vim-version <base|easy|coc|nvim-base|nvim-easy|nvim-lsp>
+  --tmux-version <base|normal>
+  -h, --help
+
+Examples:
+  bash install.sh --target vim --vim-version nvim-lsp
+  bash install.sh --target tmux --tmux-version normal
+  bash install.sh --target zsh
+EOF
+}
+
+function prompt_value() {
+	local current_value="$1"
+	local prompt="$2"
+	if [ -n "$current_value" ]; then
+		printf '%s\n' "$current_value"
+		return 0
+	fi
+	if [ ! -t 0 ]; then
+		echo "Error: missing required option for non-interactive mode: $prompt" >&2
+		exit 1
+	fi
+	local input
+	read -p "$prompt" input
+	printf '%s\n' "$input"
+}
+
+function parse_args() {
+	if [ $# -gt 0 ]; then
+		non_interactive=1
+	fi
+	while [ $# -gt 0 ]; do
+		case "$1" in
+			-t|--target)
+				if [ $# -lt 2 ] || [[ "$2" == -* ]]; then
+					echo "Error: $1 requires a value" >&2
+					print_usage
+					exit 1
+				fi
+				choice="$2"
+				shift 2
+				;;
+			--vim-version)
+				if [ $# -lt 2 ] || [[ "$2" == -* ]]; then
+					echo "Error: $1 requires a value" >&2
+					print_usage
+					exit 1
+				fi
+				vim_version="$2"
+				shift 2
+				;;
+			--tmux-version)
+				if [ $# -lt 2 ] || [[ "$2" == -* ]]; then
+					echo "Error: $1 requires a value" >&2
+					print_usage
+					exit 1
+				fi
+				tmux_version="$2"
+				shift 2
+				;;
+			-h|--help)
+				print_usage
+				exit 0
+				;;
+			*)
+				echo "Unknown option: $1" >&2
+				print_usage
+				exit 1
+				;;
+		esac
+	done
+}
 function check_network(){
 	curl --connect-timeout 3 https://google.com &> /dev/null
 	if [ $? -ne 0 ]; then
@@ -285,7 +369,8 @@ function install_yazi(){
 }
 
 function install_vim(){
-	read -p "Choose vim version to install(null/base/easy/coc/nvim-base/nvim-easy/nvim-lsp): " version
+	local version
+	version=$(prompt_value "$vim_version" "Choose vim version to install(base/easy/coc/nvim-base/nvim-easy/nvim-lsp): ")
 	if [ $version == "base" ]; then
 		cp ./baseVim/vimrc ~/.vimrc
 	elif [ $version == "easy" ]; then
@@ -346,14 +431,15 @@ function install_vim(){
 		cp ./nvim_lsp/init.vim $nvim_init_path/init.vim
 		cp -r ./nvim_lsp/lua $nvim_init_path
 		install_yazi
-	elif [ $version != "null" ]; then
+	else
 		echo "Error vim version"
 		exit 1
 	fi
 }
 
 function install_tmux(){
-	read -p "Choose tmux version to install(null/base/normal): " version
+	local version
+	version=$(prompt_value "$tmux_version" "Choose tmux version to install(base/normal): ")
 	if [ $version == "base" ]; then
 		cp ./tmux/baseTmux.conf ~/.tmux.conf
 		if [ $OS == "msys2" ]; then
@@ -368,41 +454,39 @@ function install_tmux(){
 		if [ $OS == "msys2" ]; then
 			dos2unix ~/.tmux.conf
 		fi
-	elif [ $version != "null" ]; then
+	else
 		echo "Error tmux version"
 		exit 1
 	fi
 }
 
 function install_zsh(){
-	read -p "Choose zsh version to install(null/zinit): " version
-	if [ $version == "zinit" ]; then
-		local failed=0
-		check_wget || failed=1
-		check_curl || failed=1
-		check_tar || failed=1
-		check_jq || failed=1
-		if [ $failed -ne 0 ]; then
-			echo -e "\033[1;31mError: Some dependencies are missing. Please install them using the commands above.\033[0m"
-			exit 2
-		fi
-		check_network
-		cp ./zsh/zinit/zshrc.1 ~/.zshrc
-		bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
-		echo "" >> ~/.zshrc
-		cat ./zsh/zinit/zshrc.2 >> ~/.zshrc
-		cp ./zsh/zsh_aliases ~/.zsh_aliases
-	elif [ $version != "null" ]; then
-		echo "Error zsh version"
-		exit 1
+	local failed=0
+	check_wget || failed=1
+	check_curl || failed=1
+	check_tar || failed=1
+	check_jq || failed=1
+	if [ $failed -ne 0 ]; then
+		echo -e "\033[1;31mError: Some dependencies are missing. Please install them using the commands above.\033[0m"
+		exit 2
 	fi
+	check_network
+	cp ./zsh/zinit/zshrc.1 ~/.zshrc
+	if [ $non_interactive -eq 1 ]; then
+		NO_INPUT=1 bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+	else
+		bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+	fi
+	echo "" >> ~/.zshrc
+	cat ./zsh/zinit/zshrc.2 >> ~/.zshrc
+	cp ./zsh/zsh_aliases ~/.zsh_aliases
 }
 
-read -p "Install which? (zsh/vim/tmux/all): " choice
+parse_args "$@"
+choice=$(prompt_value "$choice" "Install which? (zsh/vim/tmux): ")
 case $choice in
     zsh) install_zsh ;;
     vim) install_vim ;;
     tmux) install_tmux ;;
-    all) install_zsh; install_vim; install_tmux ;;
     *) echo "Invalid option"; exit 1 ;;
 esac
