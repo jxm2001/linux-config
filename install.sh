@@ -319,6 +319,7 @@ function check_python3_pygments() {
 	echo -e "\033[1;31mError: Missing python3-pygments. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S python-pygments" ;;
+		"fedora"|"centos") echo "sudo dnf install python3-pygments" ;;
 		"debian"|"ubuntu") echo "sudo apt install python3-pygments" ;;
 	esac
 	return 1
