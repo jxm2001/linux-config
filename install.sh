@@ -4,8 +4,10 @@ if [ -f /etc/os-release ]; then
 else
     OS="unknown"
 fi
-if [ "$OS" == "archarm"  ]; then
+if [ "$OS" == "archarm" ]; then
 	OS="arch"
+elif [ "$OS" == "bazzite" ]; then
+	OS="fedora"
 fi
 case $OS in
 	"arch"|"fedora"|"centos"|"debian"|"ubuntu")
@@ -236,9 +238,8 @@ function check_nodejs() {
 	echo -e "\033[1;31mError: Missing nodejs/npm. Run the following command to install:\033[0m"
 	case $OS in
 		"arch") echo "sudo pacman -S nodejs npm" ;;
-		"fedora"|"centos") echo "sudo dnf install nodejs" ;;
-		"debian") echo "sudo apt install nodejs npm" ;;
-		"ubuntu") echo "curl -sfLS install-node.vercel.app/lts | bash -s -- --prefix=$HOME/.local --verbose" ;;
+		"fedora") echo "sudo dnf install nodejs" ;;
+		"debian"|"ubuntu"|"centos") echo "curl -sfLS install-node.vercel.app/lts | bash -s -- --prefix=$HOME/.local --verbose" ;;
 		"msys2") echo "pacman -S mingw-w64-x86_64-nodejs" ;;
 	esac
 	return 1
