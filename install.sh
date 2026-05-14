@@ -266,7 +266,7 @@ function check_yazi() {
 	case $OS in
 		"arch") echo "sudo pacman -S yazi" ;;
 		"debian"|"ubuntu"|"centos"|"fedora")
-			echo "wget https://github.com/sxyazi/yazi/releases/download/v26.1.22/yazi-x86_64-unknown-linux-musl.zip"
+			echo "wget https://github.com/sxyazi/yazi/releases/download/v26.5.6/yazi-x86_64-unknown-linux-musl.zip"
 			echo "unzip yazi-x86_64-unknown-linux-musl.zip"
 			echo "mkdir -p ~/.local/bin/ && mv yazi-x86_64-unknown-linux-musl/{ya,yazi} ~/.local/bin/"
 			;;
