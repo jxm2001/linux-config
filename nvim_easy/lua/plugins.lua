@@ -5,7 +5,7 @@ return {
 		priority = 1000,
 		config = function()
 			require("oasis").setup()
-			vim.cmd.colorscheme("oasis")
+			vim.cmd.colorscheme("oasis-lagoon")
 		end
 	},
 	{
